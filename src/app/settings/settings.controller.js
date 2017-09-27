@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    angular.module('threebund').controller('SettingsController', ['$scope', 'dhis',
+    angular.module('EMU').controller('SettingsController', ['$scope', 'dhis',
         function($scope, dhis) {
             $scope.strategies = [{
                 value: 'NEW',

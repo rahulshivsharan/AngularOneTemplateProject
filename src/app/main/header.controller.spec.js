@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     describe('controllers', function() {
-        beforeEach(module('threebund'));
+        beforeEach(module('EMU'));
 
         var $scope, titleDeferred, dhisUrlDeferred, controller, mockDhis;
 

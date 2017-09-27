@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    angular.module('threebund').service('dhis', ['$http', 'AUTH', '$q', 'x2js',
+    angular.module('EMU').service('dhis', ['$http', 'AUTH', '$q', 'x2js',
         function($http, authHeader, $q, x2js) {
             var fileSetting = 'spectrumConfigFiles';
             var stateSetting = 'spectrumImportState';

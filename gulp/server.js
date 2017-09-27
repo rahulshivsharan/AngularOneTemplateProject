@@ -10,7 +10,9 @@ var proxyMiddleware = require('http-proxy-middleware');
 function browserSyncInit(baseDir, browser) {
   browser = browser === undefined ? 'default' : browser;
   var routes = null;
-  if (baseDir === conf.paths.src || (util.isArray(baseDir) && baseDir.indexOf(conf.paths.src) !== -1)) {
+  // the last condition in below if condition i.e. baseDir === "dist" is perposefully added
+  // as gulp serve:dist command was failing.
+  if (baseDir === conf.paths.src || (util.isArray(baseDir) && baseDir.indexOf(conf.paths.src) !== -1) || baseDir === "dist") {  
     routes = {
       '/bower_components': 'bower_components'
     };

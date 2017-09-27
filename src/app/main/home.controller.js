@@ -1,4 +1,4 @@
 (function() {
     'use strict';
-    angular.module('threebund').controller('HomeController', [function() {}]);
+    angular.module('EMU').controller('HomeController', [function() {}]);
 })();

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     describe('MainController', function() {
-        beforeEach(module('threebund'));
+        beforeEach(module('EMU'));
         var mockDhis, $scope, controller, configDeferred, stateDeferred, dhisUrlDeferred;
         beforeEach(inject(function($controller, $rootScope, $q) {
             $scope = $rootScope.$new();

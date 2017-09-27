@@ -1,6 +1,6 @@
 (function() {
     'use strict';
-    angular.module('threebund').controller('MainController', ['$scope', 'dhis',
+    angular.module('EMU').controller('MainController', ['$scope', 'dhis',
 
         function($scope, dhis) {
 

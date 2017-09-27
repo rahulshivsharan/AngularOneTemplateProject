@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('threebund')
+        .module('EMU')
         .config(routeConfig);
 
     function routeConfig($stateProvider, $urlRouterProvider) {
