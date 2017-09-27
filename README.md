@@ -1,5 +1,6 @@
-# dhis2-unaids-eppspectrum
-DHIS2 Plugin App to load UNAIDS Spectrum/Estimation and Projection Package (EPP) model outputs
+# Angular 1.6 Project Template
+This project template is for projects based on AngularJS 1. The technology is on Angular 1.6, gulp,
+bower. 
 
 [![Build Status](https://travis-ci.org/entuura/dhis2-unaids-eppspectrum.svg?branch=master)](https://travis-ci.org/entuura/dhis2-unaids-eppspectrum)
 
