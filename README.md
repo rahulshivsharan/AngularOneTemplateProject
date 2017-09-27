@@ -37,8 +37,6 @@ To create a zip of the app application
 
 The zip file should then be available in the folder target.
 
-You can find pre-built releases to DOWNLOAD HERE:
 
-    https://github.com/entuura/dhis2-unaids-eppspectrum/releases/
 
 
