@@ -2,7 +2,7 @@
 This project template is for projects based on AngularJS 1. The technology is on Angular 1.6, gulp,
 bower. 
 
-[![Build Status](https://travis-ci.org/entuura/dhis2-unaids-eppspectrum.svg?branch=master)](https://travis-ci.org/entuura/dhis2-unaids-eppspectrum)
+[![Build Status](https://http://yeoman.io/generators/)](http://yeoman.io/generators/)
 
 # Development Setup
 From the root of the project.
