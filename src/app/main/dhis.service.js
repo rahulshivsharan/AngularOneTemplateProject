@@ -2,9 +2,9 @@
     'use strict';
     angular.module('EMU').service('dhis', dhis);
     
-    dhis.$inject = ['$http', 'AUTH', '$q'];
+    dhis.$inject = ['$http', '$q', "BACKEND_URL"];
         
-    function dhis($http, authHeader, $q) {
+    function dhis($http, $q, BACKEND_URL) {
             
         var obj = {};
 

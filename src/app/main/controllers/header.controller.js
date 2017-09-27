@@ -6,7 +6,7 @@
 
     function HeaderController($scope, dhis){
         
-        $scope.title = "DHIS APPLICATION";
+        $scope.title = "EMU";
 
         $scope.goHome = function() {
             window.location = $scope.homeUrl;
