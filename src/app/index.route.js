@@ -9,17 +9,12 @@
         $stateProvider
             .state('setup', {
                 url: '/setup',
-                templateUrl: 'app/main/main.html',
+                templateUrl: 'app/main/pages/main.html',
                 controller: 'MainController',
                 controllerAs: 'main'
-            }).state('settings', {
-                url: '/settings',
-                templateUrl: 'app/settings/start.html',
-                controller: 'SettingsController',
-                controllerAs: 'SettingsController'
             }).state('home', {
                 url: '/',
-                templateUrl: 'app/main/home.html',
+                templateUrl: 'app/main/pages/home.html',
                 controller: 'HomeController',
                 controllerAs: 'home'
             });
