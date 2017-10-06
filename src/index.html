@@ -23,19 +23,26 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div id="header" ng-controller="HeaderController">
-        <img id="headerBanner" src="assets/images/dhis.png" title="View home page">
-        <span   id="headerText" 
-                style="cursor:pointer" 
-                ng-click="goHome()" 
-                title="View home page">{{title}}
-        </span>
-        <span id="showLeftBar">
-            <a href="javascript:dhis2.leftBar.showAnimated()" title="Show menu">
-                <i class="fa fa-arrow-right leftBarIcon"></i>
-            </a>
-        </span>
-    </div>
+
+    <!-- Header bar -->
+    <header class="main-header" ng-controller="HeaderController">
+        <nav class="navbar navbar-static-top" style="background-color: rgba(51, 122, 183, 0.17);">
+            <div class="container-fluid">
+                <div class="navbar-header"></div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar-collapse">
+                    <div class="row">
+                        <div class="col-md-12 zeroBox">
+                            <img src="assets/images/track-20.png" style="height: 52px;padding-left: 5px;" class="track20Logo moveRight">
+                            <img src="assets/images/logo.png" class="pull-right" style="height: 52px;">
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Header bar-->
 
     <div class="container" id="mainContainer">
         <div class="row">
