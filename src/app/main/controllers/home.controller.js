@@ -5,6 +5,6 @@
     HomeController.$inject = ["$scope"];
 
     function HomeController($scope) {
-
+    	var vm = this;
     }; // end of HomeController
 })();

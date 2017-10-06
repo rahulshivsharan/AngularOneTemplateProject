@@ -8,7 +8,18 @@
             
         var obj = {};
 
+        obj.getDistricts = getDistricts;
+
         return obj;
-    }
+
+        function getDistricts(){
+        	var callbackFn = callbackFn;
+        	return $q(callbackFn);
+
+        	function callbackFn(resolve,reject){
+        		resolve();
+        	}// end of callbackFn
+        }// end of getDistricts
+    } // end of dhis
     
 })();

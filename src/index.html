@@ -17,6 +17,8 @@
     <!-- css files will be automatically insert here -->
     <!-- endinject -->
     <!-- endbuild -->
+
+    <link rel="stylesheet" href="assets/lib/font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 
 <body ng-cloak class="ng-cloak">
@@ -25,7 +27,7 @@
     <![endif]-->
 
     <!-- Header bar -->
-    <header class="main-header" ng-controller="HeaderController">
+    <header class="main-header">
         <nav class="navbar navbar-static-top" style="background-color: rgba(51, 122, 183, 0.17);">
             <div class="container-fluid">
                 <div class="navbar-header"></div>
@@ -44,29 +46,13 @@
     </header>
     <!-- Header bar-->
 
-    <div class="container" id="mainContainer">
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-9">
-                <h2>EMU</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <ul class="nav nav-pills nav-stacked">
-                    <li ui-sref-active="active">
-                        <a ui-sref="home">Home</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="setup">Setup</a>
-                    </li>                    
-                </ul>
-            </div>
-            <div class="col-md-9">
+    <div class="row">
+        <div class="col-md-12">
                 <div ui-view></div>
-            </div>
-        </div>
+        </div>            
     </div>
+
+    
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- run `gulp inject` to automatically populate bower script dependencies -->

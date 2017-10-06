@@ -1,12 +1,74 @@
-<p class="lead">
-This application is designed to allow a HIS Manager to instantiate (bootstrap) a set of standard data elements and indicators in DHIS2 that can be used for importing and using Spectrum derived HIV/AIDS related estimates.
-</p>
-<p class="lead">
-Since every instance of DHIS2 is different, these data elements and indicators will need to be further modified by the HIS Manager before they can be used.
-</p >
-<p class="lead">
-    A link to a 'post-initiation' guideline is available once the Application has been run.
-</p>
-<p class="lead">
-Click <a ui-sref="setup" class="btn btn-primary">Here</a> to start the setup.
-</p>
+<div class="container">
+	<div class="page-header">
+		<i class="fa fa-bar-chart" aria-hidden="true"></i><span style="font-size: 20px;padding-left: 3px">EMU Analysis</span>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<form>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
+							<label for="select_states">Select State(s)</label>
+							<div class="input-group">								
+								<input type="text" class="form-control" id="select_states" aria-describedby="states_addon" />	
+								<span class="input-group-addon">									
+									<i class="fa fa-caret-down" aria-hidden="true"></i>
+								</span>
+							</div>							
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
+							<label for="select_district">Select District(s)</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="select_district" aria-describedby="district_addon" />	
+								<span class="input-group-addon">									
+									<i class="fa fa-caret-down" aria-hidden="true"></i>
+								</span>
+							</div>							
+						</div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="checkbox">
+								<label>
+          							<input type="checkbox"> National Aggregate
+        						</label>
+							</div>	
+						</div>						
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;
+							<label for="select_years">Select Year(s)</label>
+							<div class="input-group">
+								<input type="text" class="form-control" id="years_addon" />
+								<span class="input-group-addon">									
+									<i class="fa fa-caret-down" aria-hidden="true"></i>
+								</span>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-2 col-md-offset-5">
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary">Extract Inputs</button>	
+						</div>						
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
