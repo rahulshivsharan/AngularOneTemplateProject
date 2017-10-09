@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller="HomeController as vm" ng-init="vm.init()">
 	<div class="page-header">
 		<i class="fa fa-bar-chart" aria-hidden="true"></i><span style="font-size: 20px;padding-left: 3px">EMU Analysis</span>
 	</div>
@@ -11,7 +11,11 @@
 							<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
 							<label for="select_states">Select State(s)</label>
 							<div class="input-group">								
-								<input type="text" class="form-control" id="select_states" aria-describedby="states_addon" />	
+								<input 	type="text" 
+										class="form-control" 
+										id="select_states" 
+										aria-describedby="states_addon" 
+										ng-click="vm.openStatesModal()" ng-keypress="vm.openStatesModal()" />	
 								<span class="input-group-addon">									
 									<i class="fa fa-caret-down" aria-hidden="true"></i>
 								</span>
