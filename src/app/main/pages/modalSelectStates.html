@@ -9,16 +9,20 @@
 	<div class="row">
 		<div class="col-md-8">&nbsp;</div>
 		<div class="col-md-4">
-			<input type="text" class="form-control" ng-model="vm.searchState" placeholder="Search State">
+			<input type="text" class="form-control" ng-model="vm.searchState" 
+					placeholder="Search State" ng-keyup="vm.findStatesByName()">
 		</div>
 	</div>
 	<br/>
 	<div class="row">
 		<div class="col-md-12">
 			<ul style="list-style: none;">
-				<li ng-repeat="state in vm.states | filter : vm.searchState">
+				<li ng-repeat="(stateName,flag) in vm.statesMap track by $index">
 					<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
-					<span class="label label-default">{{state}}</span>
+					<a href="javascript:void(0)" class="lbl">
+						<span 	ng-class="{'label label-default' : (flag === false), 'label label-primary' : (flag === true) }"
+						 		ng-click="vm.selectState(stateName)">{{stateName}}</span>
+					</a>
 				</li>
 			</ul>		
 		</div>

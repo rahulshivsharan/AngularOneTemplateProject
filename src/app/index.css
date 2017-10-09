@@ -42,3 +42,11 @@
   margin : 0;
   padding : 0;
 }
+
+a.lbl{
+  text-decoration: none;
+}
+
+a.lbl:hover{
+  text-decoration: none;
+}
