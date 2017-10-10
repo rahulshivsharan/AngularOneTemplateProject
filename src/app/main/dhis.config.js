@@ -2,10 +2,17 @@
 	'use strict';
 	
 	angular.module("EMU").config(["$provide",function($provide){
-		$provide.factory("parameters",parameters);
+		$provide.factory("configParam",configParam);
 
-		function parameters(){
+		function configParam(){
+			var config = {};
 
+			config.abbreviation = {
+				"madhya pradesh" : "MP",
+				"uttar pradesh" : "UP"
+			} 
+
+			return config;
 		} // end of parameter
 	}]);
 })();

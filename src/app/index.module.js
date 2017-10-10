@@ -9,5 +9,5 @@
         					'mwl.confirm', 
         					'angularSpinner', 
         					'xml',
-        					'underscore']);
+        					'Lodash']);
 })();

@@ -9,6 +9,7 @@
         var obj = {};
 		obj.statesObject = undefined;
 		obj.districtsObject = undefined;
+		obj.selectedStates = [];
 
 		obj.getStates = getStates;
 		obj.getDistricts = getDistricts;

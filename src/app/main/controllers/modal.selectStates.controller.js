@@ -2,9 +2,9 @@
 	'use strict';
 	angular.module('EMU').controller('ModalSelectStatesController',ModalSelectStatesController);
 
-	ModalSelectStatesController.$inject = ["$scope","$uibModalInstance","dhisService","_"];
+	ModalSelectStatesController.$inject = ["$scope","$uibModalInstance","dhisService","_","selected_states"];
 
-	function ModalSelectStatesController($scope,$uibModalInstance,dhisService,_){
+	function ModalSelectStatesController($scope,$uibModalInstance,dhisService,_,selected_states){
 		var vm = this;
 
 		//public methods
@@ -14,8 +14,7 @@
 		vm.selectState = selectState;
 		vm.findStatesByName = findStatesByName;
 
-		// public variables
-		vm.states = [];
+		// public variables		
 		vm.statesMap = {};
 		vm.searchState = "";
 
@@ -26,19 +25,34 @@
 
 
 		function ok(){
-			$uibModalInstance.close("success");
-		}
+			/*
+				Picking only those states from stateMap whose 
+				flag is true i.e. selected.
+			*/
+			var selectedStates = _.chain(vm.statesMap).omit(function(flag, stateName, statesMap){
+				return 	(flag === false);
+			}).keys().value();
+
+			
+			$uibModalInstance.close(selectedStates);
+		} // end of ok
 
 		function cancel(){
 			$uibModalInstance.dismiss("cancel");
-		}
+		} // end of cancel
 
 		function init(){
-			//console.log(dhisService.statesObject);
+			//console.log("Selected States ",selected_states);
+
 			var stateNameArray = _.keys(dhisService.statesObject);
 			
 			angular.forEach(stateNameArray,function(state,index){
-				vm.statesMap[state] = false;
+				/*
+					Check if are there any pre-selected states, if yes,
+					than we need to show those states as highlighted.
+				*/
+				var flag = (_.indexOf(selected_states,state) !== -1) ? true : false; 
+				vm.statesMap[state] = flag;
 			});	
 
 			copyOfStateMap = angular.copy(vm.statesMap);
