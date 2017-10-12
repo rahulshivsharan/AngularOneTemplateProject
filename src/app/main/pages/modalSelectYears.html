@@ -19,8 +19,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<ul style="list-style: none;">
-				<li ng-repeat="(year,flag) in vm.yearMap track by $index" style="float:left">
-					<i class="fa fa-map-marker" aria-hidden="true"></i>
+				<li ng-repeat="(year,flag) in vm.yearMap track by $index" style="float:left">					
 					<a href="javascript:void(0)" class="lbl">
 						<span 	ng-class="{'label label-default' : (flag === false), 'label label-primary' : (flag === true) }"
 						 		ng-click="vm.selectYear(year)">{{year}}</span>

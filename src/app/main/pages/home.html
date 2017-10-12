@@ -1,12 +1,11 @@
-<div class="container" ng-controller="HomeController as vm" 
-	ng-init="vm.init()">
+<div class="container" ng-controller="HomeController as vm" ng-init="vm.init()">
 	<div class="page-header">
 		<i class="fa fa-bar-chart" aria-hidden="true"></i><span style="font-size: 20px;padding-left: 3px">EMU Analysis</span>
 	</div>
 	<span us-spinner ng-if="vm.isLoading"></span>
 	<div class="row">
 		<div class="col-md-12">
-			<form>
+			<form name="mainInputForm" ng-submit="mainInputForm.$valid && vm.extractData()" novalidate>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
@@ -16,14 +15,19 @@
 								<input 	type="text" 
 										class="form-control" 
 										id="select_states" 
+										name="selected_states"
 										aria-describedby="states_addon" 
 										ng-click="vm.openStatesModal()"
 										ng-keypress="vm.openStatesModal()" 
-										ng-model="vm.selectedStates" />	
+										ng-model="vm.selectedStates" required="" />	
 								<span class="input-group-addon">									
 									<i class="fa fa-caret-down" aria-hidden="true"></i>
 								</span>
-							</div>							
+							</div>
+
+							<div ng-show="mainInputForm.$submitted" class="form_error">
+								<div ng-show="mainInputForm.selected_states.$error.required">Cannot be empty</div>	
+							</div>
 						</div>
 					</div>
 

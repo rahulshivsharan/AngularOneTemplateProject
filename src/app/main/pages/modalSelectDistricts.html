@@ -12,6 +12,7 @@
 			<input 	type="text" 
 					class="form-control" 
 					ng-model="vm.searchDistrict" 
+					ng-keyup="vm.findDistrictByName()"
 					placeholder="Search District">
 		</div>
 	</div>
@@ -20,10 +21,12 @@
 		<div class="col-md-12">
 			<ul style="list-style: none;">
 				<li ng-repeat="(districtName,flag) in vm.districtMap track by $index">
-					<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
-					<a href="javascript:void(0)" class="lbl">
+					
+					<a href="javascript:void(0)" class="lbl" style="float:left">
 						<span 	ng-class="{'label label-default' : (flag === false), 'label label-primary' : (flag === true) }"
-						 		ng-click="vm.selectDistrict(districtName)">{{districtName}}</span>
+						 		ng-click="vm.selectDistrict(districtName)">
+						 	<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;{{districtName}}
+						</span>
 					</a>
 				</li>
 			</ul>

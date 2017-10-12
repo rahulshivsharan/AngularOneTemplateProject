@@ -50,3 +50,7 @@ a.lbl{
 a.lbl:hover{
   text-decoration: none;
 }
+
+.form_error{
+  color:red;
+}

@@ -22,6 +22,7 @@
     	vm.openStatesModal = openStatesModal;
         vm.openDistrictModal = openDistrictModal;
         vm.openYearSelectionModal = openYearSelectionModal;
+        vm.extractData = extractData; 
 
     	// private methods
     	var loadDistricts = loadDistricts;
@@ -36,6 +37,10 @@
     		}
     		return flag;
     	}
+
+        function extractData(){
+            
+        } // end of extractData
 
         // fetch districts on the basis of selected states
     	function loadDistricts(){

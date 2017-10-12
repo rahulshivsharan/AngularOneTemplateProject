@@ -13,6 +13,7 @@
 		vm.ok = ok;
 		vm.cancel = cancel;
 		vm.selectDistrict = selectDistrict;
+		vm.findDistrictByName = findDistrictByName;
 
 		// public variables
 		vm.searchDistrict = "";
@@ -21,6 +22,23 @@
 		// private variables
 		var copyOfDistrictMap = {};
 
+		function findDistrictByName(){
+			var map = {};
+			if(!angular.isDefined(vm.searchDistrict) || vm.searchDistrict === null || vm.searchDistrict === ""){
+				angular.forEach(vm.districtMap,function(flag,districtName){
+					copyOfDistrictMap[districtName] = flag;
+				});
+				vm.districtMap = angular.copy(copyOfDistrictMap);
+			}else{
+				for(var prop in vm.districtMap){
+					if(prop.toLowerCase().includes(vm.searchDistrict.toLowerCase())){
+						map[prop] = vm.districtMap[prop];	
+					}
+				}
+				vm.districtMap = map;
+			} // end of else
+			
+		} // end of findDistrictByName
 
 		function selectDistrict(districtName){
 			vm.districtMap[districtName] = !vm.districtMap[districtName];
