@@ -2,9 +2,9 @@
 	'use strict';
 	angular.module('EMU').controller('ModalSelectStatesController',ModalSelectStatesController);
 
-	ModalSelectStatesController.$inject = ["$scope","$uibModalInstance","dhisService","_","selected_states"];
+	ModalSelectStatesController.$inject = ["$scope","$uibModalInstance","dhisService","_","selected_states","configParam"];
 
-	function ModalSelectStatesController($scope,$uibModalInstance,dhisService,_,selected_states){
+	function ModalSelectStatesController($scope,$uibModalInstance,dhisService,_,selected_states,configParam){
 		var vm = this;
 
 		//public methods
@@ -44,7 +44,7 @@
 		function init(){
 			//console.log("Selected States ",selected_states);
 
-			var stateNameArray = _.keys(dhisService.statesObject);
+			var stateNameArray = _.keys(configParam.statesObject);
 			
 			angular.forEach(stateNameArray,function(state,index){
 				/*

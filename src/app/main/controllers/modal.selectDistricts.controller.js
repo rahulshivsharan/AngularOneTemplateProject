@@ -3,9 +3,9 @@
 
 	angular.module('EMU').controller('ModalSelectDistrictsController',ModalSelectDistrictsController);
 	
-	ModalSelectDistrictsController.$inject = ["$scope","$uibModalInstance","dhisService","_","selected_districts"];	
+	ModalSelectDistrictsController.$inject = ["$scope","$uibModalInstance","dhisService","_","selected_districts","configParam"];	
 
-	function ModalSelectDistrictsController($scope,$uibModalInstance,dhisService,_,selected_districts){
+	function ModalSelectDistrictsController($scope,$uibModalInstance,dhisService,_,selected_districts,configParam){
 		var vm = this;
 
 		// public methods
@@ -28,7 +28,7 @@
 		} // selectDistrict
 
 		function init(){
-			var districtNameArray = _.keys(dhisService.districtsObject);
+			var districtNameArray = _.keys(configParam.districtsObject);
 
 			angular.forEach(districtNameArray,function(district,index){
 				var flag = (_.indexOf(selected_districts,district) !== -1) ? true : false;
@@ -40,11 +40,11 @@
 
 		function ok(){
 			
-			var selectDistrict = _.chain(vm.districtMap).omit(function(flag,districtName,districtMap){
+			var selectedDistrict = _.chain(vm.districtMap).omit(function(flag,districtName,districtMap){
 				return (flag === false);
 			}).keys().value();
 
-			$uibModalInstance.close(selectDistrict);
+			$uibModalInstance.close(selectedDistrict);
 		} // end of ok
 
 		function cancel(){

@@ -7,9 +7,10 @@
     function dhisService($http, $q, BACKEND_URL) {
             
         var obj = {};
-		obj.statesObject = undefined;
-		obj.districtsObject = undefined;
-		obj.selectedStates = [];
+		// obj.statesObject = undefined;
+		// obj.districtsObject = undefined;
+		// obj.selectedStates = [];
+		// obj.selectedDistricts = [];
 
 		obj.getStates = getStates;
 		obj.getDistricts = getDistricts;

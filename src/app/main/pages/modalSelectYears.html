@@ -1,0 +1,37 @@
+<div class="modal-header" ng-init="vm.init()">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="vm.cancel()">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<h4 class="modal-title" id="modal-title">Select Years</h4>
+</div>
+
+<div class="modal-body">
+	<div class="row">
+		<div class="col-md-8">&nbsp;</div>
+		<div class="col-md-4">
+			<input 	type="text" 
+					class="form-control" 
+					ng-model="vm.searchYear" 
+					placeholder="Search Years" ng-keyup="vm.findYear()">
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		<div class="col-md-12">
+			<ul style="list-style: none;">
+				<li ng-repeat="(year,flag) in vm.yearMap track by $index" style="float:left">
+					<i class="fa fa-map-marker" aria-hidden="true"></i>
+					<a href="javascript:void(0)" class="lbl">
+						<span 	ng-class="{'label label-default' : (flag === false), 'label label-primary' : (flag === true) }"
+						 		ng-click="vm.selectYear(year)">{{year}}</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<br/>
+	<div class="modal-footer">
+    	<button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>
+    	<button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
+ 	</div>
+</div>

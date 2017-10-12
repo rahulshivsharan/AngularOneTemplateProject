@@ -7,6 +7,12 @@
 		function configParam(){
 			var config = {};
 
+			config.statesObject = undefined;
+			config.districtsObject = undefined;
+			config.selectedStates = [];
+			config.selectedDistricts = [];
+			config.selectedYears = [];
+
 			config.abbreviation = {
 				"madhya pradesh" : "MP",
 				"uttar pradesh" : "UP"

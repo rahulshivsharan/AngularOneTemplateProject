@@ -10,6 +10,7 @@
     	// public variables
     	vm.selectedStates = [];
     	vm.selectedDistricts = [];
+        vm.selectedYears = [];
     	vm.isDistrictSelectionDisabled = true;
         vm.isLoading = false;
 
@@ -20,6 +21,7 @@
     	vm.init = init;
     	vm.openStatesModal = openStatesModal;
         vm.openDistrictModal = openDistrictModal;
+        vm.openYearSelectionModal = openYearSelectionModal;
 
     	// private methods
     	var loadDistricts = loadDistricts;
@@ -68,7 +70,7 @@
                 console.log(" District loading Failure ");
             }).finally(function(){
                 vm.isLoading = false;
-                dhisService.districtsObject = loadedDistricts;
+                configParam.districtsObject = loadedDistricts;
                 //console.log(" Finally ");
             });
 
@@ -76,17 +78,18 @@
 
     	function init(){
             vm.isLoading = true;
-    		vm.selectedStates = dhisService.selectedStates;    		
+    		vm.selectedStates = configParam.selectedStates;  
+            vm.selectedYears =  configParam.selectedYears;  		
     		vm.isDistrictSelectionDisabled = isDistrictDisabled();    		
     		loadStates();
-    	}
+    	} // end init
 
     	// Load all districts
     	function loadStates(){
-    		if(!angular.isDefined(dhisService.statesObject)){
+    		if(!angular.isDefined(configParam.statesObject)){
     			dhisService.getStates().then(function(response){
     				//console.log(response.data);
-    				dhisService.statesObject = response.data;
+    				configParam.statesObject = response.data;
     			},function(error){
     				console.log(error);
     			}).finally(function(){
@@ -114,6 +117,7 @@
 
     		modalInstance.result.then(function(response){
     			vm.selectedStates = response; 
+                configParam.selectedStates = response; 
     			vm.isDistrictSelectionDisabled = isDistrictDisabled();
                 if(vm.isDistrictSelectionDisabled === false){
                     vm.isLoading = true;
@@ -143,10 +147,36 @@
             });
 
             modalInstance.result.then(function(response){
-                vm.selectedDistricts = response;                
+                vm.selectedDistricts = response;
+                configParam.selectedDistricts = response;                 
             },function(response){
                 console.log(response);
             });
         }// end of openDistrictModal
+
+        function openYearSelectionModal(){
+            var modalInstance = $uibModal.open({
+                animation : true,
+                ariaLabelledBy : "modal-title",
+                ariaDescribedBy : "modal-body",
+                templateUrl : "app/main/pages/modalSelectYears.html",
+                controller: 'ModalSelectYearsController',
+                controllerAs: 'vm',
+                size : 'lg',
+                 resolve : {
+                    selected_years : function(){
+                        return vm.selectedYears
+                    }
+                }
+            });
+
+            modalInstance.result.then(function(response){
+                vm.selectedYears = response;
+                configParam.selectedYears = response;                 
+            },function(response){
+                console.log(response);
+            });
+        } // openYearSelectionModal
+
     }; // end of HomeController
 })();
