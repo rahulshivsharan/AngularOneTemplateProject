@@ -35,6 +35,7 @@
     		return flag;
     	}
 
+        // fetch districts on the basis of selected states
     	function loadDistricts(){
             loadedDistricts = {};
     		var promiseArray = [];
@@ -67,6 +68,7 @@
                 console.log(" District loading Failure ");
             }).finally(function(){
                 vm.isLoading = false;
+                dhisService.districtsObject = loadedDistricts;
                 //console.log(" Finally ");
             });
 
@@ -93,6 +95,7 @@
     		} 
     	} // end of loadStates
 
+        // open state selection modal
     	function openStatesModal(){
     		var modalInstance = $uibModal.open({
     			animation : true,
@@ -122,6 +125,7 @@
     		});
     	} // end of openStatesModal
 
+        // open district selection modal 
         function openDistrictModal(){
             var modalInstance = $uibModal.open({
                 animation : true,
@@ -132,12 +136,17 @@
                 controllerAs: 'vm',
                 size : 'lg',
                 resolve : {
-                    selected_states : function(){
-                        return vm.selectedStates
+                    selected_districts : function(){
+                        return vm.selectedDistricts
                     }
                 }
             });
 
+            modalInstance.result.then(function(response){
+                vm.selectedDistricts = response;                
+            },function(response){
+                console.log(response);
+            });
         }// end of openDistrictModal
     }; // end of HomeController
 })();

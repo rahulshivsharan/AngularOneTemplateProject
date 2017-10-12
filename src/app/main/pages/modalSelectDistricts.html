@@ -2,38 +2,36 @@
 	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="vm.cancel()">
 		<span aria-hidden="true">&times;</span>
 	</button>
-	<h4 class="modal-title" id="modal-title">Select States</h4>
+	<h4 class="modal-title" id="modal-title">Select Districts</h4>
 </div>
 
 <div class="modal-body">
 	<div class="row">
 		<div class="col-md-8">&nbsp;</div>
 		<div class="col-md-4">
-			<input type="text"
-				 	class="form-control" 
-				 	ng-model="vm.searchState" 
-					placeholder="Search State" ng-keyup="vm.findStatesByName()">
+			<input 	type="text" 
+					class="form-control" 
+					ng-model="vm.searchDistrict" 
+					placeholder="Search District">
 		</div>
 	</div>
 	<br/>
 	<div class="row">
 		<div class="col-md-12">
 			<ul style="list-style: none;">
-				<li ng-repeat="(stateName,flag) in vm.statesMap track by $index">
+				<li ng-repeat="(districtName,flag) in vm.districtMap track by $index">
 					<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
 					<a href="javascript:void(0)" class="lbl">
 						<span 	ng-class="{'label label-default' : (flag === false), 'label label-primary' : (flag === true) }"
-						 		ng-click="vm.selectState(stateName)">{{stateName}}</span>
+						 		ng-click="vm.selectDistrict(districtName)">{{districtName}}</span>
 					</a>
 				</li>
-			</ul>		
+			</ul>
 		</div>
 	</div>
-	
-	
 </div>
 
- <div class="modal-footer">
+<div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="vm.ok()">OK</button>
     <button class="btn btn-warning" type="button" ng-click="vm.cancel()">Cancel</button>
  </div>

@@ -36,7 +36,10 @@
 										class="form-control" 
 										id="select_district" 
 										aria-describedby="district_addon" 
-										ng-disabled="vm.isDistrictSelectionDisabled" />	
+										ng-disabled="vm.isDistrictSelectionDisabled" 
+										ng-keypress="vm.openDistrictModal()"
+										ng-click="vm.openDistrictModal()" 
+										ng-model="vm.selectedDistricts" />	
 								<span class="input-group-addon">									
 									<i class="fa fa-caret-down" aria-hidden="true"></i>
 								</span>
@@ -63,7 +66,7 @@
 							<i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp;
 							<label for="select_years">Select Year(s)</label>
 							<div class="input-group">
-								<input type="text" class="form-control" id="years_addon" />
+								<input type="text" class="form-control" id="years_addon" ng-disabled="vm.isDistrictSelectionDisabled" />
 								<span class="input-group-addon">									
 									<i class="fa fa-caret-down" aria-hidden="true"></i>
 								</span>
