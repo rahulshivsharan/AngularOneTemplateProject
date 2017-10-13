@@ -12,6 +12,7 @@
 			config.selectedStates = [];
 			config.selectedDistricts = [];
 			config.selectedYears = [];
+			config.isNationalSelected = false;
 
 			config.abbreviation = {
 				"madhya pradesh" : "MP",

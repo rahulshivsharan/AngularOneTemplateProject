@@ -19,7 +19,9 @@
 										aria-describedby="states_addon" 
 										ng-click="vm.openStatesModal()"
 										ng-keypress="vm.openStatesModal()" 
-										ng-model="vm.selectedStates" required="" />	
+										ng-model="vm.selectedStates" 
+										ng-required="!vm.isNational" 
+										ng-disabled="vm.isNational" />	
 								<span class="input-group-addon">									
 									<i class="fa fa-caret-down" aria-hidden="true"></i>
 								</span>
@@ -40,7 +42,7 @@
 										class="form-control" 
 										id="select_district" 
 										aria-describedby="district_addon" 
-										ng-disabled="vm.isDistrictSelectionDisabled" 
+										ng-disabled="vm.isNational || vm.isDistrictSelectionDisabled" 
 										ng-keypress="vm.openDistrictModal()"
 										ng-click="vm.openDistrictModal()" 
 										ng-model="vm.selectedDistricts" />	
@@ -57,7 +59,7 @@
 						<div class="form-group">
 							<div class="checkbox">
 								<label>
-          							<input type="checkbox"> National Aggregate
+          							<input type="checkbox" ng-model="vm.isNational"> National Aggregate
         						</label>
 							</div>	
 						</div>						
@@ -72,16 +74,20 @@
 							<div class="input-group">
 								<input 	type="text" 
 										class="form-control" 
-										id="years_addon" 
-										ng-disabled="vm.isDistrictSelectionDisabled"
+										id="years_addon"										
 										ng-keypress="vm.openYearSelectionModal()"
-										ng-click="vm.openYearSelectionModal()" 
-										ng-model="vm.selectedYears" />
+										ng-click="vm.openYearSelectionModal()"
+										name="selected_years" 
+										ng-model="vm.selectedYears" 
+										required />
 								<span class="input-group-addon">									
 									<i class="fa fa-caret-down" aria-hidden="true"></i>
 								</span>
 							</div>
 							
+							<div ng-show="mainInputForm.$submitted" class="form_error">
+								<div ng-show="mainInputForm.selected_years.$error.required">Cannot be empty</div>	
+							</div>
 						</div>
 					</div>
 				</div>

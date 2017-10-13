@@ -2,9 +2,9 @@
     'use strict';
     angular.module('EMU').controller('HomeController',HomeController);
     
-    HomeController.$inject = ["$scope","dhisService","$uibModal","configParam","$q"];
+    HomeController.$inject = ["$scope","dhisService","$uibModal","configParam","$q","utilityService"];
 
-    function HomeController($scope,dhisService,$uibModal,configParam,$q) {
+    function HomeController($scope,dhisService,$uibModal,configParam,$q,utilityService) {
     	var vm = this;
 
     	// public variables
@@ -13,6 +13,7 @@
         vm.selectedYears = [];
     	vm.isDistrictSelectionDisabled = true;
         vm.isLoading = false;
+        vm.isNational = false;
 
         // private variables
         var loadedDistricts = undefined;
@@ -38,8 +39,9 @@
     		return flag;
     	}
 
-        function extractData(){
-            
+        function extractData(){            
+            configParam.isNationalSelected = vm.isNational;
+            console.log(utilityService.processData());            
         } // end of extractData
 
         // fetch districts on the basis of selected states
@@ -84,7 +86,8 @@
     	function init(){
             vm.isLoading = true;
     		vm.selectedStates = configParam.selectedStates;  
-            vm.selectedYears =  configParam.selectedYears;  		
+            vm.selectedYears =  configParam.selectedYears;  
+            vm.isNational = configParam.isNationalSelected;		
     		vm.isDistrictSelectionDisabled = isDistrictDisabled();    		
     		loadStates();
     	} // end init

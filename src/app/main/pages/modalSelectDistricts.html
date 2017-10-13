@@ -20,11 +20,12 @@
 	<div class="row">
 		<div class="col-md-12">
 			<ul style="list-style: none;">
-				<li ng-repeat="(districtName,flag) in vm.districtMap track by $index">
+				<li ng-repeat="(districtName,flag) in vm.districtMap track by $index" >
 					
 					<a href="javascript:void(0)" class="lbl" style="float:left">
 						<span 	ng-class="{'label label-default' : (flag === false), 'label label-primary' : (flag === true) }"
-						 		ng-click="vm.selectDistrict(districtName)">
+						 		ng-click="vm.selectDistrict(districtName)" 
+						 		style="font-size: 0.8em">
 						 	<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;{{districtName}}
 						</span>
 					</a>
