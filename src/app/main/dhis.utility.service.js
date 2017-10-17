@@ -1,10 +1,11 @@
 (function(){
 	'use strict';
+
 	angular.module('EMU').service('utilityService', utilityService);
 
-	utilityService.$inject = ["$scope","configParam","_"]
+	utilityService.$inject = ["configParam","_"];
 
-	function utilityService($scope,configParam,_){
+	function utilityService(configParam,_){
 		var obj = {};
 
 		var filterDataByYear = filterDataByYear;
@@ -35,19 +36,70 @@
 			var mainData = (selectionType === "states") ? configParam.statesObject : configParam.districtsObject;
 			var mapForSelectedOptions = {};
 			
-			angular.forEach(mainData,function(value,key){ // iterating through all districts/states
-				var index = _.findIndex(selectedOptions,key), selectedValArray = undefined; // selected districts/states
-				if(index !== -1){
+			/*
+				'mainData' contains key-value pairs for states/districts as key 
+				and value is again a key-value with key as indicator and  value as array of indicators
+				i.e.
+				for 'Andaman and Nicobar' than mainData will be
+
+				{
+					"Andaman and Nicobar":{
+						"IND1_C":[["IND1_C","2009","7"],....,["IND1_C","2017","330"]],
+						"IND2_C" : [["IND2_C","2009","690"],...,["IND2_C","2017","751"]],
+						...
+				}
+				
+			*/
+
+			// iterating through mainData 
+			angular.forEach(mainData,function(value,key){ 
+				// just to check if current iterating key i.e. state is present in selected state's array
+				var index = _.findIndex(selectedOptions,function(stateName){
+					return (key === stateName);
+				}); 
+				var selectedValArray = undefined; // selected districts/states
+				if(index !== -1){ // if state is selected 
 					mapForSelectedOptions[key] = [];	
-					selectedValArray = value;
-					var filteredArray = _.filter(selectedValArray,function(arr){
-						var idx = _.findIndex(config.selectedYears,arr[1]);						
-						return (config.selectedYears[idx] === arr[1]);						 
+
+					/*
+						value will be
+						{
+						"IND1_C":[["IND1_C","2009","7"],....,["IND1_C","2017","330"]],
+						"IND2_C" : [["IND2_C","2009","690"],...,["IND2_C","2017","751"]],
+						....
+						}
+
+					*/
+					selectedValArray = _.values(value); // get all the values
+					
+					/*
+						selectedValArray will be
+						[
+							[["IND1_C","2009","7"],....,["IND1_C","2017","330"]],
+							[["IND2_C","2009","690"],...,["IND2_C","2017","751"]],
+							[["IND3_C","2009","697"],....["IND3_C","2017","1081"]],
+							......
+						]
+					*/
+
+					angular.forEach(selectedValArray,function(arr,indexVal){
+						
+						// filtering 'selectedValArray' for selected years
+						angular.forEach(configParam.selectedYears,function(yearVal,i){
+							var resultArray = _.filter(arr,function(arrayValue){
+								return (arrayValue[1] === yearVal);
+							});
+
+							mapForSelectedOptions[key].push(resultArray[0]);
+						});
+												 
 					});
-					mapForSelectedOptions[key].push(filteredArray);										
+					
+															
 				}// end if
 			});
 			return mapForSelectedOptions;
-		} // processData
+		} // filterDataByYear
+
 	}// utilityService
 })();

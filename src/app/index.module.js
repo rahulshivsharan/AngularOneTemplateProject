@@ -10,4 +10,5 @@
         					'angularSpinner', 
         					'xml',
         					'Lodash']);
+    
 })();
