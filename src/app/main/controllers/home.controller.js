@@ -41,7 +41,8 @@
 
         function extractData(){            
             configParam.isNationalSelected = vm.isNational;
-            console.log(JSON.stringify(utilityService.processData()));            
+            var data = utilityService.processData();
+            console.log(data);            
         } // end of extractData
 
         // fetch districts on the basis of selected states
