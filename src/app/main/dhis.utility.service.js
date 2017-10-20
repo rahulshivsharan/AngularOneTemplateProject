@@ -30,11 +30,16 @@
 			// }
 
 			// I want to get only the first key-value's value of above data,
-			// i.e. only value of 'Uttar Pradesh' 
+			// for example, only value of 'Uttar Pradesh' 
 			var arrayOfData = _.values(data)[0];
 
+			// iterating though selected years i.e. if years selected are [2015,2016]
 			angular.forEach(configParam.selectedYears,function(selectedYear,index){
 				
+				// iterating through all the values of selected 
+				// districts/states, 
+				// for example, iterating through
+				// [["IND1_C","2015","234"],["IND1_C","2016","234"],["IND2_C","2016","234"] ...... ["IND31_C","2016","265"]]
 				angular.forEach(arrayOfData,function(arr,index){
 						var selectedIndicator = undefined,
 							populationCount = 0;
@@ -42,24 +47,44 @@
 						var count = 0;
 						var selectedArrayData = undefined;
 
-						if(arr[1] === selectedYear){
+						if(arr[1] === selectedYear){ // check if year matches with current iterating data
 
 							selectedIndicator = arr[0];
-							populationCount = parseInt(arr[2]);
-						
 
+
+							populationCount = parseInt(arr[2]); // just assigning first population value
+						
+							/*
+								the perpose behind below code is to summat some years and indicator population
+								for example, selected states are 'Bihar' and 'Uttar Pradesh' and selected years are 2015,2016 than
+								adding ["INDC1_C","2015","12"] of Bihar to ["INDC1_C","2015","10"] of 'UP' with summate to 
+								["INDC1_C","2015","22"]
+							*/
 						
 
 							for(var s in data){
 								count++;
-								if(count === 1){
+
+								/*
+									if selected 'Bihar' and 'UP',
+									we have already captured data for 'Bihar' above
+									hence just skip for 'Bihar' hence if count is 1 just skip.
+								*/
+								if(count === 1){ 
 									continue;
 								}else{
 									selectedArrayData = data[s];
 
 									for(var x = 0; x < selectedArrayData.length; x++){
+
+										/*
+											putting annonymous function in if condition
+											to check if population got added or not
+										*/
 										if((function(arr_data,yr,indicator){
 											var isFound = false;
+
+											// if year is same and indicators are same then add data
 											if(arr_data[1] === yr && arr_data[0] === indicator){
 												populationCount +=  parseInt(arr_data[2]);
 												isFound = true;
@@ -68,19 +93,34 @@
 											return isFound;
 										})(selectedArrayData[x],selectedYear,selectedIndicator) === true){
 											break;
-										}
-									}
+										} // end of if
+
+									} // end of for
 								}// end of else
 							}// end of for
 
-							finalArrayData.push([ arr[0], arr[1], populationCount]);
+							finalArrayData.push([ arr[0], arr[1], populationCount]); // adding the summated up population for particular year and indicator
 
 						} // end of if	
-				});
+				}); // end of for-each
 				
+			}); // end of for-each
+
+			/*
+				Re-arranging the data so that if selected years are 2015 and 2016 then arrange data as bellow
+				IND1_C 2015, IND1_C 2016, INDC_2 2015, INDC_2 2016, INDC_3 2015, INDC_3 2016 and so on
+			*/
+			var outputArray = [];
+			angular.forEach(configParam.indicators,function(indicator,indicator_index){
+				angular.forEach(configParam.selectedYears,function(year,year_index){
+					var arrayElement = _.find(finalArrayData,function(arrObj){
+						return (arrObj[0] === indicator && arrObj[1] === year);
+					});
+					outputArray.push(arrayElement);
+				});
 			});
 
-			return finalArrayData;
+			return outputArray;
 		}// end of aggregateDataByIndicators
 
 		function processData(){
