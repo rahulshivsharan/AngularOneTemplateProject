@@ -41,8 +41,14 @@
 
         function extractData(){            
             configParam.isNationalSelected = vm.isNational;
-            var data = utilityService.processData();
-            console.log(data);            
+            configParam.processedData = utilityService.processData();
+
+            // data processing for graphs and charts,
+            console.log(configParam.processedData);
+            
+            var data = utilityService.processDataForCharts();
+
+            console.log(data);
         } // end of extractData
 
         // fetch districts on the basis of selected states

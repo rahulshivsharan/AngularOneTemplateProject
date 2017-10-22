@@ -8,13 +8,71 @@
 	function utilityService(configParam,_){
 		var obj = {};
 
+		// private methods
 		var filterDataByYear = filterDataByYear;
 		var aggregateDataByIndicators = aggregateDataByIndicators;
+		var applyCYPAndAdjustmentFactor = applyCYPAndAdjustmentFactor;
 
 		// public methods
 		obj.processData = processData;
 
+		obj.processDataForCharts = processDataForCharts;
+
+
 		return obj;
+
+		function applyCYPAndAdjustmentFactor(indicator,totalPopulation){
+			var adj_factor = configParam.facilities_adjustments_Factor[indicator];
+			var CYP = configParam.CYP_Factor[indicator];
+			var calculatedAmount = (totalPopulation * 100) / adj_factor;
+			calculatedAmount *= CYP;
+
+			return {
+				"CYP_F" : CYP,
+				"Adj_Factor" : adj_factor,
+				"calculatedAmount" : calculatedAmount
+			}
+		}// end of applyCYPAndAdjustmentFactor
+
+		/*
+			The below method is used for processing data so that the same 
+			can be feed in charts and tables to be displayed.
+			Data processing like CYP calculation and Adjustment factor
+			is applied on data.
+		*/
+		function processDataForCharts(){
+			var data = [];
+			angular.forEach(configParam.selectedYears,function(selectedYear,index){
+				var obj = {};
+				obj["year"] = selectedYear;
+				obj["data"] = [];
+
+				angular.forEach(configParam.indicators,function(indicator,idx){
+
+					var arrayElement = _.find(configParam.processedData,function(arrObj){
+						return (arrObj[0] === indicator && arrObj[1] === selectedYear);
+					});
+
+					if(angular.isDefined(arrayElement) && !_.isNull(arrayElement) && angular.isArray(arrayElement)){
+
+						var calculatedData = applyCYPAndAdjustmentFactor(arrayElement[0],arrayElement[2]);
+
+						obj["data"].push({
+							"dataSetId" : arrayElement[0],
+							"amount" : arrayElement[2],
+							"CYP_F" : calculatedData["CYP_F"],
+							"Adj_Factor" : calculatedData["Adj_Factor"],
+							"calculatedAmount" : calculatedData["calculatedAmount"]
+						});	
+					}// end of if
+					
+				}); // end of for-each by indicators
+
+				data.push(obj);
+ 			});// end of for-each by year
+
+			return data;
+		}// end of method processDataForCharts
 
 		function aggregateDataByIndicators(data){
 			var finalArrayData = [];
@@ -139,7 +197,7 @@
 				filteredData = filterDataByYear(configParam.selectedStates,"states");
 			} // end of else
 			
-			console.log(filteredData);
+			//console.log(filteredData);
 			
 			return aggregateDataByIndicators(filteredData);
 		} // processData
