@@ -1,0 +1,10 @@
+<div class="container wideContainer" ng-controller="InputPageController as vm" ng-init="vm.init()">
+	<div class="page-header">
+		<info-bread-crumb></info-bread-crumb>	
+	</div>
+	<div class="row">
+		<div class="col-md-3" ng-repeat="optionData in vm.columnChartOptionsArray">
+			<high-chart-render options="optionData"></high-chart-render>
+		</div>
+	</div>	
+</div>

@@ -14,6 +14,7 @@
 			config.selectedYears = [];
 			config.isNationalSelected = false;
 			config.processedData = undefined;
+			config.processedDataByYear = undefined;
 
 			config.abbreviation = {
 				"madhya pradesh" : "MP",
@@ -34,13 +35,21 @@
 			}
 
 			config.facilities_adjustments_Factor = {
-			    "IND1_C": 74.5,    // Sterilization MALE
-			    "IND2_C": 74.5,    // Sterilization FEMALE
+			    "IND1_C": 74.5,    // Sterilization MALE (Vasectomy (M))
+			    "IND2_C": 74.5,    // Sterilization FEMALE (Tubal Ligation (F))
 			    "IND3_C": 78.2,    // Jadale Implant           
 			    "IND25_C": 64.3,   // IUCDs
-			    "IND30_C": 39.6,   // Pills    
-			    "IND30_C": 39.6,   // Progestin Only Pills  
+			    "IND30_C": 39.6,   // Pills (Progestin Only Pills)    				     
 			    "IND31_C": 23.7    // Male Condoms   
+			}
+
+			config.indicatorsMap = {
+				"IND1_C" : "Sterilization Male",
+				"IND2_C" : "Sterilization Female",
+				"IND3_C" : "Implant",
+				"IND25_C" : "IUD",
+				"IND30_C" : "Pills",
+				"IND31_C" : "Condom Consumption"
 			}
 
 			return config;

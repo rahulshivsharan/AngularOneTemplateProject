@@ -17,6 +17,11 @@
                 templateUrl: 'app/main/pages/home.html',
                 controller: 'HomeController',
                 controllerAs: 'home'
+            }).state('input', {
+                url: '/input',
+                templateUrl: 'app/main/pages/inputData.html',
+                controller: 'InputPageController',
+                controllerAs: 'vm'
             });
 
         $urlRouterProvider.otherwise('/');
