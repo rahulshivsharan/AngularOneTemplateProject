@@ -9,8 +9,7 @@
 			"scope" : {
 				"options" : "="
 			},
-			"link" : function(scope,element){
-				console.log("options ",scope.options);
+			"link" : function(scope,element){				
 				Highcharts.chart(element[0],scope.options);
 			}
 		}

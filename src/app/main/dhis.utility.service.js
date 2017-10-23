@@ -24,6 +24,7 @@
 		function applyCYPAndAdjustmentFactor(indicator,totalPopulation){
 			var adj_factor = configParam.facilities_adjustments_Factor[indicator];
 			var CYP = configParam.CYP_Factor[indicator];
+			totalPopulation = isNaN(totalPopulation) ? 0 : totalPopulation;
 			var calculatedAmount = (totalPopulation * 100) / adj_factor;
 			calculatedAmount *= CYP;
 
@@ -50,7 +51,7 @@
 				angular.forEach(configParam.indicators,function(indicator,idx){
 
 					var arrayElement = _.find(configParam.processedData,function(arrObj){
-						return (arrObj[0] === indicator && arrObj[1] === selectedYear);
+						return (angular.isDefined(arrObj) && angular.isArray(arrObj) && arrObj[0] === indicator && arrObj[1] === selectedYear);
 					});
 
 					if(angular.isDefined(arrayElement) && !_.isNull(arrayElement) && angular.isArray(arrayElement)){
@@ -59,7 +60,7 @@
 
 						obj["data"].push({
 							"dataSetId" : arrayElement[0],
-							"amount" : arrayElement[2],
+							"amount" : isNaN(arrayElement[2]) ? 0 : arrayElement[2],
 							"CYP_F" : calculatedData["CYP_F"],
 							"Adj_Factor" : calculatedData["Adj_Factor"],
 							"calculatedAmount" : calculatedData["calculatedAmount"]
@@ -90,7 +91,7 @@
 			// I want to get only the first key-value's value of above data,
 			// for example, only value of 'Uttar Pradesh' 
 			var arrayOfData = _.values(data)[0];
-
+			
 			// iterating though selected years i.e. if years selected are [2015,2016]
 			angular.forEach(configParam.selectedYears,function(selectedYear,index){
 				
@@ -105,7 +106,7 @@
 						var count = 0;
 						var selectedArrayData = undefined;
 
-						if(arr[1] === selectedYear){ // check if year matches with current iterating data
+						if(angular.isDefined(arr) && angular.isDefined(arr[1]) && arr[1] === selectedYear){ // check if year matches with current iterating data
 
 							selectedIndicator = arr[0];
 
@@ -143,7 +144,7 @@
 											var isFound = false;
 
 											// if year is same and indicators are same then add data
-											if(arr_data[1] === yr && arr_data[0] === indicator){
+											if(angular.isDefined(arr_data) && angular.isArray(arr_data) && arr_data[1] === yr && arr_data[0] === indicator){
 												populationCount +=  parseInt(arr_data[2]);
 												isFound = true;
 											}

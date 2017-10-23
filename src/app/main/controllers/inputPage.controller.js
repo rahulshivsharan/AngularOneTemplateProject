@@ -2,9 +2,9 @@
 	'use strict';	
     angular.module('EMU').controller('InputPageController',InputPageController);
 
-    InputPageController.$inject = ["$scope","dhisService","configParam","utilityService"];
+    InputPageController.$inject = ["$scope","dhisService","configParam","utilityService","$state"];
 
-    function InputPageController($scope,dhisService,configParam,utilityService){
+    function InputPageController($scope,dhisService,configParam,utilityService,$state){
 
     	var vm = this;
 
@@ -13,7 +13,7 @@
 
     	// public variables
     	vm.isLoading = false;
-    	vm.columnChartOptionsArray = []
+    	vm.columnChartOptionsArray = {};
 
     	// private methods
     	var processDataForCharts = processDataForCharts;
@@ -22,17 +22,22 @@
     	var dataForChart = {};
 
     	function init(){
-    		configParam.processedData = utilityService.processData();
-
-            // data processing for graphs and charts,
-            //console.log(configParam.processedData);
-            configParam.processedDataByYear = utilityService.processDataForCharts();
-            //console.log(configParam.processedDataByYear);
-            processDataForCharts();
+    		if(!angular.isDefined(configParam.selectedYears) || (angular.isArray(configParam.selectedYears) && configParam.selectedYears.length === 0)){
+    			$state.go("home");
+    		}else{
+    			vm.isLoading = true;
+    			configParam.processedData = utilityService.processData();
+            	// data processing for graphs and charts,            
+            	configParam.processedDataByYear = utilityService.processDataForCharts();
+            	
+            	// process data to be displayed in column charts
+            	processDataForCharts();
+            	vm.isLoading = false;	
+    		}    		
     	}// end of init
 
     	function processDataForCharts(){
-    		console.log("configParam.processedDataByYear ",configParam.processedDataByYear);
+    		
     		angular.forEach(configParam.processedDataByYear,function(dataByYear,index){
     			
     			angular.forEach(dataByYear["data"],function(data,idx){
@@ -48,12 +53,12 @@
 		    			});
 	    			}// end else
 
-    			});		
-
+    			});	// end of for each for data array iteration
     			    			
-    		});
-    		console.log("dataForChart ",dataForChart);
-    		angular.forEach(dataForChart,function(data,indicatorCode){    			
+    		}); // end of for-each for interation per year
+    		
+    		angular.forEach(dataForChart,function(data,indicatorCode){
+
     			var option = {
 	    			"chart" : {
 	    				"type" : "column"
@@ -122,7 +127,7 @@
 			        "series": data
     			} // end of option
 
-    			vm.columnChartOptionsArray.push(option);
+    			vm.columnChartOptionsArray[indicatorCode] = option;    			
     		});
     		
     	} // processDataForCharts
