@@ -49,14 +49,14 @@
 				obj["data"] = [];
 
 				angular.forEach(configParam.indicators,function(indicator,idx){
-
+					var calculatedData = undefined;
 					var arrayElement = _.find(configParam.processedData,function(arrObj){
 						return (angular.isDefined(arrObj) && angular.isArray(arrObj) && arrObj[0] === indicator && arrObj[1] === selectedYear);
 					});
-
+					
 					if(angular.isDefined(arrayElement) && !_.isNull(arrayElement) && angular.isArray(arrayElement)){
 
-						var calculatedData = applyCYPAndAdjustmentFactor(arrayElement[0],arrayElement[2]);
+						calculatedData = applyCYPAndAdjustmentFactor(arrayElement[0],arrayElement[2]);
 
 						obj["data"].push({
 							"dataSetId" : arrayElement[0],
@@ -65,7 +65,18 @@
 							"Adj_Factor" : calculatedData["Adj_Factor"],
 							"calculatedAmount" : calculatedData["calculatedAmount"]
 						});	
-					}// end of if
+					}else{ // if data not found for a particular year
+
+						calculatedData = applyCYPAndAdjustmentFactor(indicator,0);
+						
+						obj["data"].push({
+							"dataSetId" : indicator,
+							"amount" : 0,
+							"CYP_F" : calculatedData["CYP_F"],
+							"Adj_Factor" : calculatedData["Adj_Factor"],
+							"calculatedAmount" : calculatedData["calculatedAmount"]
+						});
+					}// end of else
 					
 				}); // end of for-each by indicators
 

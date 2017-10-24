@@ -51,7 +51,14 @@
     },
     "requirejs": {
       "main": []
-    }
+    },
+	"highcharts":{
+		"main":[			
+			"highcharts.js",
+			"modules/exporting.js",
+			"modules/offline-exporting.js"
+		]
+	}
   },
   "resolutions": {
     "jquery": "~3.2.1",

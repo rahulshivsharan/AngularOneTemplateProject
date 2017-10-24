@@ -16,10 +16,9 @@
     	vm.columnChartOptionsArray = {};
 
     	// private methods
-    	var processDataForCharts = processDataForCharts;
+    	var processDataForColumnCharts = processDataForColumnCharts;
 
-    	// private variables
-    	var dataForChart = {};
+    	
 
     	function init(){
     		if(!angular.isDefined(configParam.selectedYears) || (angular.isArray(configParam.selectedYears) && configParam.selectedYears.length === 0)){
@@ -31,25 +30,44 @@
             	configParam.processedDataByYear = utilityService.processDataForCharts();
             	
             	// process data to be displayed in column charts
-            	processDataForCharts();
+            	processDataForColumnCharts();
             	vm.isLoading = false;	
     		}    		
     	}// end of init
 
-    	function processDataForCharts(){
-    		
+    	/*
+			the below method assign's variable 'vm.columnChartOptionsArray' a key-value pair
+			where key is 'indicator' and value is 'options' object
+			to be passed to 'scope.options' variable present in directive 'directive.chart.js'.
+			For Example
+
+			{
+				"INDC_1" : {
+					chart : {
+						type : "column"
+					},
+					.....
+				},
+				"INDC_2" : { option configuration goes here.. },
+				....
+			}
+    	*/
+    	function processDataForColumnCharts(){    		
+    		var dataForChart = {};
+
     		angular.forEach(configParam.processedDataByYear,function(dataByYear,index){
     			
-    			angular.forEach(dataByYear["data"],function(data,idx){
-    				var indicatorCode = data["dataSetId"];
+    			angular.forEach(dataByYear.data,function(data,idx){
+
+    				var indicatorCode = data.dataSetId;
 
     				if(indicatorCode in dataForChart){
-    					dataForChart[indicatorCode][0]["data"].push(data["amount"]);
+    					dataForChart[indicatorCode][0]["data"].push(data.amount);
 	    			}else{
 	    				dataForChart[indicatorCode] = [];
 		    			dataForChart[indicatorCode].push({
 		    				"name" : configParam.indicatorsMap[indicatorCode],
-		    				"data" : [data["amount"]]
+		    				"data" : [data.amount]
 		    			});
 	    			}// end else
 
@@ -130,7 +148,7 @@
     			vm.columnChartOptionsArray[indicatorCode] = option;    			
     		});
     		
-    	} // processDataForCharts
+    	} // processDataForColumnCharts
 
     } // end of InputPageController
 })();
