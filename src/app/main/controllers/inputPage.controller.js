@@ -26,9 +26,10 @@
     		}else{
     			vm.isLoading = true;
     			configParam.processedData = utilityService.processData();
+    			//console.log(configParam.processedData);
             	// data processing for graphs and charts,            
             	configParam.processedDataByYear = utilityService.processDataForCharts();
-            	
+            	console.log(configParam.processedDataByYear);
             	// process data to be displayed in column charts
             	processDataForColumnCharts();
             	vm.isLoading = false;	

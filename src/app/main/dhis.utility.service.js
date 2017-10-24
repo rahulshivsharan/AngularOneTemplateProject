@@ -122,7 +122,7 @@
 							selectedIndicator = arr[0];
 
 
-							populationCount = parseInt(arr[2]); // just assigning first population value
+							populationCount =  isNaN(arr[2]) ? 0 : parseInt(arr[2]); // just assigning first population value
 						
 							/*
 								the perpose behind below code is to summat some years and indicator population
@@ -156,7 +156,7 @@
 
 											// if year is same and indicators are same then add data
 											if(angular.isDefined(arr_data) && angular.isArray(arr_data) && arr_data[1] === yr && arr_data[0] === indicator){
-												populationCount +=  parseInt(arr_data[2]);
+												populationCount += isNaN(arr_data[2]) ? 0 : parseInt(arr_data[2]);
 												isFound = true;
 											}
 
