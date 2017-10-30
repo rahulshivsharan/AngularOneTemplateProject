@@ -17,8 +17,20 @@
 
     	// private methods
     	var processDataForColumnCharts = processDataForColumnCharts;
+    	var processDataForInputDataTable = processDataForInputDataTable; 
 
     	
+    	function processDataForInputDataTable(){
+    		var dataTableData = [];
+    		
+    		angular.forEach(configParam.indicators,function(indicatorCode,index){
+    			angular.forEach(configParam.selectedYears,function(selected_year,index){
+    				var obj = {};
+    				
+    			});
+    		});
+
+    	} // end of processDataForInputDataTable
 
     	function init(){
     		if(!angular.isDefined(configParam.selectedYears) || (angular.isArray(configParam.selectedYears) && configParam.selectedYears.length === 0)){
@@ -26,10 +38,10 @@
     		}else{
     			vm.isLoading = true;
     			configParam.processedData = utilityService.processData();
-    			//console.log(configParam.processedData);
+    			// console.log(JSON.stringify(configParam.processedData));
             	// data processing for graphs and charts,            
             	configParam.processedDataByYear = utilityService.processDataForCharts();
-            	console.log(configParam.processedDataByYear);
+            	// console.log(JSON.stringify(configParam.processedDataByYear));
             	// process data to be displayed in column charts
             	processDataForColumnCharts();
             	vm.isLoading = false;	

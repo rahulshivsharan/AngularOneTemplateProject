@@ -26,7 +26,7 @@
 			config.indicators = ["IND1_C","IND2_C","IND3_C","IND25_C","IND30_C","IND31_C"];
 
 			config.CYP_Factor = {
-			    "IND1_C": 13, //Sterilization MALE 
+			    "IND1_C": 13, // Sterilization MALE 
 			    "IND2_C": 13, // Sterilization FEMALE 
 			    "IND3_C": 0.008333333, // Jadale Implant 
 			    "IND25_C": 4.6,	// IUD
@@ -46,10 +46,10 @@
 			config.indicatorsMap = {
 				"IND1_C" : "Sterilization Male",
 				"IND2_C" : "Sterilization Female",
-				"IND3_C" : "Implant",
-				"IND25_C" : "IUD",
-				"IND30_C" : "Pills",
-				"IND31_C" : "Condom Consumption"
+				"IND3_C" : "Jadelle - Implants (2-Rod)", //Implant,
+				"IND25_C" : "Copper-T 380-A IUD (IUCD)", // IUD
+				"IND30_C" : "Standard daily Pill", //Pills,
+				"IND31_C" : "Male Condoms", //Condom Consumption
 			}
 
 			return config;

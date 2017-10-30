@@ -9,6 +9,7 @@
         					'mwl.confirm', 
         					'angularSpinner', 
         					'xml',
-        					'Lodash']);
+        					'Lodash',
+                            'datatables']);
     
 })();
