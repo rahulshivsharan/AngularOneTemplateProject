@@ -96,3 +96,7 @@ ul.breadcrumb li a:hover {
   margin:0;
   width:100%;
 }
+
+tr.group {
+  background-color: #cce6ff;
+}

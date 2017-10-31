@@ -17,20 +17,7 @@
 
     	// private methods
     	var processDataForColumnCharts = processDataForColumnCharts;
-    	var processDataForInputDataTable = processDataForInputDataTable; 
 
-    	
-    	function processDataForInputDataTable(){
-    		var dataTableData = [];
-    		
-    		angular.forEach(configParam.indicators,function(indicatorCode,index){
-    			angular.forEach(configParam.selectedYears,function(selected_year,index){
-    				var obj = {};
-    				
-    			});
-    		});
-
-    	} // end of processDataForInputDataTable
 
     	function init(){
     		if(!angular.isDefined(configParam.selectedYears) || (angular.isArray(configParam.selectedYears) && configParam.selectedYears.length === 0)){

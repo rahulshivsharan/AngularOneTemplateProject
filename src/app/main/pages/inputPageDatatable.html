@@ -1,18 +1,20 @@
-<table datatable="ng" class="table table-striped table-bordered">
+<table datatable="ng" class="table table-bordered" dt-options="vm.dtOptions">
 	<thead>
 		<tr>
-			<th>{{vm.tableHeaderArray.METHOD}}</th>
+			<th>{{vm.tableHeaderArray.MethodType}}</th>
+			<th>{{vm.tableHeaderArray.Method}}</th>
 			<th>{{vm.tableHeaderArray.CYP}}</th>
 			<th>{{vm.tableHeaderArray.af}}</th>
 			<th ng-repeat="yearlyValue in vm.tableHeaderArray.values">{{yearlyValue}}</th>			
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="rowObj in vm.tableBodyArray">
+		<tr ng-repeat="rowObj in vm.tableBodyArray track by $index">
+			<td>{{rowObj.methodType}}</td>
 			<td>{{rowObj.method}}</td>
 			<td>{{rowObj.cyp}}</td>
 			<td>{{rowObj.af}}</td>
-			<td ng-repeat="yearlyVal in rowObj.values">{{yearlyVal}}</td>
+			<td ng-repeat="yearlyVal in rowObj.values track by $index">{{yearlyVal}}</td>
 		</tr>
 	</tbody>
 </table>
