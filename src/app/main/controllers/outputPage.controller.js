@@ -67,7 +67,7 @@
     		});
 
     		var colorCodeArray = utilityService.getColorCodes(data);
-    		
+
     		var chartOption = {
 		        title: {
 		            text: 'Users Trends by Methods - Commodities'
@@ -156,10 +156,7 @@
 	            },
 	            tooltip: {
 	                pointFormat: '<b>{point.percentage:.1f}%</b>'
-	            },
-	            exporting: {
-	                enabled: true
-	            },
+	            },	            
 	            credits: {
 	                enabled: false
 	            },
@@ -255,9 +252,6 @@
 			            plotBorderWidth: null,		            
 			            type: 'pie'
 			        },
-			        credits: {
-			            enabled: false
-			        },
 			        exporting: {
 			            buttons: {
 			                contextButton: {
@@ -285,14 +279,10 @@
 			        },
 			        tooltip: {
 			            pointFormat: '<b>{point.percentage:.1f}%</b>'
-			        },
-			        exporting: {
-			            enabled: true
-			        },
+			        },			        
 			        credits: {
 			            enabled: false
 			        },
-
 			        plotOptions: {
 			            pie: {
 			                allowPointSelect: true,
@@ -327,6 +317,8 @@
 			vm.chartOptions["estimatedModernMethodMixCommodities"] = createChartForEstimatedModernMethodMixCommodities();
 			vm.chartOptions["modernMethodMix"] = createChartForModernMethodMix();
 			vm.chartOptions["usersTrendByMethodsForCommodities"] = createChartForUsersTrendByMethodsForCommodities();
+
+			utilityService.processDataForOutput();
 		} // end of init
 	} // end of OutputPageController
 })();

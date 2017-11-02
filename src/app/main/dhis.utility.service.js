@@ -18,6 +18,7 @@
 		obj.processData = processData;
 		obj.processDataForCharts = processDataForCharts;
 		obj.getColorCodes = getColorCodes;
+		obj.processDataForOutput = processDataForOutput;
 
 		return obj;
 
@@ -311,5 +312,30 @@
 			return mapForSelectedOptions;
 		} // filterDataByYear
 
+
+
+		function processDataForOutput(){
+			
+			var outputArray = [];
+			angular.forEach(configParam.selectedYears,function(year_indicator,index){
+				var total_cc_input_year = 0;
+				var item = {};
+				angular.forEach(configParam.indicators,function(indicator,index){				
+					var searchedObject = _.chain(configParam.processedDataByYear).find(function(obj){
+						return (obj.year == year_indicator);
+					}).thru(function(obj){
+						return obj.data;
+					}).find(function(obj){
+						return (obj.dataSetId == indicator);
+					}).value();
+
+					total_cc_input_year += searchedObject["calculatedAmount"];
+				}); // end of indicator iteration
+
+				item["year"] = year_indicator;
+				item["cc_input"] = total_cc_input_year;
+				
+			}); // end of selected years iteration
+		} // end of 'processDataForOutput'
 	}// utilityService
 })();
