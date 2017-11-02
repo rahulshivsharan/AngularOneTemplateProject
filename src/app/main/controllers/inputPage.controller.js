@@ -10,6 +10,7 @@
 
     	// public methods
     	vm.init = init;
+    	vm.generateOutput = generateOutput;
 
     	// public variables
     	vm.isLoading = false;
@@ -18,6 +19,10 @@
     	// private methods
     	var processDataForColumnCharts = processDataForColumnCharts;
 
+
+    	function generateOutput(){
+    		$state.go("output");
+    	} // end of generateOutput
 
     	function init(){
     		if(!angular.isDefined(configParam.selectedYears) || (angular.isArray(configParam.selectedYears) && configParam.selectedYears.length === 0)){

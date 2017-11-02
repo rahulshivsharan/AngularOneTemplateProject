@@ -99,15 +99,11 @@
 			            var rows = api.rows( {page:'current'} ).nodes();
 			            var last = null;
 
-			            api.column(0,{ page: 'current' }).data().each(function(group,i) {
+			            api.column(0,{ page : 'current' }).data().each(function(group,i){
 			            	var colspanLength = 3 + configParam.selectedYears.length;
 			                
-			                if(last !== group) {
-			                    
-			                    $(rows).eq(i).before(
-			                        "<tr class='group'><td colspan='"+colspanLength+"''>"+group+"</td></tr>"
-			                    );
-			 
+			                if(last !== group){			                    
+			                    $(rows).eq(i).before("<tr class='group'><td colspan='"+colspanLength+"''>"+group+"</td></tr>");		 
 			                    last = group;
 			                }// if
             			});

@@ -22,6 +22,11 @@
                 templateUrl: 'app/main/pages/inputData.html',
                 controller: 'InputPageController',
                 controllerAs: 'vm'
+            }).state('output', {
+                url: '/output',
+                templateUrl: 'app/main/pages/outputData.html',
+                controller: 'OutputPageController',
+                controllerAs: 'vm'
             });
 
         $urlRouterProvider.otherwise('/');

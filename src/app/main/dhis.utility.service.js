@@ -12,14 +12,41 @@
 		var filterDataByYear = filterDataByYear;
 		var aggregateDataByIndicators = aggregateDataByIndicators;
 		var applyCYPAndAdjustmentFactor = applyCYPAndAdjustmentFactor;
+		
 
 		// public methods
 		obj.processData = processData;
-
 		obj.processDataForCharts = processDataForCharts;
-
+		obj.getColorCodes = getColorCodes;
 
 		return obj;
+
+		function getColorCodes(chartPlotPoints){
+			var index = 0,
+		        labelTxt = "",
+		        colorCode = "",
+		        colorCodeArray = [];
+		    try{
+		        if(_.isArray(chartPlotPoints)){
+		            for(var index = 0; index < chartPlotPoints.length; index++){
+		                
+		                labelTxt = chartPlotPoints[index]["name"];
+		                colorCode = configParam.colorsPerLabel[labelTxt];
+
+		                if(_.isUndefined(colorCode) || _.isNull(colorCode) || colorCode === ""){
+		                    throw "No Color found for label "+labelTxt+" for pie chart";
+		                }else{
+		                    colorCodeArray.push(colorCode);
+		                }
+		            }
+		        }else{
+		            throw "Not iterable, not of type array"
+		        }
+		    }catch(e){
+		        console.log(e);
+		    }
+		    return colorCodeArray;
+		}// end of getColorCodes
 
 		function applyCYPAndAdjustmentFactor(indicator,totalPopulation){
 			var adj_factor = configParam.facilities_adjustments_Factor[indicator];

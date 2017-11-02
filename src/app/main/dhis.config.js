@@ -52,6 +52,36 @@
 				"IND31_C" : "Male Condoms", //Condom Consumption
 			}
 
+			config.indicatorsLabel = {
+				"IND31_C" : "Condom",
+				"IND30_C" : "Pill",
+				"IND25_C" : "IUD",
+				"IND1_C" : "Sterilization",
+				"IND3_C" : "Implant"
+			}
+
+			config.colorsPerLabel = {
+			    "Condom" : "#D98880",
+			    "Condoms" : "#D98880",
+			    "Condoms (Male)" : "#D98880",
+			    "Injectable" : "#884EA0",
+			    "Implant" : "#5DADE2",
+			    "Pill" : "#76D7C4",
+			    "Pills" : "#76D7C4",
+			    "OC Pills" : "#76D7C4",
+			    "IUD" : "#F7DC6F",
+			    "IUCD" : "#F7DC6F",
+			    "Other" : "#D35400",
+			    "Others" : "#D35400",
+			    "Emergency Contraception": "#95A5A6",
+			    "EC" : "#95A5A6",
+			    "Sterilization" : "#23CA1E",
+			    "Sterilization (Male)" : "#23CA1E",
+			    "Sterilization (Female)" : "#D2B4DE",
+			    "LAM" : "#979A9A",
+			    "Any modern method" : "#23CDE2"
+			}// end of colorsPerLabel
+
 			return config;
 		} // end of parameter
 	}]);

@@ -1,0 +1,54 @@
+<div class="container wideContainer" ng-controller="OutputPageController as vm" ng-init="vm.init()">
+	<div class="page-header">
+		<info-bread-crumb></info-bread-crumb>	
+	</div>
+	<span us-spinner ng-if="vm.isLoading"></span>
+	<div class="row">		
+		<div class="col-md-6">			
+			<div class="bg-primary outputHeaderLabel pull-left" style="background-color : #00a65a;">				
+				<h3>3.57%</h3>
+				<p>EMU Commodities</p>								
+			</div>
+			<div class="pull-right">
+	            <img src="assets/images/facilities-icon.png"/>
+	        </div>									
+		</div>
+
+		<div class="col-md-6">
+			<div class="bg-primary outputHeaderLabel pull-left" style="background-color : #dd4b39;">
+				<h3>0%</h3>
+				<p>EMU Visits</p>				
+			</div>
+			<div class="pull-right">
+            	<img src="assets/images/visitsIcon.png" />
+            </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<high-chart-render options="vm.chartOptions.estimatedModernMethodMixCommodities"></high-chart-render>
+		</div>
+		<div class="col-md-6">
+			<high-chart-render options="vm.chartOptions.modernMethodMix"></high-chart-render>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<uib-tabset>
+				<uib-tab index="0" heading="Commodities" classes="pull-right">
+					<div class="row">
+						<div class="col-md-6">
+							<high-chart-render options="vm.chartOptions.usersTrendByMethodsForCommodities"></high-chart-render>
+						</div>
+						<div class="col-md-6">
+							
+						</div>
+					</div>
+				</uib-tab>
+				<uib-tab index="1" heading="Visits" classes="pull-right" disable="true">
+					<p>Tab Two</p>
+				</uib-tab>
+			</uib-tabset>
+		</div>
+	</div>
+</div>
