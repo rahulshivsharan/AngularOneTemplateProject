@@ -16,6 +16,12 @@
 			config.processedData = undefined;
 			config.processedDataByYear = undefined;
 
+			config.EMUSlopesDataX = [];
+			config.EMUSlopesDataY = [];
+			config.EMUSlopesXCondomDataX = [];
+			config.EMUSlopesXCondomDataY = [];
+
+
 			config.abbreviation = {
 				"madhya pradesh" : "MP",
 				"uttar pradesh" : "UP"
@@ -132,6 +138,32 @@
 			        "2017" : 27275502
 			    }
 			} // end of config.populationForZones
+
+			/*
+				Below configuration is required for
+				'EMU Commodities output' chart
+			*/
+			config.outputChartData = {
+			    series: [{
+			        name: 'EMU Commodities',
+			        data: []
+			    },
+			    {
+			        name: 'mCPR FPET',
+			        data: []
+			    },
+			    {
+			        name: 'mCPR Survey',
+			        data: []
+			    },
+			    {
+			        name: 'EMU Commodities excl. Condoms',
+			        data: []
+			    }]
+			}
+
+			config.fpetData = [{ "2008" : null},{ "2009" : null},{ "2010" : null},{ "2011" : null},{ "2012" : 39.6 },{ "2013" : 42.6},{ "2014" : 44.6},{ "2015" : 44.5},{ "2016" : 45.3}];
+			config.mCPRData = [{ "2008" : null},{ "2009" : null},{ "2010" : 42},{ "2011" : null},{ "2012" : null},{ "2013" : null},{ "2014" : null},{ "2015" : 58},{ "2016" : 58}];
 
 			return config;
 		} // end of parameter

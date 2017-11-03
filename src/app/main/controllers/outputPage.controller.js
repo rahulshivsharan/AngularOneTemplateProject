@@ -28,7 +28,147 @@
     	var createChartForEstimatedModernMethodMixCommodities = createChartForEstimatedModernMethodMixCommodities;
     	var createChartForModernMethodMix = createChartForModernMethodMix; 
     	var createChartForUsersTrendByMethodsForCommodities = createChartForUsersTrendByMethodsForCommodities;
+    	var createChartForComparingSlopesForCommodities = createChartForComparingSlopesForCommodities;
+    	var createChartForEMUCommoditiesOutput = createChartForEMUCommoditiesOutput;
+    	var createChartForCommoditiesStockoutByMonth = createChartForCommoditiesStockoutByMonth;
 
+    	//Has to be done 
+    	function createChartForEMUCommoditiesOutput(){
+
+    	} // createChartForEMUCommoditiesOutput
+
+    	function createChartForCommoditiesStockoutByMonth(){
+    		var chartOption = {
+                credits : {
+                    enabled : false
+                },chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Sample FP Commodities Stockout by Month'
+                },
+                subtitle: {
+                    text: 'LMIS Performance Report'
+                },
+                xAxis: {
+                    categories: [                        
+                        'Apr 2016',
+                        'May 2016',
+                        'Jun 2016',
+                        'Jul 2016',
+                        'Aug 2016',
+                        'Sep 2016',
+                        'Oct 2016',
+                        'Nov 2016',
+                        'Dec 2016',
+                        'Jan 2017',
+                        'Feb 2017',
+                        'Mar 2017'
+                    ],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Stockout Value'
+                    },
+                    plotLines : [{
+                        color : 'red',
+                        value : 5,
+                        width : 2
+                    }]
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    series : {
+                        cursor : 'pointer'
+                    }
+                },
+                series: [
+                    {
+                        color : "#8e44ad", // blue                   
+                        name: 'Stockout',
+                        data: [9.71,3.43,3.88,4.57,4.29,4.65,5.81,4.21,5.25,4.19,4.05,7.99],
+                        zones : [{
+                            value : 5,
+                            color : "#8e44ad" // purple
+                        },{
+                            value : 20,
+                            color : "#e3c4ef" // light purple
+                        }]
+                    }                  
+                ]
+            };
+
+            return chartOption;
+    	} // end of createChartForCommoditiesStockoutByMonth
+
+    	function createChartForComparingSlopesForCommodities(){
+    		var eemu = [];
+			eemu.push(Math.abs(configParam.PercentageSlopeEMUExclCondoms));
+	
+			var eemuex = [];
+			eemuex.push(Math.abs(configParam.PercentageSlopeEMU));
+
+    		var chartOption = {
+				chart: {
+					type: 'bar'
+				},
+		        credits: {
+		            enabled: false
+		        },
+				title: {
+					text: 'Comparing Slopes'
+				},
+				xAxis: {
+				title: {
+					enabled: false
+				},
+				labels: {
+					enabled: false
+				},
+				tickLength: 0
+				},
+				yAxis: {
+					min: 0,
+					title: {
+						text: ''
+					}        
+				},
+				legend: {
+					reversed: true
+				},
+				plotOptions: {
+					 bar: {
+						dataLabels: {
+							enabled: true
+						}
+					}
+				},	
+				series: [{
+					name: 'EMU Commodities ex. Condoms',
+					data: eemu
+				},{
+					name: 'EMU Commodities inc. Condoms',
+					data: eemuex
+				},{
+					name: 'mCPR Surveys',
+					data: [0.0]
+				},{
+					name: 'mCPR FPET',
+					data: [1.6]
+				}]
+			} // end of chartOption
+
+			return chartOption;
+    	} // createChartForComparingSlopesForCommodities
 
     	function createChartForUsersTrendByMethodsForCommodities(){
     		var mainObj = {}, data = [];
@@ -193,8 +333,9 @@
 			The method also calculates the data which has to be rendered.
     	*/
     	function createChartForEstimatedModernMethodMixCommodities(){
-    		vm.last_year = configParam.yearList[configParam.yearList.length - 1];
-    		
+    		vm.last_year = configParam.selectedYears[configParam.selectedYears.length - 1];
+    		console.log(configParam.processedDataByYear);
+    		console.log(vm.last_year);
     		var lastYearData = _.find(configParam.processedDataByYear,function(obj){
     			return obj.year == vm.last_year;
     		});		
@@ -317,8 +458,10 @@
 			vm.chartOptions["estimatedModernMethodMixCommodities"] = createChartForEstimatedModernMethodMixCommodities();
 			vm.chartOptions["modernMethodMix"] = createChartForModernMethodMix();
 			vm.chartOptions["usersTrendByMethodsForCommodities"] = createChartForUsersTrendByMethodsForCommodities();
+			vm.chartOptions["comparingSlopesForCommodities"] = createChartForComparingSlopesForCommodities();
+			vm.chartOptions["commoditiesStockoutByMonth"] = createChartForCommoditiesStockoutByMonth();
 
-			utilityService.processDataForOutput();
+			utilityService.processDataForOutput(); // process data for output page
 		} // end of init
 	} // end of OutputPageController
 })();

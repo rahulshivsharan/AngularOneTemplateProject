@@ -12,6 +12,7 @@
 		var filterDataByYear = filterDataByYear;
 		var aggregateDataByIndicators = aggregateDataByIndicators;
 		var applyCYPAndAdjustmentFactor = applyCYPAndAdjustmentFactor;
+		var linearRegression = linearRegression;
 		
 
 		// public methods
@@ -320,6 +321,11 @@
 			angular.forEach(configParam.selectedYears,function(year_indicator,index){
 				var total_cc_input_year = 0;
 				var item = {};
+				var wpp = 0;
+				var cc_percent_year = 0;				
+				var total_cc_input_year_excluding_condom = 0;
+				var cc_percent_year_excluding_condom = 0;
+
 				angular.forEach(configParam.indicators,function(indicator,index){				
 					var searchedObject = _.chain(configParam.processedDataByYear).find(function(obj){
 						return (obj.year == year_indicator);
@@ -330,12 +336,84 @@
 					}).value();
 
 					total_cc_input_year += searchedObject["calculatedAmount"];
+					
+					if(indicator !== "IND31_C"){
+						total_cc_input_year_excluding_condom += searchedObject["calculatedAmount"]; 
+					}// end of if
+
 				}); // end of indicator iteration
+
+				
+
+				/*if(configParam.selectedDistricts.length > 0){
+					console.log("Selected Districts ",configParam.selectedDistricts);
+				}else*/
+
+				if(configParam.selectedStates.length > 0){
+					angular.forEach(configParam.selectedStates,function(value,index){
+						wpp += configParam.populationForZones[value][year_indicator]
+					});					
+				}else{ // National
+
+				}
+				
+				cc_percent_year = (total_cc_input_year/wpp) * 100;
+				cc_percent_year_excluding_condom =  (total_cc_input_year_excluding_condom / wpp) * 100;
 
 				item["year"] = year_indicator;
 				item["cc_input"] = total_cc_input_year;
-				
+				item["cc_input_excl_condom"] = Number(Number(total_cc_input_year_excluding_condom).toFixed(2));
+				item["population"] = wpp;
+				item["facilities_cc_percent"] = isFinite(cc_percent_year) ? Number(Number(cc_percent_year).toFixed(2)) : 0;
+				item["facilities_cc_percent_excl_condom"] = isFinite(cc_percent_year_excluding_condom) ? Number(Number(cc_percent_year_excluding_condom).toFixed(2)) : 0;
+
+				outputArray.push(item);
 			}); // end of selected years iteration
+
+			//console.log("outputArray ",outputArray);	
+			angular.forEach(outputArray,function(obj,index){
+
+				if(obj.facilities_cc_percent > 0){
+					configParam.EMUSlopesDataX.push(obj.year);
+					configParam.EMUSlopesDataY.push(obj.facilities_cc_percent/100);	
+				}
+				
+				if(obj.facilities_cc_percent_excl_condom > 0){
+					configParam.EMUSlopesXCondomDataX.push(obj.year);
+                	configParam.EMUSlopesXCondomDataY.push(obj.facilities_cc_percent_excl_condom / 100);
+				}
+			});
+
+			configParam.PercentageSlopeEMU = (linearRegression(configParam.EMUSlopesDataY, configParam.EMUSlopesDataX) * 100).toFixed(2);
+    		configParam.PercentageSlopeEMUExclCondoms = (linearRegression(configParam.EMUSlopesXCondomDataY, configParam.EMUSlopesXCondomDataX) * 100).toFixed(2);
+
 		} // end of 'processDataForOutput'
+
+
+		function linearRegression(y, x){
+		    var lr = {};
+		    var n = y.length;
+		    var sum_x = 0;
+		    var sum_y = 0;
+		    var sum_xy = 0;
+		    var sum_xx = 0;
+		    var sum_yy = 0;
+
+		    for (var i = 0; i < y.length; i++) {
+
+		        sum_x += x[i];
+		        sum_y += y[i];
+		        sum_xy += (x[i] * y[i]);
+		        sum_xx += (x[i] * x[i]);
+		        sum_yy += (y[i] * y[i]);
+		    }
+
+		    lr['slope'] = (n * sum_xy - sum_x * sum_y) / (n * sum_xx - sum_x * sum_x);
+		    lr['intercept'] = (sum_y - lr.slope * sum_x) / n;
+		    lr['r2'] = Math.pow((n * sum_xy - sum_x * sum_y) / Math.sqrt((n * sum_xx - sum_x * sum_x) * (n * sum_yy - sum_y * sum_y)), 2);
+
+		    return lr.slope;
+		} // linearRegression
+
 	}// utilityService
 })();

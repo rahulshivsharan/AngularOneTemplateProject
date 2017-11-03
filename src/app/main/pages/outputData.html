@@ -41,14 +41,19 @@
 							<high-chart-render options="vm.chartOptions.usersTrendByMethodsForCommodities"></high-chart-render>
 						</div>
 						<div class="col-md-6">
-							
+							<high-chart-render options="vm.chartOptions.comparingSlopesForCommodities"></high-chart-render>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<high-chart-render options="vm.chartOptions.commoditiesStockoutByMonth"></high-chart-render>
+						</div>
+					</div>				
 				</uib-tab>
 				<uib-tab index="1" heading="Visits" classes="pull-right" disable="true">
 					<p>Tab Two</p>
-				</uib-tab>
-			</uib-tabset>
+				</uib-tab>				
+			</uib-tabset>			
 		</div>
 	</div>
 </div>
