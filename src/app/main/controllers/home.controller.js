@@ -2,9 +2,9 @@
     'use strict';
     angular.module('EMU').controller('HomeController',HomeController);
     
-    HomeController.$inject = ["$scope","dhisService","$uibModal","configParam","$q","utilityService","$state"];
+    HomeController.$inject = ["$scope","dhisService","$uibModal","configParam","$q","utilityService","$state","$uibModal"];
 
-    function HomeController($scope,dhisService,$uibModal,configParam,$q,utilityService,$state) {
+    function HomeController($scope,dhisService,$uibModal,configParam,$q,utilityService,$state,$uibModal) {
     	var vm = this;
 
     	// public variables
@@ -24,6 +24,7 @@
         vm.openDistrictModal = openDistrictModal;
         vm.openYearSelectionModal = openYearSelectionModal;
         vm.extractData = extractData; 
+        vm.openSettingsModal = openSettingsModal;
 
     	// private methods
     	var loadDistricts = loadDistricts;
@@ -194,6 +195,18 @@
                 console.log(response);
             });
         } // openYearSelectionModal
+
+
+        function openSettingsModal(){
+            $uibModal.open({
+                "animation" : true,
+                "ariaLabelledBy" : "modal-title",
+                "ariaDescribedBy" : "modal-body",
+                "templateUrl" : "app/main/pages/modalSelectSettings.html",
+                "controller" : "ModalSelectSettingsController",
+                "controllerAs" "vm"
+            });
+        }
 
     }; // end of HomeController
 })();
