@@ -2,9 +2,9 @@
     'use strict';
     angular.module('EMU').controller('HomeController',HomeController);
     
-    HomeController.$inject = ["$scope","dhisService","$uibModal","configParam","$q","utilityService","$state","$uibModal"];
+    HomeController.$inject = ["$scope","dhisService","$uibModal","configParam","$q","utilityService","$state"];
 
-    function HomeController($scope,dhisService,$uibModal,configParam,$q,utilityService,$state,$uibModal) {
+    function HomeController($scope,dhisService,$uibModal,configParam,$q,utilityService,$state) {
     	var vm = this;
 
     	// public variables
@@ -198,15 +198,27 @@
 
 
         function openSettingsModal(){
-            $uibModal.open({
+            console.log("Opening Modal for settings ");
+            var success = success, error = error;
+            var modal = $uibModal.open({
                 "animation" : true,
                 "ariaLabelledBy" : "modal-title",
                 "ariaDescribedBy" : "modal-body",
                 "templateUrl" : "app/main/pages/modalSelectSettings.html",
                 "controller" : "ModalSelectSettingsController",
-                "controllerAs" "vm"
+                "controllerAs" : "vm"
             });
-        }
+
+            modal.result.then(success,error);
+
+            function success(param){
+                console.log(param);
+            }
+
+            function error(param){
+                console.log(param);
+            }
+        } // end of 'openSettingsModal'
 
     }; // end of HomeController
 })();

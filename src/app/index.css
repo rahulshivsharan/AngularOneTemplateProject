@@ -108,6 +108,36 @@ div.outputHeaderLabel h3{
   font-weight: bold;
 }
 
+.form-error{
+  color:red;
+}
+
+.facilities-icon{
+  background: url(/assets/images/facilities-icon.png) no-repeat;
+  display: inline-block;
+  height: 75px;
+  width: 75px;
+  float: left;
+  background-size: 100% 100%;
+  background-position: center center;    
+  border-radius: 4px;
+  -webkit-transition: all 0.5s;
+  margin-top: 23px;
+}
+
+.visits-icon{
+    background: url(/assets/images/visitsIcon.png) no-repeat;
+    display: inline-block;
+    height: 75px;
+    width: 75px;
+    float: left;
+    background-size: 100% 100%;
+    background-position: center center;    
+    border-radius: 4px;
+    -webkit-transition: all 0.5s;
+    margin-top: 23px;
+}
+
 
 
 

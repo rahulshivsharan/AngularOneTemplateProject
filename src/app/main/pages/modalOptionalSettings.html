@@ -1,4 +1,5 @@
-<form class="form-horizontal" name="settingsForm" ng-submit="settingsForm.$valid && vm.addSettings()" novalidate>
+<form class="form-horizontal" name="settingsForm" ng-init="vm.init()" ng-submit="settingsForm.$valid && vm.addSettings()" 
+	novalidate>
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="vm.cancel()">
 			<span aria-hidden="true">&times;</span>
@@ -10,10 +11,13 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="colorSettings">Color Select</label>
+					<label class="col-md-3 control-label" for="colorSettings">Select Theme</label>
 					<div class="col-md-4">
-						<input type="text" class="form-control" 
-							id="colorSettings" name="colorSettings" ng-model="vm.colorSettings" required>
+						<select ng-options="theme.value as theme.label for theme in vm.themeList" 
+								class="form-control" 
+								ng-model="vm.selectedTheme" required 
+								id="colorSettings" name="colorSettings">							
+						</select>
 						<div ng-show="settingsForm.$submitted" class="form-error">
 							<div ng-show="settingsForm.colorSettings.$error.required">Cannot be empty</div>	
 						</div>
