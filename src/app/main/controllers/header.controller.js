@@ -2,9 +2,9 @@
     'use strict';
     angular.module('EMU').controller('HeaderController',HeaderController);
     
-    HeaderController.$inject =  ['$scope',"$uibModal"];
+    HeaderController.$inject =  ['$scope',"$uibModal","configParam"];
 
-    function HeaderController($scope,$uibModal){
+    function HeaderController($scope,$uibModal,configParam){
         var vm = this;
         vm.popupSettings = popupSettings;
         
@@ -23,7 +23,7 @@
 			'skin-green-light' : '#00a65a',
 			'skin-red' : '#dd4b39',
 			'skin-black' : '#fff'
-        }
+        };
 
         $scope.goHome = function() {
             window.location = $scope.homeUrl;
@@ -44,9 +44,9 @@
 
             modal.result.then(success,error);
 
-            function success(param){
-                console.log("Selected Theme ",param);
+            function success(param){                
                 vm.theme = param;
+                configParam.inputChartsColor = themeMap[param];
                 less.modifyVars({
 					'theme-color' : themeMap[param]
 				});

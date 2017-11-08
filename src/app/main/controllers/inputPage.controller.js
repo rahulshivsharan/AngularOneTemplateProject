@@ -117,6 +117,7 @@
         			},
 			        "plotOptions" : {
 			            "column" : {
+			            	"color" : configParam.inputChartsColor,
 			                "stacking" : 'normal',
 			                "depth" : 50,
 			                "dataLabels" : {

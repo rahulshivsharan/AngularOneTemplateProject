@@ -21,6 +21,8 @@
 			config.EMUSlopesXCondomDataX = [];
 			config.EMUSlopesXCondomDataY = [];
 
+			config.inputChartsColor = "#605ca8";
+
 
 			config.abbreviation = {
 				"madhya pradesh" : "MP",

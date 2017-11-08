@@ -2,14 +2,14 @@
 	<div class="page-header">
 		<i class="fa fa-bar-chart" aria-hidden="true"></i><span style="font-size: 20px;padding-left: 3px">EMU Analysis</span>		
 
-		<button class="btn btn-default pull-right" type="button" aria-label="Settings" ng-click="vm.openSettingsModal()">
+		<!--button class="btn btn-default pull-right" type="button" aria-label="Settings" ng-click="vm.openSettingsModal()">
             <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-        </button>
+        </button-->
 	</div>
 	<span us-spinner ng-if="vm.isLoading"></span>
 	<div class="row">
 		<div class="col-md-12">
-			<form name="mainInputForm" ng-submit="mainInputForm.$valid && vm.extractData()" novalidate>
+			<form name="mainInputForm" ng-submit="mainInputForm.$valid && vm.extractData()" novalidate class="applyBottomBorder">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">

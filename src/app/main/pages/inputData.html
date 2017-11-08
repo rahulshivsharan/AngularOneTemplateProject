@@ -3,36 +3,48 @@
 		<info-bread-crumb></info-bread-crumb>	
 	</div>
 	<span us-spinner ng-if="vm.isLoading"></span>
-	<div class="row">
-		<div class="col-md-6">
-			<high-chart-render options="vm.columnChartOptionsArray['IND1_C']"></high-chart-render><!-- Steralization Male -->
-		</div>
-		<div class="col-md-6">
-			<high-chart-render options="vm.columnChartOptionsArray['IND2_C']"></high-chart-render><!-- Steralization Female -->
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6">
-			<high-chart-render options="vm.columnChartOptionsArray['IND3_C']"></high-chart-render><!-- Implant -->
-		</div>
-		<div class="col-md-6">
-			<high-chart-render options="vm.columnChartOptionsArray['IND25_C']"></high-chart-render><!-- IUD -->
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6">
-			<high-chart-render options="vm.columnChartOptionsArray['IND30_C']"></high-chart-render><!-- Pills -->
-		</div>
-		<div class="col-md-6">
-			<high-chart-render options="vm.columnChartOptionsArray['IND31_C']"></high-chart-render><!-- Condom Consumptions -->
-		</div>
-	</div>
-	<!-- Input data-table is renderred below -->
-	<div class="row">
-		<div class="col-md-12">
-			<input-data-table></input-data-table>			
-		</div>
-	</div>
+	
+	<uib-tabset>		
+		<uib-tab index="0" heading="Commodities" classes="pull-right themeApply">			
+			<div class="row">
+				<div class="col-md-6">
+					<high-chart-render options="vm.columnChartOptionsArray['IND1_C']"></high-chart-render><!-- Steralization Male -->
+				</div>
+				<div class="col-md-6">
+					<high-chart-render options="vm.columnChartOptionsArray['IND2_C']"></high-chart-render><!-- Steralization Female -->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<high-chart-render options="vm.columnChartOptionsArray['IND3_C']"></high-chart-render><!-- Implant -->
+				</div>
+				<div class="col-md-6">
+					<high-chart-render options="vm.columnChartOptionsArray['IND25_C']"></high-chart-render><!-- IUD -->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<high-chart-render options="vm.columnChartOptionsArray['IND30_C']"></high-chart-render><!-- Pills -->
+				</div>
+				<div class="col-md-6">
+					<high-chart-render options="vm.columnChartOptionsArray['IND31_C']"></high-chart-render><!-- Condom Consumptions -->
+				</div>
+			</div>
+			<!-- Input data-table is renderred below -->
+			<div class="row">
+				<div class="col-md-12">
+					<input-data-table></input-data-table>			
+				</div>
+			</div>		
+		</uib-tab>
+		<uib-tab index="1" heading="Visits" classes="pull-right" disable="true"></uib-tab>
+		<uib-tab index="2" classes="pull-left" disable="true">
+			<uib-tab-heading>
+        		<i class="fa fa-inbox"></i> EMU Inputs
+      		</uib-tab-heading>			
+		</uib-tab>
+	</uib-tabset>
+
 	<div class="row">
 		<div class="col-md-4">&nbsp;</div>
 		<div class="col-md-4" style="padding-left: 10%">
