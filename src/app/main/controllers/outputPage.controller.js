@@ -13,6 +13,8 @@
 		// public variables
     	vm.isLoading = false;
     	vm.last_year = undefined;
+    	vm.outputTableData = undefined;
+
     	/* 
     		the below object 'vm.chartOptions' holds options
     		for the charts getting renderred 
@@ -42,7 +44,8 @@
                 credits : {
                     enabled : false
                 },chart: {
-                    type: 'column'
+                    type: 'column',
+                    width : 1400
                 },
                 title: {
                     text: 'Sample FP Commodities Stockout by Month'
@@ -104,7 +107,7 @@
                             color : "#e3c4ef" // light purple
                         }]
                     }                  
-                ]
+                ]                
             };
 
             return chartOption;
@@ -334,7 +337,7 @@
     	*/
     	function createChartForEstimatedModernMethodMixCommodities(){
     		vm.last_year = configParam.selectedYears[configParam.selectedYears.length - 1];
-    		console.log(configParam.processedDataByYear);
+    		//console.log(configParam.processedDataByYear);
     		console.log(vm.last_year);
     		var lastYearData = _.find(configParam.processedDataByYear,function(obj){
     			return obj.year == vm.last_year;
@@ -461,7 +464,8 @@
 			vm.chartOptions["comparingSlopesForCommodities"] = createChartForComparingSlopesForCommodities();
 			vm.chartOptions["commoditiesStockoutByMonth"] = createChartForCommoditiesStockoutByMonth();
 
-			utilityService.processDataForOutput(); // process data for output page
+			vm.outputTableData = utilityService.processDataForOutput(); // process data for output page
+			//console.log("outputDataTable ",outputDataTable);
 		} // end of init
 	} // end of OutputPageController
 })();

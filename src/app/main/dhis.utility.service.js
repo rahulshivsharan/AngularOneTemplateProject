@@ -351,7 +351,25 @@
 
 				if(configParam.selectedStates.length > 0){
 					angular.forEach(configParam.selectedStates,function(value,index){
-						wpp += configParam.populationForZones[value][year_indicator]
+						if(angular.isDefined(configParam.populationForZones[value])){
+							wpp += configParam.populationForZones[value][year_indicator];
+						}else{
+
+							angular.forEach(configParam.indicators,function(indicator,index){
+								
+								var searchedObject = _.chain(configParam.processedDataByYear).find(function(obj){
+									return (obj.year == year_indicator);
+								}).thru(function(obj){
+									return obj.data;
+								}).find(function(obj){
+									return (obj.dataSetId == indicator);
+								}).value();
+
+								wpp +=  searchedObject["amount"];	
+							});
+							
+						}
+						
 					});					
 				}else{ // National
 
@@ -361,10 +379,10 @@
 				cc_percent_year_excluding_condom =  (total_cc_input_year_excluding_condom / wpp) * 100;
 
 				item["year"] = year_indicator;
-				item["cc_input"] = total_cc_input_year;
-				item["cc_input_excl_condom"] = Number(Number(total_cc_input_year_excluding_condom).toFixed(2));
 				item["population"] = wpp;
+				item["cc_input"] = total_cc_input_year.toFixed(2);
 				item["facilities_cc_percent"] = isFinite(cc_percent_year) ? Number(Number(cc_percent_year).toFixed(2)) : 0;
+				item["cc_input_excl_condom"] = Number(Number(total_cc_input_year_excluding_condom).toFixed(2));				
 				item["facilities_cc_percent_excl_condom"] = isFinite(cc_percent_year_excluding_condom) ? Number(Number(cc_percent_year_excluding_condom).toFixed(2)) : 0;
 
 				outputArray.push(item);
@@ -387,6 +405,7 @@
 			configParam.PercentageSlopeEMU = (linearRegression(configParam.EMUSlopesDataY, configParam.EMUSlopesDataX) * 100).toFixed(2);
     		configParam.PercentageSlopeEMUExclCondoms = (linearRegression(configParam.EMUSlopesXCondomDataY, configParam.EMUSlopesXCondomDataX) * 100).toFixed(2);
 
+    		return outputArray;
 		} // end of 'processDataForOutput'
 
 

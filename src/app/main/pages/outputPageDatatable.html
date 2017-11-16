@@ -1,0 +1,18 @@
+<table datatable="ng" class="table table-bordered" dt-options="vm.dtOptions">
+	<thead>
+		<tr>			
+			<th>Year</th>
+			<th>MWRA Population</th>
+			<th>Total CYP Commodities</th>
+			<th>EMU Commodities</th>			
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="rowObj in data track by $index">
+			<td>{{rowObj.year}}</td>
+			<td>{{rowObj.population}}</td>
+			<td>{{rowObj.cc_input}}</td>
+			<td>{{rowObj.facilities_cc_percent}}</td>			
+		</tr>
+	</tbody>
+</table>
