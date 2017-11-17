@@ -10,6 +10,7 @@
         					'angularSpinner', 
         					'xml',
         					'Lodash',
-                            'datatables']);
+                            'datatables',
+                            'datatables.buttons']);
     
 })();

@@ -345,11 +345,28 @@
 
 				
 
-				/*if(configParam.selectedDistricts.length > 0){
-					console.log("Selected Districts ",configParam.selectedDistricts);
-				}else*/
+				if(configParam.selectedDistricts.length > 0){
+					// console.log("Selected Districts ",configParam.selectedDistricts);
+					angular.forEach(configParam.selectedDistricts,function(value,index){
+						if(angular.isDefined(configParam.populationForZones[value])){
+							wpp += configParam.populationForZones[value][year_indicator];
+						}else{
+							angular.forEach(configParam.indicators,function(indicator,index){
+								
+								var searchedObject = _.chain(configParam.processedDataByYear).find(function(obj){
+									return (obj.year == year_indicator);
+								}).thru(function(obj){
+									return obj.data;
+								}).find(function(obj){
+									return (obj.dataSetId == indicator);
+								}).value();
 
-				if(configParam.selectedStates.length > 0){
+								wpp +=  searchedObject["amount"];	
+							});
+						}
+					});
+
+				}else if(configParam.selectedStates.length > 0){
 					angular.forEach(configParam.selectedStates,function(value,index){
 						if(angular.isDefined(configParam.populationForZones[value])){
 							wpp += configParam.populationForZones[value][year_indicator];
