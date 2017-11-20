@@ -138,6 +138,22 @@ div.outputHeaderLabel h3{
     margin-top: 23px;
 }
 
+.ion-ios-home-outline{
+  font-size: 36px;  
+}
+
+.ion-android-arrow-back{
+  font-size: 52px;
+}
+
+#homeIcon{
+  background-color: white;
+}
+
+#backIcon{
+  background-color: white;
+}
+
 
 
 

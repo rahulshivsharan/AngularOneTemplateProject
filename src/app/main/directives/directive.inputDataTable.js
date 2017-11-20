@@ -7,18 +7,18 @@
 		return {
 			"restrict" : "EA",
 			"scope" : {},
-			"controller" : ["$scope","configParam","$q",inputDataTableController],
+			"controller" : ["$scope","configParam","$q","DTOptionsBuilder",inputDataTableController],
 			"controllerAs" : "vm",
 			"templateUrl" : 'app/main/pages/inputPageDatatable.html'
  		};
 
- 		function inputDataTableController($scope,configParam,$q){
+ 		function inputDataTableController($scope,configParam,$q,DTOptionsBuilder){
  			var vm = this;
 
  			// public variables
  			vm.tableHeaderArray = {};
- 			vm.tableBodyArray = [];
- 			vm.dtOptions = {};
+ 			vm.tableBodyArray = []; 			
+ 			
 
  			// private methods 			
  			var init = init;
@@ -90,26 +90,27 @@
 					And the column 'MethodType' is kept hidden.
 					column 'MethodType' is first column of datatable with index 0.
  				*/
- 				vm.dtOptions = {
- 					columnDefs: [
-            			{ "visible": false, "targets": 0 }
-        			],
- 					drawCallback : function(settings){
- 						var api = this.api();
-			            var rows = api.rows( {page:'current'} ).nodes();
-			            var last = null;
+ 				vm.dtOptions = DTOptionsBuilder.newOptions()
+ 								.withDOM("Bfrtip")
+ 								.withButtons(['copy','csv'])
+ 								.withOption("columnDefs",[{ "visible": false, "targets": 0 }])
+ 								.withOption("drawCallback",function(settings){
+			 						var api = this.api();
+						            var rows = api.rows( {page:'current'} ).nodes();
+						            var last = null;
 
-			            api.column(0,{ page : 'current' }).data().each(function(group,i){
-			            	var colspanLength = 3 + configParam.selectedYears.length;
-			                
-			                if(last !== group){			                    
-			                    $(rows).eq(i).before("<tr class='group'><td colspan='"+colspanLength+"''>"+group+"</td></tr>");		 
-			                    last = group;
-			                }// if
-            			});
+						            api.column(0,{ page : 'current' }).data().each(function(group,i){
+						            	var colspanLength = 3 + configParam.selectedYears.length;
+						                
+						                if(last !== group){			                    
+						                    $(rows).eq(i).before("<tr class='group'><td colspan='"+colspanLength+"''>"+group+"</td></tr>");		 
+						                    last = group;
+						                }// if
+			            			}); // end of each
 
- 					}// end of drawCallback
- 				};
+ 				}); // end of dtOptions
+
+
 
  				/*
 					data-table header-row creation.

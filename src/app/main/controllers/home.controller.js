@@ -31,7 +31,6 @@
     	var loadStates = loadStates;
     	var isDistrictDisabled = isDistrictDisabled;
 
-
     	function isDistrictDisabled(){
     		var flag = true;
     		if(angular.isDefined(vm.selectedStates) && angular.isArray(vm.selectedStates) && vm.selectedStates.length > 0){
@@ -94,7 +93,7 @@
     	} // end of loadDistricts
 
     	function init(){
-            vm.isLoading = true;
+            vm.isLoading = true;            
     		vm.selectedStates = configParam.selectedStates;  
             vm.selectedYears =  configParam.selectedYears;  
             vm.isNational = configParam.isNationalSelected;		
@@ -113,7 +112,9 @@
     			}).finally(function(){
                     vm.isLoading = false;
                 });
-    		} 
+    		}else{
+                vm.isLoading = false;                
+            } 
     	} // end of loadStates
 
         // open state selection modal

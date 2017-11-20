@@ -6,7 +6,7 @@
 
 		function configParam(){
 			var config = {};
-
+			configParam.inputChartsColor = undefined;			
 			config.statesObject = undefined;
 			config.districtsObject = undefined;
 			config.selectedStates = [];

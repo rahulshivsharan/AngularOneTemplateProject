@@ -68,9 +68,31 @@
     },
     "font-awesome": {
       "main": [
-        "css/font-awesome.min.css"
+        "css/font-awesome.min.css",
+		"fonts/fontawesome-webfont.woff2",
+		"fonts/fontawesome-webfont.woff",
+		"fonts/fontawesome-webfont.ttf"
       ]
     },
+	"admin-lte":{
+		"main" : [
+			"dist/js/adminlte.min.js",
+			"dist/css/AdminLTE.min.css",			
+			"dist/css/skins/_all-skins.min.css",
+			"dist/css/skins/skin-black.min.css",
+			"dist/css/skins/skin-black-light.min.css",
+			"dist/css/skins/skin-blue.min.css",
+			"dist/css/skins/skin-blue-light.min.css",
+			"dist/css/skins/skin-green.min.css",
+			"dist/css/skins/skin-green-light.min.css",
+			"dist/css/skins/skin-purple.min.css",
+			"dist/css/skins/skin-purple-light.min.css",
+			"dist/css/skins/skin-red.min.css",
+			"dist/css/skins/skin-red-light.min.css",
+			"dist/css/skins/skin-yellow.min.css",
+			"dist/css/skins/skin-yellow-light.min.css"
+		]
+	},
 	"angular-datatables":{
 		"main" : [
 			"dist/css/angular-datatables.css",

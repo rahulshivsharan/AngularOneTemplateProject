@@ -20,6 +20,7 @@
     	var processDataForColumnCharts = processDataForColumnCharts;
 
 
+
     	function generateOutput(){
     		$state.go("output");
     	} // end of generateOutput
@@ -28,7 +29,9 @@
     		if(!angular.isDefined(configParam.selectedYears) || (angular.isArray(configParam.selectedYears) && configParam.selectedYears.length === 0)){
     			$state.go("home");
     		}else{
-    			vm.isLoading = true;
+    			$scope.$emit("goBack",true);
+
+    			vm.isLoading = true;    			
     			configParam.processedData = utilityService.processData();
     			//console.log("configParam.processedData ",JSON.stringify(configParam.processedData));
             	// data processing for graphs and charts,            
@@ -36,7 +39,7 @@
             	//console.log("configParam.processedDataByYear ",JSON.stringify(configParam.processedDataByYear));
             	// process data to be displayed in column charts
             	processDataForColumnCharts();
-            	vm.isLoading = false;	
+            	vm.isLoading = false;            	
     		}    		
     	}// end of init
 
@@ -151,6 +154,7 @@
 			        "series": data
     			} // end of option
 
+    			
     			vm.columnChartOptionsArray[indicatorCode] = option;    			
     		});
     		

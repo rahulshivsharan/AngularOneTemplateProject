@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-group">
-					<label class="col-md-3 control-label" for="colorSettings">Select Theme</label>
+					<label class="col-md-5 control-label" for="colorSettings">Select Theme</label>
 					<div class="col-md-4">
 						<select ng-options="theme.value as theme.label for theme in vm.themeList" 
 								class="form-control" 
@@ -20,6 +20,48 @@
 						</select>
 						<div ng-show="settingsForm.$submitted" class="form-error">
 							<div ng-show="settingsForm.colorSettings.$error.required">Cannot be empty</div>	
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-5 control-label" for="showGridForGraph">Show grid lines for graphs ?</label>
+					<div class="col-md-4">
+						<select ng-options="o.value as o.key for o in vm.booleanOptions" 
+								class="form-control" 
+								ng-model="vm.showGridForGraph" required 
+								id="showGridForGraph" name="showGridForGraph">															
+						</select>
+						<div ng-show="settingsForm.$submitted" class="form-error">
+							<div ng-show="settingsForm.showGridForGraph.$error.required">Cannot be empty</div>	
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-5 control-label" for="showAxisForGraph">Are Axis visible ?</label>
+					<div class="col-md-4">
+						<select ng-options="o.value as o.key for o in vm.booleanOptions" 
+								class="form-control" 
+								ng-model="vm.showAxisForGraph" required 
+								id="showAxisForGraph" name="showAxisForGraph">															
+						</select>
+						<div ng-show="settingsForm.$submitted" class="form-error">
+							<div ng-show="settingsForm.showAxisForGraph.$error.required">Cannot be empty</div>	
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-5 control-label" for="showLabelForGraph">Are Labels visible ?</label>
+					<div class="col-md-4">
+						<select ng-options="o.value as o.key for o in vm.booleanOptions" 
+								class="form-control" 
+								ng-model="vm.showLabelForGraph" required 
+								id="showLabelForGraph" name="showLabelForGraph">															
+						</select>
+						<div ng-show="settingsForm.$submitted" class="form-error">
+							<div ng-show="settingsForm.showLabelForGraph.$error.required">Cannot be empty</div>	
 						</div>
 					</div>
 				</div>
