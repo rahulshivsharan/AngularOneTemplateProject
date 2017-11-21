@@ -39,8 +39,12 @@
             	//console.log("configParam.processedDataByYear ",JSON.stringify(configParam.processedDataByYear));
             	// process data to be displayed in column charts
             	processDataForColumnCharts();
-            	vm.isLoading = false;            	
-    		}    		
+            	vm.isLoading = false;
+
+            	$scope.$on("SETTINGS_CHANGE",function(event,args){            		            		            		
+            		$state.go($state.current, {}, {reload: true});
+            	});            	
+    		}// end of else    		
     	}// end of init
 
     	/*
@@ -62,7 +66,7 @@
     	*/
     	function processDataForColumnCharts(){    		
     		var dataForChart = {};
-
+    		console.log("Graph Color Change ",configParam.inputChartsColor.toString());
     		angular.forEach(configParam.processedDataByYear,function(dataByYear,index){
     			
     			angular.forEach(dataByYear.data,function(data,idx){

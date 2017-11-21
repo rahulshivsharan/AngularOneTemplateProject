@@ -23,8 +23,7 @@
     	vm.openStatesModal = openStatesModal;
         vm.openDistrictModal = openDistrictModal;
         vm.openYearSelectionModal = openYearSelectionModal;
-        vm.extractData = extractData; 
-        vm.openSettingsModal = openSettingsModal;
+        vm.extractData = extractData;         
 
     	// private methods
     	var loadDistricts = loadDistricts;
@@ -196,30 +195,6 @@
                 console.log(response);
             });
         } // openYearSelectionModal
-
-
-        function openSettingsModal(){
-            console.log("Opening Modal for settings ");
-            var success = success, error = error;
-            var modal = $uibModal.open({
-                "animation" : true,
-                "ariaLabelledBy" : "modal-title",
-                "ariaDescribedBy" : "modal-body",
-                "templateUrl" : "app/main/pages/modalSelectSettings.html",
-                "controller" : "ModalSelectSettingsController",
-                "controllerAs" : "vm"
-            });
-
-            modal.result.then(success,error);
-
-            function success(param){
-                console.log(param);
-            }
-
-            function error(param){
-                console.log(param);
-            }
-        } // end of 'openSettingsModal'
 
     }; // end of HomeController
 })();

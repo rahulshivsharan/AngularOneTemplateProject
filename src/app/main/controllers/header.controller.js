@@ -103,12 +103,14 @@
                 less.modifyVars({
 					'theme-color' : themeMap[param.selectedTheme]
 				});
+
+                $scope.$broadcast("SETTINGS_CHANGE",{ "msg" : "Settings Changed" });
             } // end of success
 
             function error(param){
                 console.log(param);
             }
-        }
+        }// popupSettings
 
         
     } // HeaderController
