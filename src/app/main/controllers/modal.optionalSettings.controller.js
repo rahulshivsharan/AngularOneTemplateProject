@@ -11,15 +11,16 @@
 		vm.init = init;
 		vm.cancel = cancel;
 		vm.addSettings = addSettings;
+		vm.displayColorShades = displayColorShades;
 
 		// public variables
 		vm.themeList = [];
 		vm.selectedTheme = "";
-		vm.showGridForGraph = "";
-		vm.showAxisForGraph = "";
-		vm.showLabelForGraph = "";
+		vm.showGridForGraph = true;
+		vm.showAxisForGraph = true;
+		vm.showLabelForGraph = true;
 
-		vm.booleanOptions = [{"key" : "Select", "value" : ""} ,{ "key" : "YES", "value" : true },{"key" : "NO", "value" : false}];
+		vm.booleanOptions = [{ "key" : "YES", "value" : true },{"key" : "NO", "value" : false}];
 
 		var themeMap = {
         	'skin-purple' : '#605ca8',
@@ -52,9 +53,13 @@
 			];
 
 			var isThemeAssigned = false;
+
+			// below looping is done to set the default selection or pre-selected theme in 
+			// drop-down box
 			angular.forEach(themeMap,function(value,key){				
 				if(isThemeAssigned === false && angular.isDefined(configParam.inputChartsColor) && value === configParam.inputChartsColor){
 					vm.selectedTheme = key;
+					displayColorShades();
 					isThemeAssigned = true;	
 				}
 			});			
@@ -73,5 +78,9 @@
 				"showLabelForGraph" : vm.showLabelForGraph
 			});
 		}
+
+		function displayColorShades(){
+			vm.shadeIndicator = { 'background-color' : themeMap[vm.selectedTheme] };
+		}//displayColorShades
 	} // ModalOptionalSettingsController
 })();

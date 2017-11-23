@@ -15,54 +15,45 @@
 					<div class="col-md-4">
 						<select ng-options="theme.value as theme.label for theme in vm.themeList" 
 								class="form-control" 
-								ng-model="vm.selectedTheme" required 
+								ng-model="vm.selectedTheme" required ng-change="vm.displayColorShades()"
 								id="colorSettings" name="colorSettings">							
-						</select>
+						</select>						
 						<div ng-show="settingsForm.$submitted" class="form-error">
 							<div ng-show="settingsForm.colorSettings.$error.required">Cannot be empty</div>	
 						</div>
+					</div>
+					<div class="col-md-1" style="padding:0">
+						<input type="text" class="form-control" ng-style="vm.shadeIndicator" />
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label class="col-md-5 control-label" for="showGridForGraph">Show grid lines for graphs ?</label>
 					<div class="col-md-4">
-						<select ng-options="o.value as o.key for o in vm.booleanOptions" 
-								class="form-control" 
-								ng-model="vm.showGridForGraph" required 
-								id="showGridForGraph" name="showGridForGraph">															
-						</select>
-						<div ng-show="settingsForm.$submitted" class="form-error">
-							<div ng-show="settingsForm.showGridForGraph.$error.required">Cannot be empty</div>	
-						</div>
+						<div class="btn-group" id="showGridForGraph">
+							<label class="btn btn-primary" ng-model="vm.showGridForGraph" uib-btn-radio="true">YES</label>
+							<label class="btn btn-primary" ng-model="vm.showGridForGraph" uib-btn-radio="false">NO</label>
+						</div>						
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label class="col-md-5 control-label" for="showAxisForGraph">Are Axis visible ?</label>
 					<div class="col-md-4">
-						<select ng-options="o.value as o.key for o in vm.booleanOptions" 
-								class="form-control" 
-								ng-model="vm.showAxisForGraph" required 
-								id="showAxisForGraph" name="showAxisForGraph">															
-						</select>
-						<div ng-show="settingsForm.$submitted" class="form-error">
-							<div ng-show="settingsForm.showAxisForGraph.$error.required">Cannot be empty</div>	
-						</div>
+						<div class="btn-group" id="showAxisForGraph">
+							<label class="btn btn-primary" ng-model="vm.showAxisForGraph" uib-btn-radio="true">YES</label>
+							<label class="btn btn-primary" ng-model="vm.showAxisForGraph" uib-btn-radio="false">NO</label>
+						</div>						
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label class="col-md-5 control-label" for="showLabelForGraph">Are Labels visible ?</label>
 					<div class="col-md-4">
-						<select ng-options="o.value as o.key for o in vm.booleanOptions" 
-								class="form-control" 
-								ng-model="vm.showLabelForGraph" required 
-								id="showLabelForGraph" name="showLabelForGraph">															
-						</select>
-						<div ng-show="settingsForm.$submitted" class="form-error">
-							<div ng-show="settingsForm.showLabelForGraph.$error.required">Cannot be empty</div>	
-						</div>
+						<div class="btn-group" id="showLabelForGraph">
+							<label class="btn btn-primary" ng-model="vm.showLabelForGraph" uib-btn-radio="true">YES</label>
+							<label class="btn btn-primary" ng-model="vm.showLabelForGraph" uib-btn-radio="false">NO</label>
+						</div>						
 					</div>
 				</div>
 			</div>
@@ -71,6 +62,6 @@
 
 	<div class="modal-footer">
 		<button type="submit" class="btn btn-primary">Submit</button>
-		<button type="button" class="btn btn-default" ng-click="vm.addSettings()">Cancel</button>
+		<button type="button" class="btn btn-default" ng-click="vm.cancel()">Cancel</button>
 	</div>	
 </form>

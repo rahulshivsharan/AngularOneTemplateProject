@@ -14,16 +14,16 @@
         $scope.isBackNavigation = false;
 
         var themeMap = {
-        	'skin-purple' : '#605ca8',
-			'skin-purple-light' : '#605ca8',
-			'skin-blue' : '#3c8dbc',
-			'skin-blue-light' : '#3c8dbc',
-			'skin-yellow' : '#f39c12',
-			'skin-yellow-light' : '#f39c12',
-			'skin-green' : '#00a65a',
-			'skin-green-light' : '#00a65a',
-			'skin-red' : '#dd4b39',
-			'skin-black' : '#fff'
+        	'skin-purple' : { "primary" : '#605ca8', "active" : "#3e3c6b" },  
+			'skin-purple-light' : { "primary" : '#605ca8', "active" : "#3e3c6b" },  
+			'skin-blue' : { "primary" : '#3c8dbc', "active" : "#1c577a" },  
+			'skin-blue-light' : { "primary" : '#3c8dbc', "active" : "#1c577a" },  
+			'skin-yellow' : { "primary" : '#f39c12', "active" : "#bc7300" }, 
+			'skin-yellow-light' : { "primary" : '#f39c12', "active" : "#bc7300" },  
+			'skin-green' : { "primary" : '#00a65a', "active" : "#036337" }, 
+			'skin-green-light' : { "primary" : '#00a65a', "active" : "#036337" },  
+			'skin-red' : { "primary" : '#dd4b39', "active" : '#9f1706' }, 
+			'skin-black' : { "primary" : '#fff', "active" : '#fff' } 
         };
 
         $scope.goHome = function() {
@@ -99,9 +99,10 @@
                 }
                 Highcharts.setOptions(options);
 
-                configParam.inputChartsColor = themeMap[param.selectedTheme];
+                configParam.inputChartsColor = themeMap[param.selectedTheme]["primary"];
                 less.modifyVars({
-					'theme-color' : themeMap[param.selectedTheme]
+					'theme-color' : themeMap[param.selectedTheme]["primary"],
+                    'theme-color-active' : themeMap[param.selectedTheme]["active"]
 				});
 
                 $scope.$broadcast("SETTINGS_CHANGE",{ "msg" : "Settings Changed" });

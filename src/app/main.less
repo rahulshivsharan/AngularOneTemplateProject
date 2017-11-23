@@ -1,4 +1,5 @@
 @theme-color: #605ca8;
+@theme-color-active : #3e3c6b;
 
 .btn-primary{
 	background-color: @theme-color;
@@ -37,4 +38,11 @@ li.themeApply > a{
 .modal-header{
 	color : white;
 	background-color: @theme-color;
+}
+
+
+.btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary{
+	color : #fff;
+	background-color : @theme-color-active;
+	border-color : @theme-color-active;
 }
