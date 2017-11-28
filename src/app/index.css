@@ -63,6 +63,7 @@ ul.breadcrumb {
     list-style: none;
     background-color: #eee;
     font-size: 18px;
+    box-shadow: 10px 10px 10px 10px #8888;
 }
 
 /* Display list items side by side */
@@ -75,7 +76,7 @@ ul.breadcrumb li {
 ul.breadcrumb li+li:before {
     padding: 8px;
     color: black;
-    content: url(/assets/images/breadcrumb_sep.png);
+    content: url(../assets/images/breadcrumb_sep.png);
 }
 
 /* Add a color to all links inside the list */
@@ -113,7 +114,7 @@ div.outputHeaderLabel h3{
 }
 
 .facilities-icon{
-  background: url(/assets/images/facilities-icon.png) no-repeat;
+  background: url(../assets/images/facilities-icon.png) no-repeat;
   display: inline-block;
   height: 75px;
   width: 75px;
@@ -126,7 +127,7 @@ div.outputHeaderLabel h3{
 }
 
 .visits-icon{
-    background: url(/assets/images/visitsIcon.png) no-repeat;
+    background: url(../assets/images/visitsIcon.png) no-repeat;
     display: inline-block;
     height: 75px;
     width: 75px;
@@ -155,7 +156,9 @@ div.outputHeaderLabel h3{
 }
 
 
-
+.dataTables_wrapper{
+  box-shadow: 10px 10px 5px 10px #8888;
+}
 
 
 

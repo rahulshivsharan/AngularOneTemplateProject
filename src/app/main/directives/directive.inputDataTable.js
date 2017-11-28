@@ -64,8 +64,7 @@
  					}).find(function(obj){
  						return obj.dataSetId == indicatorName; // find by indicator
  					}).value();
- 								
- 					
+
  					tableRowObj.values.push(data["amount"]);		 					 					
  				});
 
@@ -109,7 +108,6 @@
 			            			}); // end of each
 
  				}); // end of dtOptions
-
 
 
  				/*
@@ -236,7 +234,8 @@
 																				"af" : 23.7,
 																				"values" : []
 																			}).then(function(rowObj){
-																				vm.tableBodyArray.push(rowObj);
+																				// commented as 'Female Condom' was added twice
+																				//vm.tableBodyArray.push(rowObj); 
 																				createRowDataWithZeroValue({ 
 																					"methodType" : "Other",
 																					"method" : "LAM",

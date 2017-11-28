@@ -14,6 +14,7 @@
     	vm.isLoading = false;
     	vm.last_year = undefined;
     	vm.outputTableData = undefined;
+    	vm.emuFacilitiesForLatestYear = 0;
 
     	/* 
     		the below object 'vm.chartOptions' holds options
@@ -464,8 +465,9 @@
 			vm.chartOptions["comparingSlopesForCommodities"] = createChartForComparingSlopesForCommodities();
 			vm.chartOptions["commoditiesStockoutByMonth"] = createChartForCommoditiesStockoutByMonth();
 
-			vm.outputTableData = utilityService.processDataForOutput(); // process data for output page
-			//console.log("outputDataTable ",outputDataTable);
+			vm.outputTableData = utilityService.processDataForOutput(); // process data for output page			
+			vm.emuFacilitiesForLatestYear = vm.outputTableData[vm.outputTableData.length -1]["facilities_cc_percent"];
+			
 		} // end of init
 	} // end of OutputPageController
 })();

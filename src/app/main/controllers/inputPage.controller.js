@@ -91,7 +91,8 @@
 
     			var option = {
 	    			"chart" : {
-	    				"type" : "column"
+	    				"type": "column",
+	    				"shadow": true
 	    			},
 	    			"credits" : {
 	    				"enabled" : false

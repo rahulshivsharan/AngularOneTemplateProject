@@ -389,7 +389,7 @@
 						
 					});					
 				}else{ // National
-
+					wpp += configParam.wpp[year_indicator];
 				}
 				
 				cc_percent_year = (total_cc_input_year/wpp) * 100;
