@@ -24,10 +24,11 @@
     "pdfmake": "^0.1.33",
     "datatables.net-dt": "^3.2.2",
     "datatables.net-buttons-dt": "^1.4.2",
-	"angular-datatables": "0.5",
+    "angular-datatables": "0.5",
     "less": "^2.7.3",
     "admin-lte": "^2.4.2",
-    "font-awesome": "fontawesome#^4.7.0"    
+    "font-awesome": "fontawesome#^4.7.0",
+    "datatables.net-bs": "^2.1.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.6.6",
@@ -48,7 +49,10 @@
     "bootstrap": {
       "main": [
         "dist/css/bootstrap.css",
-        "dist/js/bootstrap.min.js"
+        "dist/js/bootstrap.min.js",
+		"fonts/glyphicons-halflings-regular.woff2",
+		"fonts/glyphicons-halflings-regular.woff",
+		"fonts/glyphicons-halflings-regular.ttf"
       ]
     },
     "fuelux": {
@@ -69,35 +73,51 @@
     "font-awesome": {
       "main": [
         "css/font-awesome.min.css",
-		"fonts/fontawesome-webfont.woff2",
-		"fonts/fontawesome-webfont.woff",
-		"fonts/fontawesome-webfont.ttf"
+        "fonts/fontawesome-webfont.woff2",
+        "fonts/fontawesome-webfont.woff",
+        "fonts/fontawesome-webfont.ttf"
       ]
     },
-	"admin-lte":{
+    "admin-lte": {
+      "main": [
+        "dist/js/adminlte.min.js",
+        "dist/css/AdminLTE.min.css",
+        "dist/css/skins/_all-skins.min.css",
+        "dist/css/skins/skin-black.min.css",
+        "dist/css/skins/skin-black-light.min.css",
+        "dist/css/skins/skin-blue.min.css",
+        "dist/css/skins/skin-blue-light.min.css",
+        "dist/css/skins/skin-green.min.css",
+        "dist/css/skins/skin-green-light.min.css",
+        "dist/css/skins/skin-purple.min.css",
+        "dist/css/skins/skin-purple-light.min.css",
+        "dist/css/skins/skin-red.min.css",
+        "dist/css/skins/skin-red-light.min.css",
+        "dist/css/skins/skin-yellow.min.css",
+        "dist/css/skins/skin-yellow-light.min.css"
+      ]
+    },
+    "angular-datatables": {
+      "main": [
+        "dist/css/angular-datatables.css",
+        "dist/angular-datatables.js",
+        "dist/plugins/buttons/angular-datatables.buttons.js"
+      ]
+    },
+    "datatables.net-dt": {
+      "main": [
+        "css/jquery.dataTables.min.css",
+        "images/sort_asc.png",
+        "images/sort_asc_disabled.png",
+        "images/sort_both.png",
+        "images/sort_desc.png",
+        "images/sort_desc_disabled.png"
+      ]
+    },
+	"datatables.net-bs": {
 		"main" : [
-			"dist/js/adminlte.min.js",
-			"dist/css/AdminLTE.min.css",			
-			"dist/css/skins/_all-skins.min.css",
-			"dist/css/skins/skin-black.min.css",
-			"dist/css/skins/skin-black-light.min.css",
-			"dist/css/skins/skin-blue.min.css",
-			"dist/css/skins/skin-blue-light.min.css",
-			"dist/css/skins/skin-green.min.css",
-			"dist/css/skins/skin-green-light.min.css",
-			"dist/css/skins/skin-purple.min.css",
-			"dist/css/skins/skin-purple-light.min.css",
-			"dist/css/skins/skin-red.min.css",
-			"dist/css/skins/skin-red-light.min.css",
-			"dist/css/skins/skin-yellow.min.css",
-			"dist/css/skins/skin-yellow-light.min.css"
-		]
-	},
-	"angular-datatables":{
-		"main" : [
-			"dist/css/angular-datatables.css",
-			"dist/angular-datatables.js",			
-			"dist/plugins/buttons/angular-datatables.buttons.js"			
+			"js/dataTables.bootstrap.min.js",
+			"css/dataTables.bootstrap.min.css"
 		]
 	}
   },

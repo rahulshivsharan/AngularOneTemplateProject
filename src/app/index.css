@@ -158,8 +158,25 @@ div.outputHeaderLabel h3{
 
 .dataTables_wrapper{
   box-shadow: 10px 10px 5px 10px #8888;
+  border-radius: 25px;
 }
 
+.dt-buttons{
+  padding-left: 25px;
+}
+
+.highcharts-container{
+  box-shadow: 10px 10px 10px 10px #8888;
+  border-radius: 25px;
+}
+
+.top-buffer{ 
+  margin-top:30px;
+}
+
+body{
+  background-color: #e6e6e6;
+}
 
 
 

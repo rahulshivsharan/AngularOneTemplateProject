@@ -27,30 +27,30 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-6">
+	<div class="row top-buffer">
+		<div class="col-md-5 col-md-offset-1">
 			<high-chart-render options="vm.chartOptions.estimatedModernMethodMixCommodities"></high-chart-render>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-5">
 			<high-chart-render options="vm.chartOptions.modernMethodMix"></high-chart-render>
 		</div>
 	</div>
 	<uib-tabset>
 		<uib-tab index="0" heading="Commodities" classes="pull-right themeApply">
-			<div class="row">
-				<div class="col-md-6">
+			<div class="row top-buffer">
+				<div class="col-md-5 col-md-offset-1">
 					<high-chart-render options="vm.chartOptions.usersTrendByMethodsForCommodities"></high-chart-render>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-5">
 					<high-chart-render options="vm.chartOptions.comparingSlopesForCommodities"></high-chart-render>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row top-buffer">
 				<div class="col-md-12">
 					<high-chart-render options="vm.chartOptions.commoditiesStockoutByMonth"></high-chart-render>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row top-buffer">
 				<div class="col-md-12">
 					<output-data-table data="vm.outputTableData"></output-data-table>
 				</div>

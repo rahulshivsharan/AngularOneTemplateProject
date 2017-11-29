@@ -6,32 +6,32 @@
 	
 	<uib-tabset>		
 		<uib-tab index="0" heading="Commodities" classes="pull-right themeApply">			
-			<div class="row">
-				<div class="col-md-6"><!-- Steralization Male -->					
+			<div class="row top-buffer">
+				<div class="col-md-5 col-md-offset-1"><!-- Steralization Male -->					
 					<high-chart-render options="vm.columnChartOptionsArray['IND1_C']"></high-chart-render>
 				</div>
-				<div class="col-md-6"><!-- Steralization Female -->
+				<div class="col-md-5"><!-- Steralization Female -->
 					<high-chart-render options="vm.columnChartOptionsArray['IND2_C']"></high-chart-render>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-6"><!-- Implant -->
+			<div class="row top-buffer">
+				<div class="col-md-5 col-md-offset-1"><!-- Implant -->
 					<high-chart-render options="vm.columnChartOptionsArray['IND3_C']"></high-chart-render>
 				</div>
-				<div class="col-md-6"><!-- IUD -->
+				<div class="col-md-5"><!-- IUD -->
 					<high-chart-render options="vm.columnChartOptionsArray['IND25_C']"></high-chart-render>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-6"><!-- Pills -->
+			<div class="row top-buffer">
+				<div class="col-md-5 col-md-offset-1"><!-- Pills -->
 					<high-chart-render options="vm.columnChartOptionsArray['IND30_C']"></high-chart-render>
 				</div>
-				<div class="col-md-6"><!-- Condom Consumptions -->
+				<div class="col-md-5"><!-- Condom Consumptions -->
 					<high-chart-render options="vm.columnChartOptionsArray['IND31_C']"></high-chart-render>
 				</div>
 			</div>
 			<!-- Input data-table is renderred below -->
-			<div class="row">
+			<div class="row top-buffer">
 				<div class="col-md-12">
 					<input-data-table></input-data-table>			
 				</div>
@@ -45,7 +45,7 @@
 		</uib-tab>
 	</uib-tabset>
 
-	<div class="row">
+	<div class="row top-buffer">
 		<div class="col-md-4">&nbsp;</div>
 		<div class="col-md-4" style="padding-left: 10%">
 			<button class="btn btn-primary" ng-click="vm.generateOutput()">Generate EMU Output</button>
