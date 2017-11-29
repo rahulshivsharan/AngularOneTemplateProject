@@ -11,7 +11,15 @@
 			"templateUrl" : 'app/main/pages/outputPageDatatable.html',
 			"controller" : ["$scope","DTOptionsBuilder",function($scope,DTOptionsBuilder){
 				var vm = this;
-				vm.dtOptions = DTOptionsBuilder.newOptions().withDOM("Bfrtip").withButtons(['copy','print','csv']);
+				vm.dtOptions = DTOptionsBuilder.newOptions()
+								.withDOM("Bfrtip")
+								.withButtons(['copy','print','csv'])
+								.withLanguage({
+				 					"oPaginate" : {
+				 						"sNext":  "<span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span>",
+				                		"sPrevious": "<span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span>"
+				 					}
+ 				});
 			}],
 			"controllerAs" : "vm"	
 		} // end of return block				

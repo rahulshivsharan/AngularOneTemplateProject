@@ -1,10 +1,15 @@
 @theme-color: #605ca8;
 @theme-color-active : #3e3c6b;
 
+@gradient_top: #fbfbfb;
+@gradient_middle: #dad9f3;
+@gradient_bottom: #cccbef;
+
 .btn-primary{
 	background-color: @theme-color;
 	border-color: @theme-color;
 	background : @theme-color;
+	box-shadow:2px 2px 2px 2px #8888;
 }
 
 .btn-primary:hover,.btn-primary:focus{
@@ -45,4 +50,30 @@ li.themeApply > a{
 	color : #fff;
 	background-color : @theme-color-active;
 	border-color : @theme-color-active;
+}
+
+.pagination > .active > a{
+	color : white;
+	background-color: @theme-color;
+	border-color : @theme-color;
+}
+
+div.dataTables_wrapper{
+	background-color : @theme-color-active;
+	border-color : @theme-color-active;
+}
+
+div.dataTables_wrapper thead tr,.dataTables_filter label{
+	color:white;
+}
+
+div.dataTables_info{
+	color:white !important;
+}
+
+body{
+  background: -webkit-linear-gradient(@gradient_top, @gradient_middle, @gradient_bottom); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(@gradient_top, @gradient_middle, @gradient_bottom); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(@gradient_top, @gradient_middle, @gradient_bottom); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(@gradient_top, @gradient_middle, @gradient_bottom); /* Standard syntax (must be last) */
 }

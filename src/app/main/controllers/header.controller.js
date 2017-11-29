@@ -14,16 +14,96 @@
         $scope.isBackNavigation = false;
 
         var themeMap = {
-        	'skin-purple' : { "primary" : '#605ca8', "active" : "#3e3c6b" },  
-			'skin-purple-light' : { "primary" : '#605ca8', "active" : "#3e3c6b" },  
-			'skin-blue' : { "primary" : '#3c8dbc', "active" : "#1c577a" },  
-			'skin-blue-light' : { "primary" : '#3c8dbc', "active" : "#1c577a" },  
-			'skin-yellow' : { "primary" : '#f39c12', "active" : "#bc7300" }, 
-			'skin-yellow-light' : { "primary" : '#f39c12', "active" : "#bc7300" },  
-			'skin-green' : { "primary" : '#00a65a', "active" : "#036337" }, 
-			'skin-green-light' : { "primary" : '#00a65a', "active" : "#036337" },  
-			'skin-red' : { "primary" : '#dd4b39', "active" : '#9f1706' }, 
-			'skin-black' : { "primary" : '#fff', "active" : '#fff' } 
+        	'skin-purple' : { 
+                "primary" : '#605ca8', 
+                "active" : "#3e3c6b", 
+                "gradient" : { 
+                    "top" : "#fbfbfb", 
+                    "middle" : "#dad9f3", 
+                    "bottom" : "#cccbef"  
+                } 
+            },  
+			'skin-purple-light' : { 
+                "primary" : '#605ca8', 
+                "active" : "#3e3c6b", 
+                "gradient" : { 
+                    "top" : "#fbfbfb", 
+                    "middle" : "#dad9f3", 
+                    "bottom" : "#cccbef"  
+                } 
+            },  
+			'skin-blue' : { 
+                "primary" : '#3c8dbc', 
+                "active" : "#1c577a", 
+                "gradient" : { 
+                    "top" : "#f3f6f7", 
+                    "middle" : "#d0e3ed", 
+                    "bottom" : "#c8e4ed"  
+                } 
+            },  
+			'skin-blue-light' : { 
+                "primary" : '#3c8dbc',
+                "active" : "#1c577a", 
+                "gradient" : { 
+                    "top" : "#f3f6f7", 
+                    "middle" : "#d0e3ed", 
+                    "bottom" : "#c8e4ed"  
+                } 
+            },  
+			'skin-yellow' : { 
+                "primary" : '#f39c12', 
+                "active" : "#bc7300", 
+                "gradient" : { 
+                    "top" : "#fbfaf7", 
+                    "middle" : "#f7eed4", 
+                    "bottom" : "#f3e6c1"  
+                } 
+            }, 
+			'skin-yellow-light' : { 
+                "primary" : '#f39c12',
+                 "active" : "#bc7300", 
+                 "gradient" : { 
+                    "top" : "#fbfaf7", 
+                    "middle" : "#f7eed4", 
+                    "bottom" : "#f3e6c1"  
+                } 
+            },  
+			'skin-green' : { 
+                "primary" : '#00a65a', 
+                "active" : "#036337", 
+                "gradient" : { 
+                    "top" : "#f3fbf7", 
+                    "middle" : "#e4fff1", 
+                    "bottom" : "#e2fff2"  
+                } 
+            }, 
+			'skin-green-light' : { 
+                "primary" : '#00a65a', 
+                "active" : "#036337", 
+                "gradient" : { 
+                    "top" : "#f3fbf7", 
+                    "middle" : "#e4fff1", 
+                    "bottom" : "#e2fff2"  
+                } 
+            },  
+			'skin-red' : { 
+                "primary" : '#dd4b39', 
+                "active" : '#9f1706', 
+                "gradient" : { 
+                    "top" : "#fff7f6", 
+                    "middle" : "#ffebe9", 
+                    "bottom" : "#ffdedb"  
+                } 
+            }, 
+			'skin-black' : { 
+                "primary" : '#fff', 
+                "active" : '#fff', 
+                "gradient" : { 
+                    "top" : "", 
+                    "middle" : "", 
+                    "bottom" : ""  
+                } 
+            } 
         };
 
         $scope.goHome = function() {
@@ -102,7 +182,10 @@
                 configParam.inputChartsColor = themeMap[param.selectedTheme]["primary"];
                 less.modifyVars({
 					'theme-color' : themeMap[param.selectedTheme]["primary"],
-                    'theme-color-active' : themeMap[param.selectedTheme]["active"]
+                    'theme-color-active' : themeMap[param.selectedTheme]["active"],
+                    'gradient_top' : themeMap[param.selectedTheme]["gradient"]["top"],
+                    'gradient_middle' : themeMap[param.selectedTheme]["gradient"]["middle"],
+                    'gradient_bottom' : themeMap[param.selectedTheme]["gradient"]["bottom"]
 				});
 
                 $scope.$broadcast("SETTINGS_CHANGE",{ "msg" : "Settings Changed" });
