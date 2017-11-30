@@ -173,3 +173,17 @@ div.outputHeaderLabel h3{
 .top-buffer{ 
   margin-top:30px;
 }
+
+.selected-label-indicator{
+  text-align: center;
+  padding:2px;
+  margin: 0 10px 10px 0;
+  float: left;
+  border-radius: 5px;
+  background-color: #ffff;
+  color: black;  
+}
+
+.noBorder{
+  border:0;
+}
