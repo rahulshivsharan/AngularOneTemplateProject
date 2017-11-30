@@ -187,3 +187,7 @@ div.outputHeaderLabel h3{
 .noBorder{
   border:0;
 }
+
+.fontColorWhite{
+  color: #ffff;
+}
