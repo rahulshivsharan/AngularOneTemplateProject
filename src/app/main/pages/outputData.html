@@ -5,7 +5,7 @@
 	<span us-spinner ng-if="vm.isLoading"></span>
 	<div class="row">		
 		<div class="col-md-6">
-			<div class="small-box bg-green">
+			<div class="small-box bg-green dropShadowBox">
 				<div class=inner>
 					<h3>{{vm.emuFacilitiesForLatestYear}}%</h3>
 					<p>EMU Commodities</p>								
@@ -16,7 +16,7 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<div class="small-box bg-red">
+			<div class="small-box bg-red dropShadowBox">
 				<div class=inner>
 					<h3>0%</h3>
 					<p>EMU Visits</p>								
@@ -28,20 +28,20 @@
 		</div>
 	</div>
 	<div class="row top-buffer">
-		<div class="col-md-5 col-md-offset-1">
+		<div class="col-md-6">
 			<high-chart-render options="vm.chartOptions.estimatedModernMethodMixCommodities"></high-chart-render>
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-6">
 			<high-chart-render options="vm.chartOptions.modernMethodMix"></high-chart-render>
 		</div>
 	</div>
 	<uib-tabset>
 		<uib-tab index="0" heading="Commodities" classes="pull-right themeApply">
 			<div class="row top-buffer">
-				<div class="col-md-5 col-md-offset-1">
+				<div class="col-md-6">
 					<high-chart-render options="vm.chartOptions.usersTrendByMethodsForCommodities"></high-chart-render>
 				</div>
-				<div class="col-md-5">
+				<div class="col-md-6">
 					<high-chart-render options="vm.chartOptions.comparingSlopesForCommodities"></high-chart-render>
 				</div>
 			</div>

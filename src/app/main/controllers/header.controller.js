@@ -146,10 +146,12 @@
                 var showGridForGraph = param["showGridForGraph"];
 
                 var options = {};
+
                 options.yAxis = {};
                 options.xAxis = {};
                 options.yAxis.labels = {}
                 options.xAxis.labels = {}
+                
 
                 if(param["showAxisForGraph"] === false){
                     options.yAxis.visible = false;

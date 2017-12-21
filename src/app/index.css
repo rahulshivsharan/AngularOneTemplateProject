@@ -161,13 +161,18 @@ div.outputHeaderLabel h3{
   border-radius: 25px;
 }
 
+.dropShadowBox{
+  box-shadow: 10px 10px 5px 10px #8888;
+}
+
 .dt-buttons{
   padding-left: 25px;
 }
 
 .highcharts-container{
   box-shadow: 10px 10px 10px 10px #8888;
-  border-radius: 25px;
+  border-radius: 25px;  
+  margin: auto;
 }
 
 .top-buffer{ 
@@ -190,4 +195,8 @@ div.outputHeaderLabel h3{
 
 .fontColorWhite{
   color: #ffff;
+}
+
+.heightSet{
+  height: 200px;
 }

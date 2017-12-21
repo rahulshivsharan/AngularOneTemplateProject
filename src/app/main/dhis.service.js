@@ -9,8 +9,26 @@
 		
 		obj.getStates = getStates;
 		obj.getDistricts = getDistricts;
+		obj.loadDataFile = loadDataFile;
 
 		return obj;
+
+		function loadDataFile(){
+			var deferred = $q.defer();
+			var url = "assets/data/data.json";
+
+			$http.get(url).then(success,error);
+
+			return deferred.promise;
+
+			function success(data){
+				deferred.resolve(data);
+			}
+
+			function error(){
+				deferred.reject(data);
+			}
+		} // end loadDataFile
 
 		function getStates(){
 			var deferred = $q.defer();

@@ -34,6 +34,35 @@
     	var createChartForComparingSlopesForCommodities = createChartForComparingSlopesForCommodities;
     	var createChartForEMUCommoditiesOutput = createChartForEMUCommoditiesOutput;
     	var createChartForCommoditiesStockoutByMonth = createChartForCommoditiesStockoutByMonth;
+    	var createChartForTotalSterilisation = createChartForTotalSterilisation;
+
+
+    	function loadAdditonalDataForCharts(){
+    		var promise = dhisService.loadDataFile(),
+    			success = success,
+    			error = error;
+
+    		promise.then(success,error);
+
+    		function success(data){
+    			var mainData = data["data"];
+
+    			var filteredDataByStates = _.pick(mainData,function(value, state_name,obj){
+    				
+    				var filteredStates = _.find(configParam.selectedStates,function(stateName){
+    					return (stateName.toLowerCase() === state_name.toLowerCase());	
+    				});
+    				
+    				return filteredStates;
+    			});
+    			
+    			createChartForTotalSterilisation(filteredDataByStates);
+    		} // end of success
+
+    		function error(data){
+    			console.log(data);
+    		} // end of error
+    	} // end of loadAdditonalDataForCharts
 
     	//Has to be done 
     	function createChartForEMUCommoditiesOutput(){
@@ -455,7 +484,29 @@
     	} // createChartForEstimatedModernMethodMixCommodities
 
 
+    	function createChartForTotalSterilisation(data){
+    		var dataElements = [
+    			"femalesterilisationnumber",
+    			"malesterilisationnumber",
+    			"postpartumsterilizationnumber",
+    			"postabortionsterilizationnumber"
+    		];
+
+    		_.each(data,function(dataValue,stateName){
+    			var v = _.pick(dataValue,function(valArray,dataElementName){
+    				return  _.find(dataElements,function(dataElement_Name){
+    					return dataElement_Name === dataElementName;
+    				});
+    			});
+
+    			console.log(v);
+    		}); // end of each
+    	} // end of createChartForTotalSterilisation
+
+
 		function init(){
+			loadAdditonalDataForCharts();
+			console.log("processedDataByYear ",configParam.processedDataByYear);
 			if(!angular.isDefined(configParam.processedDataByYear)){
 				$state.go("home");
 			}
