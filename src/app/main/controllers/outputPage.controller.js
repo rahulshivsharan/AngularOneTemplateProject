@@ -15,6 +15,7 @@
     	vm.last_year = undefined;
     	vm.outputTableData = undefined;
     	vm.emuFacilitiesForLatestYear = 0;
+    	vm.isChartDataLoaded = false;
 
     	/* 
     		the below object 'vm.chartOptions' holds options
@@ -35,6 +36,10 @@
     	var createChartForEMUCommoditiesOutput = createChartForEMUCommoditiesOutput;
     	var createChartForCommoditiesStockoutByMonth = createChartForCommoditiesStockoutByMonth;
     	var createChartForTotalSterilisation = createChartForTotalSterilisation;
+    	var createChartForProportionOfSteralization = createChartForProportionOfSteralization;
+    	var createChartForTotalIUCD = createChartForTotalIUCD;
+    	var createChartForProportionOfIUCD = createChartForProportionOfIUCD;
+    	var createNewChart = createNewChart;
 
 
     	function loadAdditonalDataForCharts(){
@@ -42,7 +47,9 @@
     			success = success,
     			error = error;
 
-    		promise.then(success,error);
+    		promise.then(success,error).finally(function(){
+    			vm.isChartDataLoaded = true;
+    		});
 
     		function success(data){
     			var mainData = data["data"];
@@ -56,7 +63,14 @@
     				return filteredStates;
     			});
     			
-    			createChartForTotalSterilisation(filteredDataByStates);
+    			vm.chartOptions["totalSterilisation"] = createChartForTotalSterilisation(filteredDataByStates);
+    			vm.chartOptions["proportionOfSterilisation"] = createChartForProportionOfSteralization(filteredDataByStates);
+    			vm.chartOptions["totalIUCD"] = createChartForTotalIUCD(filteredDataByStates);
+    			vm.chartOptions["proportionOfIUCD"] = createChartForProportionOfIUCD(filteredDataByStates);
+    			vm.chartOptions["ocpUsers"] = createChartForOCPUsers(filteredDataByStates);
+    			vm.chartOptions["injectableMPA"] = createChartForInjectableMPA(filteredDataByStates); 
+    			vm.chartOptions["discontinuationRates"] = createChartForDiscontinuationRates(filteredDataByStates); 
+    			//console.log(vm.chartOptions["totalSterilisation"]);
     		} // end of success
 
     		function error(data){
@@ -492,24 +506,605 @@
     			"postabortionsterilizationnumber"
     		];
 
+    		var mainArray = [];
+    		
+
     		_.each(data,function(dataValue,stateName){
-    			var v = _.pick(dataValue,function(valArray,dataElementName){
+    			var v = undefined;
+
+    			var yearList = configParam.selectedYears;
+    			v = _.chain(dataValue).pick(function(valArray,dataElementName){
     				return  _.find(dataElements,function(dataElement_Name){
     					return dataElement_Name === dataElementName;
     				});
-    			});
+    			}).value();
 
-    			console.log(v);
+    			var obj2 = {};	
+
+				_.each(v,function(valueArray,key){
+				   obj2[key] = [];
+				   _.each(yearList,function(yearNo,index){
+				      var v = _.find(valueArray,function(val_array){
+				         return val_array[1] === yearNo;
+				      });
+
+				      if(!_.isUndefined(v)){
+				         obj2[key].push(v);
+				      }else{
+				         obj2[key].push([key,yearNo,"0"]);
+				      }
+
+				   });
+				});
+				mainArray.push(obj2);    			
     		}); // end of each
+
+    		//console.log(JSON.stringify(mainArray));
+    		var mainObject = {};
+    		_.each(mainArray,function(stateObject,index){
+    			_.each(stateObject,function(valueArray,dataElement){
+    				
+    				if(dataElement in mainObject){
+    					
+    					_.each(mainObject[dataElement],function(array, index){
+    						
+    							
+    							_.each(valueArray,function(val,index){
+    								
+    								if(val[1] === array[1]){
+    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] += val[2];  	
+    								} 
+    							});  							
+    						
+    					});
+    				
+    				}else{
+    					mainObject[dataElement] = valueArray;
+    				}
+    			});
+    		});
+
+    		//console.log(JSON.stringify(mainObject));
+
+    		return createNewChart(mainObject,"Total sterilisation (Male and female)");
+
     	} // end of createChartForTotalSterilisation
 
+    	function createChartForProportionOfSteralization(data){
+			var dataElements = [
+    			"offemalesterilisationtototalsterilisation",
+    			"ofmalesterilisationtototalsterilisation",
+    			"ofintervalminilaptototalfemalesterilization",
+    			"ofLaptototalFemalesterilization",
+    			"ofPPStofemalesterilization",
+    			"ofPAStoFemalesterilization",
+    			"PPSacceptancerate"
+    		];
+
+    		var mainArray = [];
+    		
+
+    		_.each(data,function(dataValue,stateName){
+    			var v = undefined;
+
+    			var yearList = configParam.selectedYears;
+    			v = _.chain(dataValue).pick(function(valArray,dataElementName){
+    				return  _.find(dataElements,function(dataElement_Name){
+    					return dataElement_Name === dataElementName;
+    				});
+    			}).value();
+
+    			var obj2 = {};	
+
+				_.each(v,function(valueArray,key){
+				   obj2[key] = [];
+				   _.each(yearList,function(yearNo,index){
+				      var v = _.find(valueArray,function(val_array){
+				         return val_array[1] === yearNo;
+				      });
+
+				      if(!_.isUndefined(v)){
+				         obj2[key].push(v);
+				      }else{
+				         obj2[key].push([key,yearNo,"0"]);
+				      }
+
+				   });
+				});
+				mainArray.push(obj2);    			
+    		}); // end of each
+
+    		//console.log(JSON.stringify(mainArray));
+    		var mainObject = {};
+    		_.each(mainArray,function(stateObject,index){
+    			_.each(stateObject,function(valueArray,dataElement){
+    				
+    				if(dataElement in mainObject){
+    					
+    					_.each(mainObject[dataElement],function(array, index){
+    						
+    							
+    							_.each(valueArray,function(val,index){
+    								
+    								if(val[1] === array[1]){
+    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] += val[2];  	
+    								} 
+    							});  							
+    						
+    					});
+    				
+    				}else{
+    					mainObject[dataElement] = valueArray;
+    				}
+    			});
+    		});
+
+    		//console.log(JSON.stringify(mainObject));
+
+    		return createNewChart(mainObject,"Proportion of Sterilization");
+    	}; // end of createChartForProportionOfSteralization
+
+
+    	function createChartForTotalIUCD(data){
+    		var dataElements = [
+    			"IntervalIUCD",
+    			"PPIUCDNumber",
+    			"PAIUCDNumber"    			
+    		];
+
+    		var mainArray = [];
+    		
+
+    		_.each(data,function(dataValue,stateName){
+    			var v = undefined;
+
+    			var yearList = configParam.selectedYears;
+    			v = _.chain(dataValue).pick(function(valArray,dataElementName){
+    				return  _.find(dataElements,function(dataElement_Name){
+    					return dataElement_Name === dataElementName;
+    				});
+    			}).value();
+
+    			var obj2 = {};	
+
+				_.each(v,function(valueArray,key){
+				   obj2[key] = [];
+				   _.each(yearList,function(yearNo,index){
+				      var v = _.find(valueArray,function(val_array){
+				         return val_array[1] === yearNo;
+				      });
+
+				      if(!_.isUndefined(v)){
+				         obj2[key].push(v);
+				      }else{
+				         obj2[key].push([key,yearNo,"0"]);
+				      }
+
+				   });
+				});
+				mainArray.push(obj2);    			
+    		}); // end of each
+
+    		//console.log(JSON.stringify(mainArray));
+    		var mainObject = {};
+    		_.each(mainArray,function(stateObject,index){
+    			_.each(stateObject,function(valueArray,dataElement){
+    				
+    				if(dataElement in mainObject){
+    					
+    					_.each(mainObject[dataElement],function(array, index){
+    						
+    							
+    							_.each(valueArray,function(val,index){
+    								
+    								if(val[1] === array[1]){
+    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] += val[2];  	
+    								} 
+    							});  							
+    						
+    					});
+    				
+    				}else{
+    					mainObject[dataElement] = valueArray;
+    				}
+    			});
+    		});
+
+    		//console.log(JSON.stringify(mainObject));
+
+    		return createNewChart(mainObject,"Total of IUCD");
+    	} // end of createChartForTotalIUCD
+
+
+
+    	function createChartForProportionOfIUCD(data){
+    		var dataElements = [
+    			"ofPPIUCDoutoftotalIUCD",
+    			"ofPAIUCDoutoftotalIUCD",
+    			"PPIUCDacceptancerate",
+    			"PostpartumFPacceptance",
+    			"PAFPacceptance",
+    			"CondomNirodhUsersNumber"    			
+    		];
+
+    		var mainArray = [];
+    		
+
+    		_.each(data,function(dataValue,stateName){
+    			var v = undefined;
+
+    			var yearList = configParam.selectedYears;
+    			v = _.chain(dataValue).pick(function(valArray,dataElementName){
+    				return  _.find(dataElements,function(dataElement_Name){
+    					return dataElement_Name === dataElementName;
+    				});
+    			}).value();
+
+    			var obj2 = {};	
+
+				_.each(v,function(valueArray,key){
+				   obj2[key] = [];
+				   _.each(yearList,function(yearNo,index){
+				      var v = _.find(valueArray,function(val_array){
+				         return val_array[1] === yearNo;
+				      });
+
+				      if(!_.isUndefined(v)){
+				         obj2[key].push(v);
+				      }else{
+				         obj2[key].push([key,yearNo,"0"]);
+				      }
+
+				   });
+				});
+				mainArray.push(obj2);    			
+    		}); // end of each
+
+    		//console.log(JSON.stringify(mainArray));
+    		var mainObject = {};
+    		_.each(mainArray,function(stateObject,index){
+    			_.each(stateObject,function(valueArray,dataElement){
+    				
+    				if(dataElement in mainObject){
+    					
+    					_.each(mainObject[dataElement],function(array, index){
+    						
+    							
+    							_.each(valueArray,function(val,index){
+    								
+    								if(val[1] === array[1]){
+    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] += val[2];  	
+    								} 
+    							});  							
+    						
+    					});
+    				
+    				}else{
+    					mainObject[dataElement] = valueArray;
+    				}
+    			});
+    		});
+
+    		//console.log(JSON.stringify(mainObject));
+
+    		return createNewChart(mainObject,"Proportion of IUCD");
+    	} // end of createChartForProportionOfIUCD
+
+
+    	function createChartForOCPUsers(data){
+    		var dataElements = [
+    			"MalaNCOC",
+    			"CentrochomanChhaya"    			
+    		];
+
+    		var mainArray = [];
+    		
+
+    		_.each(data,function(dataValue,stateName){
+    			var v = undefined;
+
+    			var yearList = configParam.selectedYears;
+    			v = _.chain(dataValue).pick(function(valArray,dataElementName){
+    				return  _.find(dataElements,function(dataElement_Name){
+    					return dataElement_Name === dataElementName;
+    				});
+    			}).value();
+
+    			var obj2 = {};	
+
+				_.each(v,function(valueArray,key){
+				   obj2[key] = [];
+				   _.each(yearList,function(yearNo,index){
+				      var v = _.find(valueArray,function(val_array){
+				         return val_array[1] === yearNo;
+				      });
+
+				      if(!_.isUndefined(v)){
+				         obj2[key].push(v);
+				      }else{
+				         obj2[key].push([key,yearNo,"0"]);
+				      }
+
+				   });
+				});
+				mainArray.push(obj2);    			
+    		}); // end of each
+
+    		//console.log(JSON.stringify(mainArray));
+    		var mainObject = {};
+    		_.each(mainArray,function(stateObject,index){
+    			_.each(stateObject,function(valueArray,dataElement){
+    				
+    				if(dataElement in mainObject){
+    					
+    					_.each(mainObject[dataElement],function(array, index){
+    						
+    							
+    							_.each(valueArray,function(val,index){
+    								
+    								if(val[1] === array[1]){
+    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] += val[2];  	
+    								} 
+    							});  							
+    						
+    					});
+    				
+    				}else{
+    					mainObject[dataElement] = valueArray;
+    				}
+    			});
+    		});
+
+    		//console.log(JSON.stringify(mainObject));
+
+    		return createNewChart(mainObject,"OCP Users");
+    	} // end of createChartForOCPUsers
+
+    	function createChartForInjectableMPA(data){
+    		var dataElements = [
+    			"InjectableContraceptiveAntaraProgramFirstDose",
+    			"InjectableContraceptiveAntaraProgramSecondDose",
+    			"InjectableContraceptiveAntaraProgramThirdDose",
+    			"InjectableContraceptiveAntaraProgramFourthormorethanfourth"    			
+    		];
+
+    		var mainArray = [];
+    		
+
+    		_.each(data,function(dataValue,stateName){
+    			var v = undefined;
+
+    			var yearList = configParam.selectedYears;
+    			v = _.chain(dataValue).pick(function(valArray,dataElementName){
+    				return  _.find(dataElements,function(dataElement_Name){
+    					return dataElement_Name === dataElementName;
+    				});
+    			}).value();
+
+    			var obj2 = {};	
+
+				_.each(v,function(valueArray,key){
+				   obj2[key] = [];
+				   _.each(yearList,function(yearNo,index){
+				      var v = _.find(valueArray,function(val_array){
+				         return val_array[1] === yearNo;
+				      });
+
+				      if(!_.isUndefined(v)){
+				         obj2[key].push(v);
+				      }else{
+				         obj2[key].push([key,yearNo,"0"]);
+				      }
+
+				   });
+				});
+				mainArray.push(obj2);    			
+    		}); // end of each
+
+    		//console.log(JSON.stringify(mainArray));
+    		var mainObject = {};
+    		_.each(mainArray,function(stateObject,index){
+    			_.each(stateObject,function(valueArray,dataElement){
+    				
+    				if(dataElement in mainObject){
+    					
+    					_.each(mainObject[dataElement],function(array, index){
+    						
+    							
+    							_.each(valueArray,function(val,index){
+    								
+    								if(val[1] === array[1]){
+    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] += val[2];  	
+    								} 
+    							});  							
+    						
+    					});
+    				
+    				}else{
+    					mainObject[dataElement] = valueArray;
+    				}
+    			});
+    		});
+
+    		//console.log(JSON.stringify(mainObject));
+
+    		return createNewChart(mainObject,"Injectable MPA");
+    	} // createChartForInjectableMPA
+
+    	function createChartForDiscontinuationRates(data){
+    		var dataElements = [
+    			"1stdoseto2nddose",
+    			"2nddoseto3rddose",
+    			"1stdosedto3rddose"    			
+    		];
+
+    		var mainArray = [];
+    		
+
+    		_.each(data,function(dataValue,stateName){
+    			var v = undefined;
+
+    			var yearList = configParam.selectedYears;
+    			v = _.chain(dataValue).pick(function(valArray,dataElementName){
+    				return  _.find(dataElements,function(dataElement_Name){
+    					return dataElement_Name === dataElementName;
+    				});
+    			}).value();
+
+    			var obj2 = {};	
+
+				_.each(v,function(valueArray,key){
+				   obj2[key] = [];
+				   _.each(yearList,function(yearNo,index){
+				      var v = _.find(valueArray,function(val_array){
+				         return val_array[1] === yearNo;
+				      });
+
+				      if(!_.isUndefined(v)){
+				         obj2[key].push(v);
+				      }else{
+				         obj2[key].push([key,yearNo,"0"]);
+				      }
+
+				   });
+				});
+				mainArray.push(obj2);    			
+    		}); // end of each
+
+    		//console.log(JSON.stringify(mainArray));
+    		var mainObject = {};
+    		_.each(mainArray,function(stateObject,index){
+    			_.each(stateObject,function(valueArray,dataElement){
+    				
+    				if(dataElement in mainObject){
+    					
+    					_.each(mainObject[dataElement],function(array, index){
+    						
+    							
+    							_.each(valueArray,function(val,index){
+    								
+    								if(val[1] === array[1]){
+    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] += val[2];  	
+    								} 
+    							});  							
+    						
+    					});
+    				
+    				}else{
+    					mainObject[dataElement] = valueArray;
+    				}
+    			});
+    		});
+
+    		//console.log(JSON.stringify(mainObject));
+
+    		return createNewChart(mainObject,"Discontinuation Rates");
+    	} // end of createChartForDiscontinuationRates
+
+    	function createNewChart(dataObject,chartTitle){
+    		var chartOption = {
+			    chart: {
+			        type: 'column'
+			    },
+			    title: {
+			        text: chartTitle
+			    },
+			    xAxis: {
+			        categories: configParam.selectedYears
+			    },
+			    yAxis: {
+			        min: 0,
+			        title: {
+			            text: 'Total data'
+			        },
+			        stackLabels: {
+			            enabled: true,
+			            style: {
+			                fontWeight: 'bold',
+			                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+			            }
+			        }
+			    },
+			    legend: {
+			        align: 'right',
+			        x: -30,
+			        verticalAlign: 'top',
+			        y: 25,
+			        floating: true,
+			        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+			        borderColor: '#CCC',
+			        borderWidth: 1,
+			        shadow: false
+			    },
+			    tooltip: {
+			        headerFormat: '<b>{point.x}</b><br/>',
+			        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+			    },
+			    plotOptions: {
+			        column: {
+			            stacking: 'normal',
+			            dataLabels: {
+			                enabled: true,
+			                color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+			            }
+			        }
+			    },
+			    series: (function(obj){
+			    	var outputArray = [];
+			    	_.each(obj,function(valueArray,key){
+			    		var data = [];
+			    			
+			    		_.each(valueArray,function(value,index){
+			    			data.push(value[2]);
+			    		});
+			    			
+			    		outputArray.push({
+			    			"name" : key,
+			    			"data" : data
+			    		});			    		
+			    	});
+			    	console.log(outputArray);
+
+			    	return outputArray;
+			    })(dataObject)
+			    /*
+			    [{
+			        name: 'John',
+			        data: [5, 3, 4, 7, 2]
+			    }, {
+			        name: 'Jane',
+			        data: [2, 2, 3, 2, 1]
+			    }, {
+			        name: 'Joe',
+			        data: [3, 4, 4, 2, 5]
+			    }]
+			    */
+			}; // end of chart Options
+			return chartOption;
+    	} // end of createNewChart 
 
 		function init(){
-			loadAdditonalDataForCharts();
-			console.log("processedDataByYear ",configParam.processedDataByYear);
+			// additional charts renderred using new data
+			loadAdditonalDataForCharts(); 
+			
 			if(!angular.isDefined(configParam.processedDataByYear)){
 				$state.go("home");
 			}
+			
 			vm.chartOptions["estimatedModernMethodMixCommodities"] = createChartForEstimatedModernMethodMixCommodities();
 			vm.chartOptions["modernMethodMix"] = createChartForModernMethodMix();
 			vm.chartOptions["usersTrendByMethodsForCommodities"] = createChartForUsersTrendByMethodsForCommodities();

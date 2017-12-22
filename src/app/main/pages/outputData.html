@@ -50,6 +50,41 @@
 					<high-chart-render options="vm.chartOptions.commoditiesStockoutByMonth"></high-chart-render>
 				</div>
 			</div>
+			<div class="row top-buffer" ng-if="vm.isChartDataLoaded === true">
+				<div class="col-md-12">
+					<high-chart-render options="vm.chartOptions.totalSterilisation"></high-chart-render>
+				</div>
+			</div>
+			<div class="row top-buffer" ng-if="vm.isChartDataLoaded === true">
+				<div class="col-md-12">
+					<high-chart-render options="vm.chartOptions.proportionOfSterilisation"></high-chart-render>
+				</div>
+			</div>
+			<div class="row top-buffer" ng-if="vm.isChartDataLoaded === true">
+				<div class="col-md-12">
+					<high-chart-render options="vm.chartOptions.totalIUCD"></high-chart-render>
+				</div>
+			</div>
+			<div class="row top-buffer" ng-if="vm.isChartDataLoaded === true">
+				<div class="col-md-12">
+					<high-chart-render options="vm.chartOptions.proportionOfIUCD"></high-chart-render>
+				</div>
+			</div>
+			<div class="row top-buffer" ng-if="vm.isChartDataLoaded === true">
+				<div class="col-md-12">
+					<high-chart-render options="vm.chartOptions.ocpUsers"></high-chart-render>
+				</div>
+			</div>
+			<div class="row top-buffer" ng-if="vm.isChartDataLoaded === true">
+				<div class="col-md-12">
+					<high-chart-render options="vm.chartOptions.injectableMPA"></high-chart-render>
+				</div>
+			</div>
+			<div class="row top-buffer" ng-if="vm.isChartDataLoaded === true">
+				<div class="col-md-12">
+					<high-chart-render options="vm.chartOptions.discontinuationRates"></high-chart-render>
+				</div>
+			</div>
 			<div class="row top-buffer">
 				<div class="col-md-12">
 					<output-data-table data="vm.outputTableData"></output-data-table>
