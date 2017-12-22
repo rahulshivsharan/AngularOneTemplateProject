@@ -54,15 +54,22 @@
     		function success(data){
     			var mainData = data["data"];
 
-    			var filteredDataByStates = _.pick(mainData,function(value, state_name,obj){
-    				
-    				var filteredStates = _.find(configParam.selectedStates,function(stateName){
-    					return (stateName.toLowerCase() === state_name.toLowerCase());	
-    				});
-    				
-    				return filteredStates;
-    			});
+    			var filteredDataByStates = undefined;
     			
+    			if(configParam.isNationalSelected === true){
+    				filteredDataByStates = {
+    					"allindia" : mainData["allindia"]	
+    				}
+    			}else{
+    				filteredDataByStates = _.pick(mainData,function(value, state_name,obj){    				
+	    				var filteredStates = _.find(configParam.selectedStates,function(stateName){
+	    					return (stateName.toLowerCase() === state_name.toLowerCase());	
+	    				});	    				
+	    				return filteredStates;
+    				});	
+    			} // end of if
+
+    			    			
     			vm.chartOptions["totalSterilisation"] = createChartForTotalSterilisation(filteredDataByStates);
     			vm.chartOptions["proportionOfSterilisation"] = createChartForProportionOfSteralization(filteredDataByStates);
     			vm.chartOptions["totalIUCD"] = createChartForTotalIUCD(filteredDataByStates);
@@ -506,6 +513,13 @@
     			"postabortionsterilizationnumber"
     		];
 
+    		var dataElementMap = {
+    			"femalesterilisationnumber" : "Female Sterilisation",
+    			"malesterilisationnumber" : "Male Sterilisation",
+    			"postpartumsterilizationnumber" : "Post Partum (PP) Sterilization",
+    			"postabortionsterilizationnumber" : "Post Abortion (PA) Sterilization"
+    		}
+
     		var mainArray = [];
     		
 
@@ -543,10 +557,11 @@
     		var mainObject = {};
     		_.each(mainArray,function(stateObject,index){
     			_.each(stateObject,function(valueArray,dataElement){
-    				
-    				if(dataElement in mainObject){
+    				var dataElementLabel = dataElementMap[dataElement];
+
+    				if(dataElementLabel in mainObject){
     					
-    					_.each(mainObject[dataElement],function(array, index){
+    					_.each(mainObject[dataElementLabel],function(array, index){
     						
     							
     							_.each(valueArray,function(val,index){
@@ -561,8 +576,9 @@
     					});
     				
     				}else{
-    					mainObject[dataElement] = valueArray;
+    					mainObject[dataElementLabel] = valueArray;
     				}
+
     			});
     		});
 
@@ -583,6 +599,16 @@
     			"PPSacceptancerate"
     		];
 
+    		var dataElementMap = {
+    			"offemalesterilisationtototalsterilisation" : "% of female sterilisation to total Sterilisation",
+    			"ofmalesterilisationtototalsterilisation" : "% of male sterilisation to total sterilisation",
+    			"ofintervalminilaptototalfemalesterilization" : "% of interval mini lap to total female sterilization",
+    			"ofLaptototalFemalesterilization" : "% of Lap to total Female sterilization",
+    			"ofPPStofemalesterilization" : "% of PPS to Female sterilization",
+    			"ofPAStoFemalesterilization" : "% of PAS to Female sterilization",
+    			"PPSacceptancerate" : "PPS acceptance rate"
+    		}
+
     		var mainArray = [];
     		
 
@@ -620,10 +646,10 @@
     		var mainObject = {};
     		_.each(mainArray,function(stateObject,index){
     			_.each(stateObject,function(valueArray,dataElement){
-    				
-    				if(dataElement in mainObject){
+    				var dataElementLabel = dataElementMap[dataElement];
+    				if(dataElementLabel in mainObject){
     					
-    					_.each(mainObject[dataElement],function(array, index){
+    					_.each(mainObject[dataElementLabel],function(array, index){
     						
     							
     							_.each(valueArray,function(val,index){
@@ -638,7 +664,7 @@
     					});
     				
     				}else{
-    					mainObject[dataElement] = valueArray;
+    					mainObject[dataElementLabel] = valueArray;
     				}
     			});
     		});
@@ -656,6 +682,12 @@
     			"PAIUCDNumber"    			
     		];
 
+    		var dataElementMap = {
+    			"IntervalIUCD" : "Interval IUCD",
+    			"PPIUCDNumber" : "PP IUCD - Number",
+    			"PAIUCDNumber" : "PAI UCD - Number"
+    		}
+
     		var mainArray = [];
     		
 
@@ -693,10 +725,10 @@
     		var mainObject = {};
     		_.each(mainArray,function(stateObject,index){
     			_.each(stateObject,function(valueArray,dataElement){
-    				
-    				if(dataElement in mainObject){
+    				var dataElementLabel = dataElementMap[dataElement];	
+    				if(dataElementLabel in mainObject){
     					
-    					_.each(mainObject[dataElement],function(array, index){
+    					_.each(mainObject[dataElementLabel],function(array, index){
     						
     							
     							_.each(valueArray,function(val,index){
@@ -711,7 +743,7 @@
     					});
     				
     				}else{
-    					mainObject[dataElement] = valueArray;
+    					mainObject[dataElementLabel] = valueArray;
     				}
     			});
     		});
@@ -733,6 +765,15 @@
     			"CondomNirodhUsersNumber"    			
     		];
 
+    		var dataElementMap = {
+    			"ofPPIUCDoutoftotalIUCD" : "% of PP IUCD out of total IUCD",
+    			"ofPAIUCDoutoftotalIUCD" : "% of PA IUCD out of total IUCD",
+    			"PPIUCDacceptancerate" : "PPIUCD acceptance rate",
+    			"PostpartumFPacceptance" : "Post partum FP acceptance",
+    			"PAFPacceptance" : "PA FP acceptance",
+    			"CondomNirodhUsersNumber" : "Condom (Nirodh) Users – Number"
+    		}
+
     		var mainArray = [];
     		
 
@@ -770,10 +811,11 @@
     		var mainObject = {};
     		_.each(mainArray,function(stateObject,index){
     			_.each(stateObject,function(valueArray,dataElement){
-    				
-    				if(dataElement in mainObject){
+    				var dataElementLabel = dataElementMap[dataElement];
+
+    				if(dataElementLabel in mainObject){
     					
-    					_.each(mainObject[dataElement],function(array, index){
+    					_.each(mainObject[dataElementLabel],function(array, index){
     						
     							
     							_.each(valueArray,function(val,index){
@@ -788,7 +830,7 @@
     					});
     				
     				}else{
-    					mainObject[dataElement] = valueArray;
+    					mainObject[dataElementLabel] = valueArray;
     				}
     			});
     		});
@@ -805,6 +847,11 @@
     			"CentrochomanChhaya"    			
     		];
 
+    		var dataElementMap = {
+    			"MalaNCOC" : "Mala-N (COC)",
+    			"CentrochomanChhaya" : "Centrochoman (Chhaya)"
+    		}
+
     		var mainArray = [];
     		
 
@@ -842,10 +889,11 @@
     		var mainObject = {};
     		_.each(mainArray,function(stateObject,index){
     			_.each(stateObject,function(valueArray,dataElement){
-    				
-    				if(dataElement in mainObject){
+    				var dataElementLabel = dataElementMap[dataElement];
+
+    				if(dataElementLabel in mainObject){
     					
-    					_.each(mainObject[dataElement],function(array, index){
+    					_.each(mainObject[dataElementLabel],function(array, index){
     						
     							
     							_.each(valueArray,function(val,index){
@@ -860,7 +908,7 @@
     					});
     				
     				}else{
-    					mainObject[dataElement] = valueArray;
+    					mainObject[dataElementLabel] = valueArray;
     				}
     			});
     		});
@@ -878,6 +926,13 @@
     			"InjectableContraceptiveAntaraProgramFourthormorethanfourth"    			
     		];
 
+    		var dataElementMap = {
+    			"InjectableContraceptiveAntaraProgramFirstDose" : "Injectable Contraceptive-Antara Program- First Dose",
+    			"InjectableContraceptiveAntaraProgramSecondDose" : "Injectable Contraceptive-Antara Program- Second Dose",
+    			"InjectableContraceptiveAntaraProgramThirdDose" : "Injectable Contraceptive-Antara Program- Third Dose",
+    			"InjectableContraceptiveAntaraProgramFourthormorethanfourth" : "Injectable Contraceptive-Antara Program- Fourth or more than fourth"
+    		}
+
     		var mainArray = [];
     		
 
@@ -916,9 +971,11 @@
     		_.each(mainArray,function(stateObject,index){
     			_.each(stateObject,function(valueArray,dataElement){
     				
-    				if(dataElement in mainObject){
+    				var dataElementLabel = dataElementMap[dataElement];
+
+    				if(dataElementLabel in mainObject){
     					
-    					_.each(mainObject[dataElement],function(array, index){
+    					_.each(mainObject[dataElementLabel],function(array, index){
     						
     							
     							_.each(valueArray,function(val,index){
@@ -933,7 +990,7 @@
     					});
     				
     				}else{
-    					mainObject[dataElement] = valueArray;
+    					mainObject[dataElementLabel] = valueArray;
     				}
     			});
     		});
@@ -950,6 +1007,12 @@
     			"1stdosedto3rddose"    			
     		];
 
+    		var dataElementMap = {
+    			"1stdoseto2nddose" : "1st dose to 2nd dose",
+    			"2nddoseto3rddose" : "2nd dose to 3rd dose",
+    			"1stdosedto3rddose" : "1st dose d to  3rd  dose"
+    		}
+
     		var mainArray = [];
     		
 
@@ -987,14 +1050,12 @@
     		var mainObject = {};
     		_.each(mainArray,function(stateObject,index){
     			_.each(stateObject,function(valueArray,dataElement){
-    				
-    				if(dataElement in mainObject){
+    				var dataElementLabel = dataElementMap[dataElement];
+    				if(dataElementLabel in mainObject){
     					
-    					_.each(mainObject[dataElement],function(array, index){
-    						
+    					_.each(mainObject[dataElementLabel],function(array, index){    						
     							
-    							_.each(valueArray,function(val,index){
-    								
+    							_.each(valueArray,function(val,index){    								
     								if(val[1] === array[1]){
     									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
     									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
@@ -1005,7 +1066,14 @@
     					});
     				
     				}else{
-    					mainObject[dataElement] = valueArray;
+
+    					var valueArray = _.map(valueArray,function(val){
+    						val[2] = (val[2] === "") ? 0 : parseInt(val[2]);
+    						return val;
+    					});
+
+    					//console.log(" valueArray ",valueArray);
+    					mainObject[dataElementLabel] = valueArray;
     				}
     			});
     		});
@@ -1038,7 +1106,7 @@
 			                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
 			            }
 			        }
-			    },
+			    }/*,
 			    legend: {
 			        align: 'right',
 			        x: -30,
@@ -1049,7 +1117,7 @@
 			        borderColor: '#CCC',
 			        borderWidth: 1,
 			        shadow: false
-			    },
+			    }*/,
 			    tooltip: {
 			        headerFormat: '<b>{point.x}</b><br/>',
 			        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
@@ -1069,6 +1137,14 @@
 			    		var data = [];
 			    			
 			    		_.each(valueArray,function(value,index){
+			    			if(value[2] === ""){
+			    				value[2] = 0;	
+			    			}else if(typeof value[2] === 'string'){
+			    				value[2] = parseInt(value[2]); 
+			    			}else{
+			    				value[2] = value[2]; 	
+			    			}
+			    			
 			    			data.push(value[2]);
 			    		});
 			    			
