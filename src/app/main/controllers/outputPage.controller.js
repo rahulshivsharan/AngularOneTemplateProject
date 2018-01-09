@@ -584,7 +584,7 @@
 
     		//console.log(JSON.stringify(mainObject));
 
-    		return createNewChart(mainObject,"Total sterilisation (Male and female)");
+    		return createNewChart(mainObject,"Total sterilisation (Male and Female)",false);
 
     	} // end of createChartForTotalSterilisation
 
@@ -671,7 +671,7 @@
 
     		//console.log(JSON.stringify(mainObject));
 
-    		return createNewChart(mainObject,"Proportion of Sterilization");
+    		return createNewChart(mainObject,"Proportion of Sterilization",true);
     	}; // end of createChartForProportionOfSteralization
 
 
@@ -750,7 +750,7 @@
 
     		//console.log(JSON.stringify(mainObject));
 
-    		return createNewChart(mainObject,"Total of IUCD");
+    		return createNewChart(mainObject,"Total of IUCD",true);
     	} // end of createChartForTotalIUCD
 
 
@@ -837,7 +837,7 @@
 
     		//console.log(JSON.stringify(mainObject));
 
-    		return createNewChart(mainObject,"Proportion of IUCD");
+    		return createNewChart(mainObject,"Proportion of IUCD",false);
     	} // end of createChartForProportionOfIUCD
 
 
@@ -915,7 +915,7 @@
 
     		//console.log(JSON.stringify(mainObject));
 
-    		return createNewChart(mainObject,"OCP Users");
+    		return createNewChart(mainObject,"OCP Users",false);
     	} // end of createChartForOCPUsers
 
     	function createChartForInjectableMPA(data){
@@ -997,7 +997,7 @@
 
     		//console.log(JSON.stringify(mainObject));
 
-    		return createNewChart(mainObject,"Injectable MPA");
+    		return createNewChart(mainObject,"Injectable MPA",false);
     	} // createChartForInjectableMPA
 
     	function createChartForDiscontinuationRates(data){
@@ -1080,10 +1080,10 @@
 
     		//console.log(JSON.stringify(mainObject));
 
-    		return createNewChart(mainObject,"Discontinuation Rates");
+    		return createNewChart(mainObject,"Discontinuation Rates",false);
     	} // end of createChartForDiscontinuationRates
 
-    	function createNewChart(dataObject,chartTitle){
+    	function createNewChart(dataObject,chartTitle,isTotalDisplayed){
     		var chartOption = {
 			    chart: {
 			        type: 'column'
@@ -1103,7 +1103,7 @@
 			            text: 'Total data'
 			        },
 			        stackLabels: {
-			            enabled: true,
+			            enabled: (isTotalDisplayed) ? isTotalDisplayed : false,
 			            style: {
 			                fontWeight: 'bold',
 			                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
