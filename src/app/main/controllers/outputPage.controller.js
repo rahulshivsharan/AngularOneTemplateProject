@@ -1088,6 +1088,9 @@
 			    chart: {
 			        type: 'column'
 			    },
+                credits : {
+                    enabled : false
+                },
 			    title: {
 			        text: chartTitle
 			    },
