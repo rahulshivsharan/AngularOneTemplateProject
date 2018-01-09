@@ -39,6 +39,9 @@
     	var createChartForProportionOfSteralization = createChartForProportionOfSteralization;
     	var createChartForTotalIUCD = createChartForTotalIUCD;
     	var createChartForProportionOfIUCD = createChartForProportionOfIUCD;
+        var createChartForSterilisationPer1000EC = createChartForSterilisationPer1000EC;
+        var createChartForAdverseEventsAttributableToSterilisation = createChartForAdverseEventsAttributableToSterilisation;
+        var createChartForAcceptanceRate = createChartForAcceptanceRate;
     	var createNewChart = createNewChart;
 
 
@@ -77,6 +80,9 @@
     			vm.chartOptions["ocpUsers"] = createChartForOCPUsers(filteredDataByStates);
     			vm.chartOptions["injectableMPA"] = createChartForInjectableMPA(filteredDataByStates); 
     			vm.chartOptions["discontinuationRates"] = createChartForDiscontinuationRates(filteredDataByStates); 
+                vm.chartOptions["sterilisationPer1000EC"] = createChartForSterilisationPer1000EC(filteredDataByStates);
+                vm.chartOptions["adverseEventToSterilisation"] = createChartForAdverseEventsAttributableToSterilisation(filteredDataByStates);
+                vm.chartOptions["acceptanceRate"] = createChartForAcceptanceRate(filteredDataByStates);
     			//console.log(vm.chartOptions["totalSterilisation"]);
     		} // end of success
 
@@ -505,6 +511,240 @@
     	} // createChartForEstimatedModernMethodMixCommodities
 
 
+        function createChartForAcceptanceRate(data){
+            var dataElements = [
+                "pps_acceptance_rate",
+                "pas_acceptance_rate",
+                "paiucd_acceptance_rate"
+            ];    
+
+            var dataElementMap = {
+                "pps_acceptance_rate" : "Postpartum Sterilisation acceptance Rate",
+                "pas_acceptance_rate" : "Post Abortion acceptance Rate",
+                "paiucd_acceptance_rate" : "Post Abortion IUCD acceptance Rate"
+            };
+
+            var mainArray = [];         
+
+            _.each(data,function(dataValue,stateName){
+                var v = undefined;
+
+                var yearList = configParam.selectedYears;
+                v = _.chain(dataValue).pick(function(valArray,dataElementName){
+                    return  _.find(dataElements,function(dataElement_Name){
+                        return dataElement_Name === dataElementName;
+                    });
+                }).value();
+
+                var obj2 = {};  
+
+                _.each(v,function(valueArray,key){
+                   obj2[key] = [];
+                   _.each(yearList,function(yearNo,index){
+                      var v = _.find(valueArray,function(val_array){
+                         return val_array[1] === yearNo;
+                      });
+
+                      if(!_.isUndefined(v)){
+                         obj2[key].push(v);
+                      }else{
+                         obj2[key].push([key,yearNo,"0"]);
+                      }
+
+                   });
+                });
+                mainArray.push(obj2);               
+            }); // end of each
+
+            //console.log(JSON.stringify(mainArray));
+            var mainObject = {};
+            _.each(mainArray,function(stateObject,index){
+                _.each(stateObject,function(valueArray,dataElement){
+                    var dataElementLabel = dataElementMap[dataElement];
+
+                    if(dataElementLabel in mainObject){
+                        
+                        _.each(mainObject[dataElementLabel],function(array, index){
+                            
+                                
+                                _.each(valueArray,function(val,index){
+                                    
+                                    if(val[1] === array[1]){
+                                        array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
+                                        val[2] = (val[2] === "") ? 0 :  parseInt(val[2]);
+                                        array[2] += val[2];     
+                                    } 
+                                });                             
+                            
+                        });
+                    
+                    }else{
+                        mainObject[dataElementLabel] = valueArray;
+                    }
+
+                });
+            });
+
+            //console.log(JSON.stringify(mainObject));
+
+            return createNewChart(mainObject,"Acceptance Rate",false);
+        }; //end of createChartForAcceptanceRate
+
+        function createChartForAdverseEventsAttributableToSterilisation(data){
+            var dataElements = [
+                "failure_rate_per_lakh_sterilization",
+                "complication_rate_per_lakh_sterilization",
+                "death_rate_per_lakh_sterilization"
+            ];
+
+            var dataElementMap = {
+                "failure_rate_per_lakh_sterilization" : "Failure rate per Lakh Sterilization",
+                "complication_rate_per_lakh_sterilization" : "Complication rate per Lakh Sterilization",
+                "death_rate_per_lakh_sterilization" : "Death rate per lakh Sterilization"
+            };
+
+            var mainArray = [];         
+
+            _.each(data,function(dataValue,stateName){
+                var v = undefined;
+
+                var yearList = configParam.selectedYears;
+                v = _.chain(dataValue).pick(function(valArray,dataElementName){
+                    return  _.find(dataElements,function(dataElement_Name){
+                        return dataElement_Name === dataElementName;
+                    });
+                }).value();
+
+                var obj2 = {};  
+
+                _.each(v,function(valueArray,key){
+                   obj2[key] = [];
+                   _.each(yearList,function(yearNo,index){
+                      var v = _.find(valueArray,function(val_array){
+                         return val_array[1] === yearNo;
+                      });
+
+                      if(!_.isUndefined(v)){
+                         obj2[key].push(v);
+                      }else{
+                         obj2[key].push([key,yearNo,"0"]);
+                      }
+
+                   });
+                });
+                mainArray.push(obj2);               
+            }); // end of each
+
+            //console.log(JSON.stringify(mainArray));
+            var mainObject = {};
+            _.each(mainArray,function(stateObject,index){
+                _.each(stateObject,function(valueArray,dataElement){
+                    var dataElementLabel = dataElementMap[dataElement];
+
+                    if(dataElementLabel in mainObject){
+                        
+                        _.each(mainObject[dataElementLabel],function(array, index){
+                            
+                                
+                                _.each(valueArray,function(val,index){
+                                    
+                                    if(val[1] === array[1]){
+                                        array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
+                                        val[2] = (val[2] === "") ? 0 :  parseInt(val[2]);
+                                        array[2] += val[2];     
+                                    } 
+                                });                             
+                            
+                        });
+                    
+                    }else{
+                        mainObject[dataElementLabel] = valueArray;
+                    }
+
+                });
+            });
+
+            //console.log(JSON.stringify(mainObject));
+
+            return createNewChart(mainObject,"Adverse Event Attributable to Sterilisation",false);
+        }; // end of createChartForAdverseEventsAttributableToSterilisation
+
+        function createChartForSterilisationPer1000EC(data){
+            var dataElements = [
+                "totalMaleSterilization",
+                "totalFemaleSterilization"
+            ];
+
+            var dataElementMap = {
+                "totalMaleSterilization" : "Male",
+                "totalFemaleSterilization" : "Female"
+            };
+
+            var mainArray = [];
+            
+
+            _.each(data,function(dataValue,stateName){
+                var v = undefined;
+
+                var yearList = configParam.selectedYears;
+                v = _.chain(dataValue).pick(function(valArray,dataElementName){
+                    return  _.find(dataElements,function(dataElement_Name){
+                        return dataElement_Name === dataElementName;
+                    });
+                }).value();
+
+                var obj2 = {};  
+
+                _.each(v,function(valueArray,key){
+                   obj2[key] = [];
+                   _.each(yearList,function(yearNo,index){
+                      var v = _.find(valueArray,function(val_array){
+                         return val_array[1] === yearNo;
+                      });
+
+                      if(!_.isUndefined(v)){
+                         obj2[key].push(v);
+                      }else{
+                         obj2[key].push([key,yearNo,"0"]);
+                      }
+
+                   });
+                });
+                mainArray.push(obj2);               
+            }); // end of each
+
+            //console.log(JSON.stringify(mainArray));
+            var mainObject = {};
+            _.each(mainArray,function(stateObject,index){
+                _.each(stateObject,function(valueArray,dataElement){
+                    var dataElementLabel = dataElementMap[dataElement];
+
+                    if(dataElementLabel in mainObject){
+                        
+                        _.each(mainObject[dataElementLabel],function(array, index){
+                            
+                                
+                                _.each(valueArray,function(val,index){
+                                    
+                                    if(val[1] === array[1]){
+                                        array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
+                                        val[2] = (val[2] === "") ? 0 :  parseInt(val[2]);
+                                        array[2] += val[2];     
+                                    } 
+                                });                             
+                            
+                        });
+                    
+                    }else{
+                        mainObject[dataElementLabel] = valueArray;
+                    }
+
+                });
+            });
+
+            return createNewChart(mainObject,"Sterilisation Per 1000 eligible couple (EC)",true);            
+        }; // end of createChartForSterilisationPer1000EC
+
     	function createChartForTotalSterilisation(data){
     		var dataElements = [
     			"femalesterilisationnumber",
@@ -520,8 +760,7 @@
     			"postabortionsterilizationnumber" : "Post Abortion (PA) Sterilization"
     		}
 
-    		var mainArray = [];
-    		
+    		var mainArray = [];    		
 
     		_.each(data,function(dataValue,stateName){
     			var v = undefined;

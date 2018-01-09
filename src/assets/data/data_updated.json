@@ -1192,36 +1192,36 @@
             "100"
          ]
       ],
-      "male":[
+      "totalMaleSterilization":[
          [
-            "male",
+            "totalMaleSterilization",
             "2015",
             "24.752475247524753"
          ],
          [
-            "male",
+            "totalMaleSterilization",
             "2016",
             "1633.6633663366335"
          ],
          [
-            "male",
+            "totalMaleSterilization",
             "2017",
             "0"
          ]
       ],
-      "female":[
+      "totalFemaleSterilization":[
          [
-            "female",
+            "totalFemaleSterilization",
             "2015",
             ""
          ],
          [
-            "female",
+            "totalFemaleSterilization",
             "2016",
             ""
          ],
          [
-            "female",
+            "totalFemaleSterilization",
             "2017",
             "495.049504950495"
          ]
