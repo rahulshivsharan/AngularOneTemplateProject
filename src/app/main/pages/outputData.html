@@ -45,11 +45,11 @@
 					<high-chart-render options="vm.chartOptions.comparingSlopesForCommodities"></high-chart-render>
 				</div>
 			</div>
-			<div class="row top-buffer">
+			<!-- div class="row top-buffer">
 				<div class="col-md-12">
 					<high-chart-render options="vm.chartOptions.commoditiesStockoutByMonth"></high-chart-render>
 				</div>
-			</div>
+			</div -->
 			<div class="row top-buffer" ng-if="vm.isChartDataLoaded === true">
 				<div class="col-md-6">
 					<high-chart-render options="vm.chartOptions.totalSterilisation"></high-chart-render>
@@ -75,7 +75,7 @@
 				</div>
 			</div>			
 			<div class="row top-buffer" ng-if="vm.isChartDataLoaded === true">
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<high-chart-render options="vm.chartOptions.discontinuationRates"></high-chart-render>
 				</div>
 			</div>
