@@ -73,16 +73,16 @@
     			} // end of if
 
     			    			
-    			vm.chartOptions["totalSterilisation"] = createChartForTotalSterilisation(filteredDataByStates);
-    			vm.chartOptions["proportionOfSterilisation"] = createChartForProportionOfSteralization(filteredDataByStates);
-    			vm.chartOptions["totalIUCD"] = createChartForTotalIUCD(filteredDataByStates);
-    			vm.chartOptions["proportionOfIUCD"] = createChartForProportionOfIUCD(filteredDataByStates);
-    			vm.chartOptions["ocpUsers"] = createChartForOCPUsers(filteredDataByStates);
-    			vm.chartOptions["injectableMPA"] = createChartForInjectableMPA(filteredDataByStates); 
-    			vm.chartOptions["discontinuationRates"] = createChartForDiscontinuationRates(filteredDataByStates); 
-                vm.chartOptions["sterilisationPer1000EC"] = createChartForSterilisationPer1000EC(filteredDataByStates);
-                vm.chartOptions["adverseEventToSterilisation"] = createChartForAdverseEventsAttributableToSterilisation(filteredDataByStates);
-                vm.chartOptions["acceptanceRate"] = createChartForAcceptanceRate(filteredDataByStates);
+    			vm.chartOptions["totalSterilisation"] = createChartForTotalSterilisation(filteredDataByStates); // renders Chart for 'Total Sterilisation'
+    			vm.chartOptions["proportionOfSterilisation"] = createChartForProportionOfSteralization(filteredDataByStates); // renders Chart for 'Proportion of Sterilisation'
+    			vm.chartOptions["totalIUCD"] = createChartForTotalIUCD(filteredDataByStates); // renders Chart for 'Total IUCD'
+    			vm.chartOptions["proportionOfIUCD"] = createChartForProportionOfIUCD(filteredDataByStates); // renders Chart for 'Proportion of IUCD'
+    			vm.chartOptions["ocpUsers"] = createChartForOCPUsers(filteredDataByStates); // renders Chart for 'OCP Users'
+    			vm.chartOptions["injectableMPA"] = createChartForInjectableMPA(filteredDataByStates); // renders Chart for 'Injectable MPA' 
+    			vm.chartOptions["discontinuationRates"] = createChartForDiscontinuationRates(filteredDataByStates); // renders Chart for 'Discontinuation Rates'
+                vm.chartOptions["sterilisationPer1000EC"] = createChartForSterilisationPer1000EC(filteredDataByStates); // renders chart for Sterilisation Per 1000 EC
+                vm.chartOptions["adverseEventToSterilisation"] = createChartForAdverseEventsAttributableToSterilisation(filteredDataByStates); // renders chart for Adverse Events Attributable to Sterilisation 
+                vm.chartOptions["acceptanceRate"] = createChartForAcceptanceRate(filteredDataByStates); // renders chart for Acceptance Rate
     			//console.log(vm.chartOptions["totalSterilisation"]);
     		} // end of success
 
