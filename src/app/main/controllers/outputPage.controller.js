@@ -1076,7 +1076,7 @@
 
     		//console.log(JSON.stringify(mainObject));
 
-    		return createNewChart(mainObject,"Proportion of IUCD",false);
+    		return createNewChart(mainObject,"Proportion of IUCD",true);
     	} // end of createChartForProportionOfIUCD
 
 
