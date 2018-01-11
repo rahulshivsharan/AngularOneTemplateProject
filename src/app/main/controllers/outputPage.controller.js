@@ -823,7 +823,7 @@
 
     		//console.log(JSON.stringify(mainObject));
 
-    		return createNewChart(mainObject,"Total sterilisation (Male and Female)",true);
+    		return createNewChart(mainObject,"Total Sterilization",true);
 
     	} // end of createChartForTotalSterilisation
 
@@ -913,8 +913,15 @@
                     type: 'column'
                 },
                 credits : {
-                    enabled : false
-                },
+                    enabled : true,
+                    text : "Zero when no data found",
+                    position : {
+                        align : 'center'
+                    },
+                    style : {
+                        fontSize : '10pt'
+                    }
+                },                
                 title: {
                     text: "Proportion of Sterilization"
                 },
@@ -1395,7 +1402,14 @@
 			        type: 'column'
 			    },
                 credits : {
-                    enabled : false
+                    enabled : true,
+                    text : "Zero when no data found",
+                    position : {
+                        align : 'center'
+                    },
+                    style : {
+                        fontSize : '10pt'
+                    }
                 },
 			    title: {
 			        text: chartTitle
