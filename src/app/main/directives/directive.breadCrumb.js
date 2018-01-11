@@ -10,8 +10,7 @@
 			var vm = this;
 			vm.selectedStates = undefined;
 			vm.selectedDistricts = undefined;
-			
-			
+						
 
 			if(angular.isDefined(configParam.selectedDistricts) && angular.isArray(configParam.selectedDistricts) && configParam.selectedDistricts.length > 0){
 				

@@ -671,13 +671,13 @@
 
         function createChartForSterilisationPer1000EC(data){
             var dataElements = [
-                "totalMaleSterilization",
-                "totalFemaleSterilization"
+                "male",
+                "female"
             ];
 
             var dataElementMap = {
-                "totalMaleSterilization" : "Male",
-                "totalFemaleSterilization" : "Female"
+                "male" : "Male",
+                "female" : "Female"
             };
 
             var mainArray = [];
@@ -823,7 +823,7 @@
 
     		//console.log(JSON.stringify(mainObject));
 
-    		return createNewChart(mainObject,"Total sterilisation (Male and Female)",false);
+    		return createNewChart(mainObject,"Total sterilisation (Male and Female)",true);
 
     	} // end of createChartForTotalSterilisation
 
@@ -908,9 +908,76 @@
     			});
     		});
 
-    		//console.log(JSON.stringify(mainObject));
+    		var chartOption = {
+                chart: {
+                    type: 'column'
+                },
+                credits : {
+                    enabled : false
+                },
+                title: {
+                    text: "Proportion of Sterilization"
+                },
+                xAxis: {
+                    categories: configParam.selectedYears
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Total data'
+                    },
+                    stackLabels: {
+                        enabled: true,
+                        style: {
+                            fontWeight: 'bold',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{point.x}</b><br/>',
+                    pointFormatter: function(){
+                        var str = this.series.name + ": " + this.percentage.toFixed(2) + "% <br/>Total: "+ this.total;                         
+                        return str;
+                    } 
+                },
+                plotOptions: {
+                    column: {
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true,
+                            color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                        }
+                    }
+                },
+                series: (function(obj){
+                    var outputArray = [];
+                    _.each(obj,function(valueArray,key){
+                        var data = [];
+                            
+                        _.each(valueArray,function(value,index){
+                            if(value[2] === ""){
+                                value[2] = 0;   
+                            }else if(typeof value[2] === 'string'){
+                                value[2] = parseInt(value[2]); 
+                            }else{
+                                value[2] = value[2];    
+                            }
+                            
+                            data.push(value[2]);
+                        });
+                            
+                        outputArray.push({
+                            "name" : key,
+                            "data" : data
+                        });                     
+                    });
+                    console.log(outputArray);
 
-    		return createNewChart(mainObject,"Proportion of Sterilization",true);
+                    return outputArray;
+                })(mainObject)                
+            }; // end of chart Options
+            return chartOption;
     	}; // end of createChartForProportionOfSteralization
 
 
@@ -1348,18 +1415,7 @@
 			                color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
 			            }
 			        }
-			    }/*,
-			    legend: {
-			        align: 'right',
-			        x: -30,
-			        verticalAlign: 'top',
-			        y: 25,
-			        floating: true,
-			        backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-			        borderColor: '#CCC',
-			        borderWidth: 1,
-			        shadow: false
-			    }*/,
+			    },
 			    tooltip: {
 			        headerFormat: '<b>{point.x}</b><br/>',
 			        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
