@@ -9,6 +9,7 @@
 
 		// public methods
 		vm.init = init;
+        vm.toggleTabSelection = toggleTabSelection
 
 		// public variables
     	vm.isLoading = false;
@@ -16,6 +17,8 @@
     	vm.outputTableData = undefined;
     	vm.emuFacilitiesForLatestYear = 0;
     	vm.isChartDataLoaded = false;
+        vm.activeTabOne = "themeApply";
+        vm.activeTabTwo = "";
 
     	/* 
     		the below object 'vm.chartOptions' holds options
@@ -43,6 +46,8 @@
         var createChartForAdverseEventsAttributableToSterilisation = createChartForAdverseEventsAttributableToSterilisation;
         var createChartForAcceptanceRate = createChartForAcceptanceRate;
     	var createNewChart = createNewChart;
+
+
 
 
     	function loadAdditonalDataForCharts(){
@@ -82,7 +87,7 @@
     			vm.chartOptions["discontinuationRates"] = createChartForDiscontinuationRates(filteredDataByStates); // renders Chart for 'Discontinuation Rates'
                 vm.chartOptions["sterilisationPer1000EC"] = createChartForSterilisationPer1000EC(filteredDataByStates); // renders chart for Sterilisation Per 1000 EC
                 vm.chartOptions["adverseEventToSterilisation"] = createChartForAdverseEventsAttributableToSterilisation(filteredDataByStates); // renders chart for Adverse Events Attributable to Sterilisation 
-                vm.chartOptions["acceptanceRate"] = createChartForAcceptanceRate(filteredDataByStates); // renders chart for Acceptance Rate
+                vm.chartOptions["acceptanceRate"] = createChartForAcceptanceRate(filteredDataByStates); // renders chart for Acceptance Rate                
     			//console.log(vm.chartOptions["totalSterilisation"]);
     		} // end of success
 
@@ -92,8 +97,75 @@
     	} // end of loadAdditonalDataForCharts
 
     	//Has to be done 
-    	function createChartForEMUCommoditiesOutput(){
+    	function createChartForEMUCommoditiesOutput(){            
+            var copyOfSeries = angular.copy(configParam.outputChartData.series);
+            var chartOption = {
+                chart: {
+                    type: 'spline'
+                },
+                credits: {
+                    enabled: false
+                },
+                lang: {
+                    thousandsSep: ','
+                },
+                title: {
+                    text: 'EMU Commodities Output'
+                },
+                subtitle: {
+                    text: ""
+                },
+                xAxis: {
+                    categories: [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016],
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'EMU'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    },
+                    series: {
+                        connectNulls: true,
+                        lineWidth:3
+                    }                
+                },
+                exporting: {
+                    buttons: {
+                        contextButton: {
+                                menuItems: [{
+                                    textKey: 'downloadPNG',
+                                    onclick: function () {
+                                        this.exportChart();
+                                    }
+                                }, {
+                                    textKey: 'downloadJPEG',
+                                    onclick: function () {
+                                        this.exportChart({
+                                            type: 'image/jpeg'
+                                        });
+                                    }
+                                }]
+                        }
+                    }
+                },
+                series: copyOfSeries //config.outputChartData.series
+            };
 
+            return chartOption;
     	} // createChartForEMUCommoditiesOutput
 
     	function createChartForCommoditiesStockoutByMonth(){
@@ -570,8 +642,8 @@
                                 _.each(valueArray,function(val,index){
                                     
                                     if(val[1] === array[1]){
-                                        array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
-                                        val[2] = (val[2] === "") ? 0 :  parseInt(val[2]);
+                                        array[2] = (array[2] === "") ? null : parseInt(array[2]);
+                                        val[2] = (val[2] === "") ? null :  parseInt(val[2]);
                                         array[2] += val[2];     
                                     } 
                                 });                             
@@ -587,7 +659,7 @@
 
             //console.log(JSON.stringify(mainObject));
 
-            return createNewChart(mainObject,"Acceptance Rate",false);
+            return createNewChart(mainObject,"Acceptance Rate",true);
         }; //end of createChartForAcceptanceRate
 
         function createChartForAdverseEventsAttributableToSterilisation(data){
@@ -649,8 +721,8 @@
                                 _.each(valueArray,function(val,index){
                                     
                                     if(val[1] === array[1]){
-                                        array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
-                                        val[2] = (val[2] === "") ? 0 :  parseInt(val[2]);
+                                        array[2] = (array[2] === "") ? null : parseInt(array[2]);
+                                        val[2] = (val[2] === "") ? null :  parseInt(val[2]);
                                         array[2] += val[2];     
                                     } 
                                 });                             
@@ -666,7 +738,7 @@
 
             //console.log(JSON.stringify(mainObject));
 
-            return createNewChart(mainObject,"Adverse Event Attributable to Sterilisation",false);
+            return createNewChart(mainObject,"Adverse Event Attributable to Sterilisation",true);
         }; // end of createChartForAdverseEventsAttributableToSterilisation
 
         function createChartForSterilisationPer1000EC(data){
@@ -727,8 +799,8 @@
                                 _.each(valueArray,function(val,index){
                                     
                                     if(val[1] === array[1]){
-                                        array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
-                                        val[2] = (val[2] === "") ? 0 :  parseInt(val[2]);
+                                        array[2] = (array[2] === "") ? null : parseInt(array[2]);
+                                        val[2] = (val[2] === "") ? null :  parseInt(val[2]);
                                         array[2] += val[2];     
                                     } 
                                 });                             
@@ -806,8 +878,8 @@
     							_.each(valueArray,function(val,index){
     								
     								if(val[1] === array[1]){
-    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
-    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] = (array[2] === "") ? null : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? null : parseInt(val[2]);
     									array[2] += val[2];  	
     								} 
     							});  							
@@ -894,8 +966,8 @@
     							_.each(valueArray,function(val,index){
     								
     								if(val[1] === array[1]){
-    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
-    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] = (array[2] === "") ? null : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? null : parseInt(val[2]);
     									array[2] += val[2];  	
     								} 
     							});  							
@@ -931,7 +1003,7 @@
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Total data'
+                        text: ' '
                     },
                     stackLabels: {
                         enabled: true,
@@ -944,7 +1016,7 @@
                 tooltip: {
                     headerFormat: '<b>{point.x}</b><br/>',
                     pointFormatter: function(){
-                        var str = this.series.name + ": " + this.percentage.toFixed(2) + "% <br/>Total: "+ this.total;                         
+                        var str = this.series.name + " is " + this.percentage.toFixed(2) + "% <br/>of Total "+ this.total;                         
                         return str;
                     } 
                 },
@@ -952,7 +1024,7 @@
                     column: {
                         stacking: 'normal',
                         dataLabels: {
-                            enabled: true,
+                            enabled: false,
                             color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
                         }
                     }
@@ -960,24 +1032,35 @@
                 series: (function(obj){
                     var outputArray = [];
                     _.each(obj,function(valueArray,key){
-                        var data = [];
+                        var data = [],
+                            percentageData = [],
+                            total = 0;
                             
                         _.each(valueArray,function(value,index){
                             if(value[2] === ""){
-                                value[2] = 0;   
+                                value[2] = null;   
                             }else if(typeof value[2] === 'string'){
                                 value[2] = parseInt(value[2]); 
                             }else{
                                 value[2] = value[2];    
                             }
-                            
+                            total += value[2];
                             data.push(value[2]);
+                        });
+
+                        
+                        _.each(data,function(value,index){
+                            var val = (value * 100) / total;
+                            percentageData.push(val);
                         });
                             
                         outputArray.push({
                             "name" : key,
+                            //"data" : percentageData
                             "data" : data
-                        });                     
+                        });
+
+                        console.log(" percentageData ",percentageData);                     
                     });
                     console.log(outputArray);
 
@@ -1047,8 +1130,8 @@
     							_.each(valueArray,function(val,index){
     								
     								if(val[1] === array[1]){
-    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
-    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] = (array[2] === "") ? null : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? null : parseInt(val[2]);
     									array[2] += val[2];  	
     								} 
     							});  							
@@ -1084,7 +1167,7 @@
     			"PPIUCDacceptancerate" : "PPIUCD acceptance rate",
     			"PostpartumFPacceptance" : "Post partum FP acceptance",
     			"PAFPacceptance" : "PA FP acceptance",
-    			"CondomNirodhUsersNumber" : "Condom (Nirodh) Users – Number"
+    			"CondomNirodhUsersNumber" : "Condom (Nirodh) Users"
     		}
 
     		var mainArray = [];
@@ -1134,8 +1217,8 @@
     							_.each(valueArray,function(val,index){
     								
     								if(val[1] === array[1]){
-    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
-    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] = (array[2] === "") ? null : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? null : 	parseInt(val[2]);
     									array[2] += val[2];  	
     								} 
     							});  							
@@ -1212,8 +1295,8 @@
     							_.each(valueArray,function(val,index){
     								
     								if(val[1] === array[1]){
-    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
-    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] = (array[2] === "") ? null : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? null : 	parseInt(val[2]);
     									array[2] += val[2];  	
     								} 
     							});  							
@@ -1228,7 +1311,7 @@
 
     		//console.log(JSON.stringify(mainObject));
 
-    		return createNewChart(mainObject,"OCP Users",false);
+    		return createNewChart(mainObject,"OCP Users",true);
     	} // end of createChartForOCPUsers
 
     	function createChartForInjectableMPA(data){
@@ -1294,8 +1377,8 @@
     							_.each(valueArray,function(val,index){
     								
     								if(val[1] === array[1]){
-    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
-    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] = (array[2] === "") ? null : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? null : 	parseInt(val[2]);
     									array[2] += val[2];  	
     								} 
     							});  							
@@ -1310,7 +1393,7 @@
 
     		//console.log(JSON.stringify(mainObject));
 
-    		return createNewChart(mainObject,"Injectable MPA",false);
+    		return createNewChart(mainObject,"Injectable MPA",true);
     	} // createChartForInjectableMPA
 
     	function createChartForDiscontinuationRates(data){
@@ -1370,8 +1453,8 @@
     							
     							_.each(valueArray,function(val,index){    								
     								if(val[1] === array[1]){
-    									array[2] = (array[2] === "") ? 0 : parseInt(array[2]);
-    									val[2] = (val[2] === "") ? 0 : 	parseInt(val[2]);
+    									array[2] = (array[2] === "") ? null : parseInt(array[2]);
+    									val[2] = (val[2] === "") ? null : 	parseInt(val[2]);
     									array[2] += val[2];  	
     								} 
     							});  							
@@ -1393,7 +1476,7 @@
 
     		//console.log(JSON.stringify(mainObject));
 
-    		return createNewChart(mainObject,"Discontinuation Rates",false);
+    		return createNewChart(mainObject,"Discontinuation Rates",true);
     	} // end of createChartForDiscontinuationRates
 
     	function createNewChart(dataObject,chartTitle,isTotalDisplayed){
@@ -1420,7 +1503,7 @@
 			    yAxis: {
 			        min: 0,
 			        title: {
-			            text: 'Total data'
+			            text: ' '
 			        },
 			        stackLabels: {
 			            enabled: (isTotalDisplayed) ? isTotalDisplayed : false,
@@ -1450,7 +1533,7 @@
 			    			
 			    		_.each(valueArray,function(value,index){
 			    			if(value[2] === ""){
-			    				value[2] = 0;	
+			    				value[2] = null;	
 			    			}else if(typeof value[2] === 'string'){
 			    				value[2] = parseInt(value[2]); 
 			    			}else{
@@ -1488,7 +1571,7 @@
 		function init(){
 			// additional charts renderred using new data
 			loadAdditonalDataForCharts(); 
-			
+			//console.log(configParam.processedDataByYear);            
 			if(!angular.isDefined(configParam.processedDataByYear)){
 				$state.go("home");
 			}
@@ -1499,9 +1582,26 @@
 			vm.chartOptions["comparingSlopesForCommodities"] = createChartForComparingSlopesForCommodities();
 			vm.chartOptions["commoditiesStockoutByMonth"] = createChartForCommoditiesStockoutByMonth();
 
+
 			vm.outputTableData = utilityService.processDataForOutput(); // process data for output page			
 			vm.emuFacilitiesForLatestYear = vm.outputTableData[vm.outputTableData.length -1]["facilities_cc_percent"];
-			
+			utilityService.processDataForEMUCommoditiesOutput(vm.outputTableData);
+            vm.chartOptions["emuCommoditiesOutput"] = createChartForEMUCommoditiesOutput();
+            //console.log("EMU Commodities Output ",configParam.outputChartData);
 		} // end of init
+
+
+        function toggleTabSelection(tabName){
+            console.log(tabName);
+            if(tabName === "Commodities"){
+                vm.activeTabOne = "themeApply";
+                vm.activeTabTwo = "";
+            }else{
+                vm.activeTabOne = "";
+                vm.activeTabTwo = "themeApply";
+            }
+
+             
+        } // end of toggleTabSelection
 	} // end of OutputPageController
 })();

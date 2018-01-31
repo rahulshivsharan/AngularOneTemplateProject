@@ -7,13 +7,18 @@
 
     function routeConfig($stateProvider, $urlRouterProvider) {
         $stateProvider
-            .state('setup', {
+            .state('intro', {
+                url: '/',
+                templateUrl: 'app/main/pages/intro.html',
+                controller: 'introController',
+                controllerAs: 'intro'
+            }).state('setup', {
                 url: '/setup',
                 templateUrl: 'app/main/pages/main.html',
                 controller: 'MainController',
                 controllerAs: 'main'
             }).state('home', {
-                url: '/',
+                url: '/home',
                 templateUrl: 'app/main/pages/home.html',
                 controller: 'HomeController',
                 controllerAs: 'home'

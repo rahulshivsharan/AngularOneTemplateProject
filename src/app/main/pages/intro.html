@@ -1,0 +1,124 @@
+<div id="emu_introduction_page"><div align="right"><a target="_self" href="http://smartcities.ivizard.org/demo/fp/home.html">Family Planning Dashboard - INDIA</a></div>
+                <div class="container" style="padding-top:5%" ng-controller="introController as vm">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-heading titleBar" style="font-weight: bold;font-size: 20px">
+                                    <span>TRACK20 TOOL: CONVERT SERVICE STATISTICS DATA TO "EMU (Estimated Method Use)" FOR FPET</span>
+                                </div>
+                                <h5 class="version">Version 3 : January 2017</h5>
+                                <p class="info">Track20 has developed this tool to assist countries in reviewing their service statistics data and converting it into estimates of modern method use (EMU is a proxy for mCPR), that can be used as input in the Family Planning Estimate Tool(FPET). Inclusion of recent service statistics in FPET allows for more accurate estimates of contraceptive prevalence in years beyond the last national population-based survey. For more information on FPET, and instructions of how to use FPET, visit Track20 website <a href="www.track20.org">www.track20.org</a></p>
+
+                                <p class="nextParagraph">This tool will produce the estimates of modern method use (EMU) from routine data that can be used as input data in FPET. These estimates, while meant to approximate modern contraceptive prevalence, should not be used as mCPR estimates anywhere in FPET. Read on to find out if your service statistics data are suitable for use in FPET.</p>
+
+                                <div class="infocontainer">
+                                    <h4><b>ARE YOUR SERVICE STATISTICS DATA SUITABLE FOR INCLUSION OF FPET ?</b></h4>
+                                    <p>Not all the service statistics data are suitable for use in FPET. The annual estimates need to be comparable to each other. So, while it may be acceptable for the service statistics to be biased or have data quality issues, these baises/issues must be consistent accross the years for which your are producing these estimates. <b>These ensures that the trend between these data points, which will affect the project FPET results curve, is accurate and reflects the actual trend in the family planning use in out country.</b></p>
+                                    <p>That the data present an accurate, consistent trend is of utmost importance, because FPET will use the trend/change between these estimates, and not the actual magnitude/value of each point estimate, to inform the FPET results. In fact, the final EMU that results from your service statistics data may be very different in value from your country's actual mCPR. For the purposes of including Service Statistics in FPET, the value of the EMU does not hold much meaning, it's the change in this value over time that we wish to capture through use of this routine data.</p>
+
+                                    
+
+                                    <!-- Accordian -->
+                                    <div class="panel-group" id="infoaccordion" role="tablist" aria-multiselectable="false" style="margin-right:2%;">
+                                        <div class="panel panel-info"><!-- panel primary -->
+                                            <div class="panel-heading" role="tab" id="headingOne">
+                                                <h4 class="panel-title">
+                                                    <a role="button" data-toggle="collapse" data-parent="#infoaccordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Answering the following questions will help you determine whether your data are suited for inclusion in FPET</a>
+                                                </h4>
+                                            </div>                                           
+
+                                            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne"> <!-- collapse 1 -->
+                                                <div class="panel-body">
+                                                    <ol>
+                                                        <li>
+                                                            <span class="subtitle">Data availability</span>
+                                                            <ol type="a">
+                                                               <li>Do you have data that capture national family planning service statistics in your country, such as commodities distribution data (either to clients by providers OR to facilities), family planning visits data, or family planning users data? The source for these data would be your country's health management information systems (HMIS), or in some cases, the logistics management information system (LMIS).</li>    
+                                                            </ol>
+                                                        </li>
+                                                        <li>
+                                                            <span class="subtitle">Data Frequency/Recency</span>
+                                                            <ol type="a">
+                                                                <li>Do you have national annual estimates of these data for a minimum of three years ?</li>
+                                                                <li>Do you have service statistics that overlap with a national survey (DHS, MICS, PMA2020, or other national survey)?  We strongly recommend that this be the case, so that you can 'calibrate' the relationship between service stats and mCPR.</li>
+                                                                <li>Do you have service statistics that are more recent that your last survey?  For example, if you had a 2015 survey, and your service statistics only go to 2015, then you do not need to use them in FPET, since it will favor the survey.</li>
+                                                            </ol>
+                                                        </li>
+                                                        <li>
+                                                            <span class="subtitle">Data Consistency</span>
+                                                            <ol type="a">
+                                                                <li>Are your service statistics figures consistent from year to year, so that one can compare them to each other and 'believe' the trend they represent ?<br/> 
+                                                                For example, are reporting rates for these figures consistent from year to year ?<br/> 
+                                                                Are the estimates for each year representing the same methods/facilities ?</li>
+                                                                <li>If your answer to 3a is 'no', do you have a way of adjusting the data to make it comparable between years ?</li>    
+                                                            </ol>
+                                                        </li>
+                                                        <li>
+                                                            <span class="subtitle">Data Quality</span>
+                                                            <ol type="a">
+                                                                <li>Is the quality of your data similar from year to year (i.e.. none of the years are missing specific data, or all years are missing the same data) ? <br/>
+                                                                If, for example, there was a problem with availability of registers one year, then that year should be excluded. But if the same problem occurred in all years, it is fine to use these data, as the affect on the data quality would be the same in each of the years.    
+                                                                </li>
+                                                                <li>Are reporting rates high and consistent over time ?<br/>
+                                                                If reporting rates are over 80% then the data can be used, however, if reporting rates are below 60%, these years should be excluded. Data with reporting rates between 60-80% may be usable, but requires further review. 
+                                                                </li>
+                                                            </ol>
+                                                        </li>
+                                                        <li>
+                                                            <span class="subtitle">Data Accuracy</span>
+                                                            <ol type="a">
+                                                                <li>Do the service statistics figures seem to be in line with your country's family planning program and how it's changed over the years ?</li>
+                                                            </ol>
+                                                        </li>
+                                                    </ol>
+
+                                                    <div style="padding-top: 1%">
+                                                        <p><span class="subtitle">If you answered yes to all of these questions, then you can proceed with use of this tool to prepare your EMU.  Review and compare your final results for a consistent trend before finalizing the decision to use this data in FPET.</span></p>
+
+                                                        <p><span class="subtitle">If you are unsure about questions 3, 4 and 5, you can input your data and look at the final graph on the 'EMU output' tab to see a graph of your data which might help you better answer these questions.</span></p>
+
+                                                        <p><span class="subtitle">If you answered no to any of these questions, then your data is most likely not suitable for use in FPET. Please contact us at track20@avenirhealth.org if you have any questions.</span></p>
+                                                    </div>    
+                                                </div>
+                                            </div> <!-- collapse 1 -->
+
+                                        </div><!-- panel primary -->
+
+                                        <div class="panel panel-info"><!-- panel primary -->
+                                            <div class="panel-heading" role="tab" id="headingTwo">
+                                                <h4 class="panel-title">
+                                                    <a role="button" data-toggle="collapse" data-parent="#infoaccordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">HOW TO USE THIS TOOL</a>
+                                                </h4>
+                                            </div>
+
+                                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                                <div class="panel-body">
+                                                    <ol>
+                                                        <li>Go to the tab 'Set up' to provide background information needed for this tool.</li>
+                                                        <li>From the 'Set up' tab, you can navigate to the data entry pages for 4 types of data: Commoditites to Clients, Commoditites to Facilities, FP Visits and FP Users.Depending on what type of data you have available, proceed to the Input tab. You see step-by-step instructions on where to enter your data.</li>
+                                                        <li>From the Input Tab, proceed to the Output Tab for the given data type. Here you can review the "users" values calculated from your data and are guided through a process of evaluating the quality of the data.</li>
+                                                        <li>If you have more than one type of data, return to the 'Set up' tab and repeat steps 2 and 3. </li>
+                                                        <li>Finally proceed to the EMU Output tab to view the "Estimated Method Use" approximations produced from the data you provided. Review the EMU values compared to your survey and FPET data to determine if you can use this data and FPET, and if so, which data to use.</li>
+                                                    </ol>
+                                                </div>
+                                            </div>
+
+                                        </div><!-- panel primary -->
+
+                                        
+                                    </div>    
+                                    <!-- Accordian -->
+                                </div>
+
+                                <p style="color:red;font-weight: bold;text-align: center;">Remember that these rough approximations of contraceptive use should only be used in FPET, and are not meant to be used as estimates of your country's mCPR.</p>
+                                
+                                <div class="row" style="margin-bottom:1%;">
+                                    <div class="col-md-4">&nbsp;</div>
+                                    <div class="col-md-4" style="padding-left:12%;"><button class="btn btn-primary enter" ng-click="vm.navigateToHome()">Enter</button></div>
+                                    <div class="col-md-4">&nbsp;</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

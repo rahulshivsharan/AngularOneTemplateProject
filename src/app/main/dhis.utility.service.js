@@ -20,6 +20,7 @@
 		obj.processDataForCharts = processDataForCharts;
 		obj.getColorCodes = getColorCodes;
 		obj.processDataForOutput = processDataForOutput;
+		obj.processDataForEMUCommoditiesOutput = processDataForEMUCommoditiesOutput; // this data processing is for chart 'EMU Commodities Output'
 
 		return obj;
 
@@ -450,6 +451,41 @@
 
 		    return lr.slope;
 		} // linearRegression
+
+
+		// This function process data for chart
+		// 'EMU Commodities Output' shown in output screen
+		function processDataForEMUCommoditiesOutput(outputData){
+			//console.log("Final Data ",outputData);
+
+			// re-initialising configParam.outputChartData 
+			angular.forEach(configParam.outputChartData.series,function(obj,index){
+				obj.data = [];
+			});	
+
+			angular.forEach(configParam.fpetData,function(obj,index){
+				angular.forEach(obj,function(value,key){
+					configParam.outputChartData.series[0]["data"].push(null);
+					configParam.outputChartData.series[1]["data"].push(value);
+				});
+			});
+
+			angular.forEach(configParam.mCPRData,function(obj,index){
+				angular.forEach(obj,function(value,key){					
+					configParam.outputChartData.series[2]["data"].push(value);
+				});
+			});
+
+			angular.forEach(outputData,function(data,idx){
+				angular.forEach(configParam.fpetData,function(obj,index){
+					angular.forEach(obj,function(value,key){
+						if(parseInt(data.year) === parseInt(value)){
+							config.outputChartData.series[0].data.splice(index, 1, Number(data.facilities_cc_percent));
+						}	
+					});					
+				});
+			});
+		} // end of 'processDataForEMUCommoditiesOutput'
 
 	}// utilityService
 })();

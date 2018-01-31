@@ -35,21 +35,20 @@
 			<high-chart-render options="vm.chartOptions.modernMethodMix"></high-chart-render>
 		</div>
 	</div>
-	<uib-tabset>
-		<uib-tab index="0" heading="Commodities" classes="pull-right themeApply">
+	<uib-tabset active="0">
+		<uib-tab index="0" heading="Commodities" classes="pull-right" 
+			ng-click="vm.toggleTabSelection('Commodities')">
 			<div class="row top-buffer">
 				<div class="col-md-6">
 					<high-chart-render options="vm.chartOptions.usersTrendByMethodsForCommodities"></high-chart-render>
 				</div>
 				<div class="col-md-6">
-					<high-chart-render options="vm.chartOptions.comparingSlopesForCommodities"></high-chart-render>
-				</div>
-			</div>
-			<!-- div class="row top-buffer">
-				<div class="col-md-12">
-					<high-chart-render options="vm.chartOptions.commoditiesStockoutByMonth"></high-chart-render>
-				</div>
-			</div -->
+					<high-chart-render options="vm.chartOptions.emuCommoditiesOutput"></high-chart-render>
+				</div>				
+			</div>									
+		</uib-tab>
+		<uib-tab index="1" heading="Service Provision" classes="pull-right" 
+				ng-click="vm.toggleTabSelection('ServiceProvision')">
 			<div class="row top-buffer" ng-if="vm.isChartDataLoaded === true">
 				<div class="col-md-6">
 					<high-chart-render options="vm.chartOptions.totalSterilisation"></high-chart-render>
@@ -90,14 +89,13 @@
 					<high-chart-render options="vm.chartOptions.acceptanceRate"></high-chart-render>
 				</div>				
 			</div>
-			<div class="row top-buffer">
-				<div class="col-md-12">
-					<output-data-table data="vm.outputTableData"></output-data-table>
-				</div>
-			</div>
 		</uib-tab>
-		<uib-tab index="1" heading="Visits" classes="pull-right" disable="true">
-			<p>Tab Two</p>
-		</uib-tab>
-	</uib-tabset>	
+	</uib-tabset>
+	<div class="row top-buffer">
+		<div class="col-md-12">
+			<datatable-wrapper>
+				<output-data-table data="vm.outputTableData"></output-data-table>	
+			</datatable-wrapper>					
+		</div>
+	</div>	
 </div>

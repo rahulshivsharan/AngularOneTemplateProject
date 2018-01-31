@@ -200,3 +200,42 @@ div.outputHeaderLabel h3{
 .heightSet{
   height: 200px;
 }
+
+#emu_introduction_page div.titleBar{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#emu_introduction_page .version{
+    font-weight: bold;
+    margin:0;
+    padding-left: 1%;
+    color:#31708f;
+} 
+
+#emu_introduction_page p.info{
+    padding-left: 1%;
+    padding-top : 2%;
+    font-weight: bold;
+}
+
+#emu_introduction_page p.nextParagraph{
+    padding-left: 1%;
+    font-weight: bold;
+}
+
+#emu_introduction_page .infocontainer{
+    padding-left: 1%;
+    padding-top : 2%;
+}
+
+#emu_introduction_page span.subtitle{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#emu_introduction_page span.subtitle-main{
+    font-size: 20px;
+    font-weight: bold;
+    color: #31708f;
+}

@@ -31,9 +31,16 @@ tr.group{
 	color : white;	
 }
 
-li.themeApply > a{
+
+.nav-tabs > li.active > a{
 	background-color: @theme-color !important;
 	color : white !important;	
+}
+
+.nav-tabs > li > a{
+	border : 1px solid @theme-color !important;
+	color : @theme-color;
+	background-color:white;
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
@@ -69,6 +76,16 @@ div.dataTables_wrapper thead tr,.dataTables_filter label{
 
 div.dataTables_info{
 	color:white !important;
+}
+
+.panel-info > .panel-heading{
+	color : @theme-color;
+	border-color : @gradient_bottom;
+	background-color : @gradient_bottom;
+}
+
+.panel-info{
+	border-color : @gradient_bottom;
 }
 
 body{

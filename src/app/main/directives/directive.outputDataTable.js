@@ -12,7 +12,9 @@
 			"controller" : ["$scope","DTOptionsBuilder",function($scope,DTOptionsBuilder){
 				var vm = this;
 				vm.dtOptions = DTOptionsBuilder.newOptions()
-								.withDOM("Bfrtip")
+								//.withDOM("Bfrtip")
+								//.withDOM('&lt;"outputtable-header"&gt;pitrfl')
+								.withDOM('&lt;"outputtable-header"&gt;Bfrtip')
 								.withButtons(['copy','print','csv'])
 								.withLanguage({
 				 					"oPaginate" : {
