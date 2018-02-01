@@ -35,7 +35,7 @@
 													ng-disabled="vm.isNational" />		
 										
 											<span class="input-group-addon" ng-click="vm.openStatesModal()">									
-												<i class="fa fa-caret-down" aria-hidden="true"></i>
+												<a href="javaScript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 											</span>	
 		  								</div>	
 		  								<div ng-show="mainInputForm.$submitted" class="fontColorWhite">
@@ -84,7 +84,7 @@
 													ng-click="vm.openDistrictModal()" 
 													ng-model="vm.selectedDistricts" />
 											<span class="input-group-addon" ng-click="vm.openDistrictModal()">									
-												<i class="fa fa-caret-down" aria-hidden="true"></i>
+												<a href="javaScript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
 											</span>	
 		  								</div>		  										
 		  							</div>
@@ -124,10 +124,12 @@
 													name="selected_years" 
 													ng-model="vm.selectedYears" 
 													required />
-										
-											<span class="input-group-addon">									
-												<i class="fa fa-caret-down" aria-hidden="true"></i>
-											</span>	
+											
+												<span class="input-group-addon" ng-click="vm.openYearSelectionModal()">									
+													<a href="javaScript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+												</span>	
+											
+												
 		  								</div>		
 
 		  								<div ng-show="mainInputForm.$submitted" class="fontColorWhite">
