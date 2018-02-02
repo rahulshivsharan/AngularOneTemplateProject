@@ -21,6 +21,7 @@
 		return obj;
 
 		function BreadcrumbController($scope,configParam,$uibModal,$state){
+			console.log("BreadcrumbController is initialised......");
 			var vm = this;
 			vm.selectedStates = undefined;
 			vm.selectedDistricts = undefined;
@@ -69,9 +70,14 @@
             	});
 
             	modal.result.then(function(arg){
-            		// close
-            		console.log(" success ",arg);
-            		$state.go("input");
+            		// close            		
+            		var stateName = $state.current.name;
+            		
+            		if(angular.isDefined(stateName) && stateName !== null && stateName === "input"){
+            			$state.reload();
+            		}else{
+            			$state.go("input");	
+            		}            		
             	},function(){
             		// dissmiss
             		console.log("Close modal ");
