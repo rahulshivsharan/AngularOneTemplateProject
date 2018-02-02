@@ -239,3 +239,16 @@ div.outputHeaderLabel h3{
     font-weight: bold;
     color: #31708f;
 }
+
+.shadowMe{
+  box-shadow: 0px 5px 5px 0px #8888;
+}
+
+
+.large-modal-window .modal-dialog{
+  width: 1400px;
+}
+
+.large-modal-window .modal-content{
+  width: 1400px;
+}

@@ -15,7 +15,7 @@
 
 		function loadDataFile(){
 			var deferred = $q.defer();			
-			var url = "assets/data/data.json";
+			var url = "assets/data/data01021607.json";
 
 			$http.get(url).then(success,error);
 

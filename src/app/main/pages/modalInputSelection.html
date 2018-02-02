@@ -1,0 +1,173 @@
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="vm.cancel()">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<h4 class="modal-title" id="modal-title">Input</h4>
+</div>
+
+<div class="modal-body"><!-- Modal Body -->
+	<div class="container" ng-init="vm.init()">
+		<div class="page-header">
+			<i class="fa fa-bar-chart" aria-hidden="true"></i><span style="font-size: 20px;padding-left: 3px">EMU Analysis</span>
+		</div>
+		<span us-spinner ng-if="vm.isLoading"></span>
+		<div class="row">
+			<div class="col-md-12">
+				<form name="mainInputForm" ng-submit="mainInputForm.$valid && vm.extractData()" novalidate class="applyBottomBorder">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="panel panel-default modal-header highcharts-container">
+			  					<div class="panel-body">		    					
+			  						<div class="row">
+			  							<div class="col-md-10 col-md-offset-2" style="font-weight: bold;font-size: 25px">
+			  								<span>Select State<span>(s)
+			  							</div>
+			  						</div>
+			  						<div class="row top-buffer">
+			  							<div class="col-md-1 col-md-offset-4">
+			  								<i class="fa fa-map-marker fa-5x" aria-hidden="true"></i>		
+			  							</div>
+			  						</div>	
+			    					<div class="row top-buffer">
+			  							<div class="col-md-12">
+			  								<div class="input-group">		  									
+												<input 	type="text" 
+														class="form-control" 
+														id="select_states" 
+														name="selected_states"
+														aria-describedby="states_addon" 
+														ng-click="vm.openStatesModal()"
+														ng-keypress="vm.openStatesModal()" 
+														ng-model="vm.selectedStates" 
+														ng-required="!vm.isNational" 
+														ng-disabled="vm.isNational" />		
+											
+												<span class="input-group-addon" ng-click="vm.openStatesModal()">									
+													<a href="javaScript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+												</span>	
+			  								</div>	
+			  								<div ng-show="mainInputForm.$submitted" class="fontColorWhite">
+												<div ng-show="mainInputForm.selected_states.$error.required">Cannot be empty</div>	
+											</div>	  										
+			  							</div>
+			  						</div>
+
+			  						<div class="row heightSet">
+			  							<div class="col-md-12" style="padding-top: 20px">
+			  								<p class="bg-default selected-label-indicator" ng-repeat="stateName in vm.selectedStates">
+			  									<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;{{stateName}}</p>
+			  							</div>
+			  						</div>		  						
+			  					</div><!-- panel-body -->
+			  					<div class="panel-footer modal-header noBorder" style="text-align: center;vertical-align: middle;">
+			  						<div class="checkbox" style="margin: 0;">									
+		          						<input type="checkbox" ng-model="vm.isNational" style="text-align: center;vertical-align: middle;">
+		          							<span style="font-size: 20px">National Aggregate</span>				
+									</div>
+			  					</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="panel panel-default modal-header highcharts-container">
+			  					<div class="panel-body">
+			    					<div class="row">
+			  							<div class="col-md-10 col-md-offset-2" style="font-weight: bold;font-size: 25px">
+			  								<span>Select District<span>(s)
+			  							</div>
+			  						</div>
+			  						<div class="row top-buffer">
+			  							<div class="col-md-1 col-md-offset-4">
+			  								<i class="fa fa-map-marker fa-5x" aria-hidden="true"></i>		
+			  							</div>
+			  						</div>	
+			    					<div class="row top-buffer">
+			  							<div class="col-md-12">
+			  								<div class="input-group">
+												<input 	type="text" 
+														class="form-control" 
+														id="select_district" 
+														aria-describedby="district_addon" 
+														ng-disabled="vm.isNational || vm.isDistrictSelectionDisabled" 
+														ng-keypress="vm.openDistrictModal()"
+														ng-click="vm.openDistrictModal()" 
+														ng-model="vm.selectedDistricts" />
+												<span class="input-group-addon" ng-click="vm.openDistrictModal()">									
+													<a href="javaScript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+												</span>	
+			  								</div>		  										
+			  							</div>
+			  						</div>
+
+			  						<div class="row heightSet">
+			  							<div class="col-md-12" style="padding-top: 20px">
+			  								<p class="bg-default selected-label-indicator" ng-repeat="district in vm.selectedDistricts">
+			  									<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;{{district}}</p>
+			  							</div>
+			  						</div>
+			  					</div><!-- panel-body -->
+			  					<div class="panel-footer modal-header noBorder">&nbsp;</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="panel panel-default modal-header highcharts-container">							
+			  					<div class="panel-body">
+			  						<div class="row">
+			  							<div class="col-md-10 col-md-offset-2" style="font-weight: bold;font-size: 25px">
+			  								<span>Select Year<span>(s)
+			  							</div>
+			  						</div>
+			  						<div class="row top-buffer">
+			  							<div class="col-md-1 col-md-offset-4">
+			  								<i class="fa fa-calendar fa-5x" aria-hidden="true"></i>		
+			  							</div>
+			  						</div>	
+			    					<div class="row top-buffer">
+			  							<div class="col-md-12">
+			  								<div class="input-group">
+			  									<input 	type="text" 
+														class="form-control" 
+														id="years_addon"										
+														ng-keypress="vm.openYearSelectionModal()"
+														ng-click="vm.openYearSelectionModal()"
+														name="selected_years" 
+														ng-model="vm.selectedYears" 
+														required />
+												
+													<span class="input-group-addon" ng-click="vm.openYearSelectionModal()">									
+														<a href="javaScript:void(0)"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+													</span>	
+												
+													
+			  								</div>		
+
+			  								<div ng-show="mainInputForm.$submitted" class="fontColorWhite">
+												<div ng-show="mainInputForm.selected_years.$error.required">Cannot be empty</div>	
+											</div>  										
+			  							</div>
+			  						</div>
+
+			  						<div class="row heightSet">
+			  							<div class="col-md-12" style="padding-top: 20px">
+			  								<p class="bg-default selected-label-indicator" ng-repeat="year in vm.selectedYears">
+			  									<i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{year}}</p>
+			  							</div>
+			  						</div>
+			  					</div> <!-- Panel Body -->
+			  					<div class="panel-footer modal-header noBorder">&nbsp;</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-2 col-md-offset-5">
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary">Extract Inputs</button>	
+							</div>						
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+

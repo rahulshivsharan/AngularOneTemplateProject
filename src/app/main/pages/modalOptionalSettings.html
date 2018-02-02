@@ -15,14 +15,17 @@
 					<div class="col-md-4">
 						<select ng-options="theme.value as theme.label for theme in vm.themeList" 
 								class="form-control" 
-								ng-model="vm.selectedTheme" required ng-change="vm.displayColorShades()"
-								id="colorSettings" name="colorSettings">							
+								ng-model="vm.selectedTheme" 
+								required 
+								ng-change="vm.displayColorShades()"
+								id="colorSettings" 
+								name="colorSettings">							
 						</select>						
 						<div ng-show="settingsForm.$submitted" class="form-error">
 							<div ng-show="settingsForm.colorSettings.$error.required">Cannot be empty</div>	
 						</div>
 					</div>
-					<div class="col-md-1" style="padding:0">
+					<div class="col-md-1 shadowMe" style="padding:0">
 						<input type="text" class="form-control" ng-style="vm.shadeIndicator" />
 					</div>
 				</div>
